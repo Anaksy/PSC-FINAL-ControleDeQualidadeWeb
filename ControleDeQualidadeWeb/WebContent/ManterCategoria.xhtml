@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:title>Manter Categoria</h:title>
+</h:head>
+<h:body>
+    <p:growl id="msgs" showDetail="true" />
+	
+	<h:form id="formCategoria">
+	<br />
+	Nome da Categoria: <h:inputText
+			value="#{ManterCategoriaMB.categoria.nomeCategoria}"></h:inputText>
+		<br />
+	Número de dias para vencer: <h:inputText
+			value="#{ManterCategoriaMB.categoria.numeroDeDiasParaVencimento}"></h:inputText>
+		<br /><br />
+		<h:commandButton value="Criar Categoria" action="#{ManterCategoriaMB.criarCategoria}" ></h:commandButton>&nbsp;
+		<h:commandButton value="Remover Categoria" action="#{ManterCategoriaMB.removerCategoria}" ></h:commandButton>&nbsp;
+		<h:commandButton value="Atualizar Categoria" action="#{ManterCategoriaMB.atualizarCategoria}"></h:commandButton>
+		<br /><br />
+		<h:outputText value="#{ManterCategoriaMB.mensagem}"></h:outputText>
+		<br /><br />
+		
+		<p:dataTable value="#{ManterCategoriaMB.listaCategoria}"
+			var="categoria" style="width:80%" styleClass="table table-hover"
+			emptyMessage="Nenhum resultado">
+			<p:column>
+				<f:facet name="header">Nome></f:facet>
+				<h:outputText value="#{categoria.nomeCategoria}"></h:outputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Número de dias para vencer</f:facet>
+				<h:outputText value="#{categoria.numeroDeDiasParaVencimento}"></h:outputText>
+			</p:column>
+			<p:column style= "width=100; text-align: center">
+				<h:commandButton value="Selecionar" action="#{ManterCategoriaMB.selecionarCategoria(categoria)}">
+				</h:commandButton> 
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>
