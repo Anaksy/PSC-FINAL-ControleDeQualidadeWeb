@@ -107,8 +107,6 @@ public class NegocioCategoria {
 	 * Método para alterar nome e número de dias para vencer de uma Categoria.
 	 * 
 	 * @param categoria
-	 * @param novoNomeCategoria
-	 * @param novoNumeroDeDiasParaVencimento
 	 * @throws CategoriaCadastradaException
 	 */
 	public void alteraCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, CategoriaCadastradaException{

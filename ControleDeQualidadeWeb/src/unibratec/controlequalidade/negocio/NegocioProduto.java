@@ -5,9 +5,11 @@ import java.util.List;
 
 import unibratec.controlequalidade.dao.DAOFactory;
 import unibratec.controlequalidade.dao.IDAOProduto;
-import unibratec.controlequalidade.entidades.Categoria;
+import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Produto;
+import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
+import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.util.MensagensExceptions;
 
@@ -33,10 +35,18 @@ public class NegocioProduto {
 	 * Método para listar todos os produtos cadastrados na base
 	 * 
 	 * @return List<Produto>
+	 * @throws ProdutoNaoCadastradoException 
 	 */
-	public List<Produto> listaTodosProdutos(){
+	public List<Produto> listaTodosProdutos() throws ProdutoNaoCadastradoException{
 
-		return daoProduto.consultarTodos();
+		List<Produto> produtosList= new ArrayList<Produto>();
+		
+		if (produtosList.isEmpty()) {
+			
+			throw new ProdutoNaoCadastradoException(MensagensExceptions.NENHUM_PRODUTO_CADASTRADO_EXCEPTION);
+		}
+		
+		return this.daoProduto.consultarTodos();
 	}
 	
 	/**
@@ -48,7 +58,7 @@ public class NegocioProduto {
 	 */
 	public Produto buscaProdutoPorId(long idProduto) throws ProdutoNaoCadastradoException{
 
-		Produto produto = daoProduto.consultarPorId(idProduto);
+		Produto produto = this.daoProduto.consultarPorId(idProduto);
 
 		if (produto != null) {
 
@@ -71,14 +81,62 @@ public class NegocioProduto {
 
 		List<Produto> produtosList = new ArrayList<Produto>();
 				
-		produtosList = daoProduto.pesquisaProdutoPorNomeList(nomeProduto);
+		produtosList = this.daoProduto.pesquisaProdutoPorNomeList(nomeProduto);
 
 		if (produtosList.isEmpty()) {
 
-			throw new ProdutoNaoCadastradoException(MensagensExceptions.NENHUMA_PRODUTO_CADASTRADA_EXCEPTION);
+			throw new ProdutoNaoCadastradoException(MensagensExceptions.NENHUM_PRODUTO_CADASTRADO_NOME_EXCEPTION);
 
 		}
 		
 		return produtosList;	
+	}
+	
+	/**
+	 * Método para alterar um produto.
+	 * 
+	 * @param produto
+	 * @throws ProdutoNaoCadastradoException 
+	 */
+	public void alteraProduto(Produto produto) throws ProdutoNaoCadastradoException{
+
+		Produto pdto = this.daoProduto.consultarPorId(produto.getIdProduto());
+
+		if (pdto != null) {
+
+			pdto.setNomeProduto(produto.getFabricanteProduto());
+			pdto.setFabricanteProduto(produto.getFabricanteProduto());
+			pdto.setCategoriaProduto(produto.getCategoriaProduto());
+			pdto.setPrecoProduto(produto.getPrecoProduto());
+			pdto.setEstadoProduto(produto.getEstadoProduto());
+			
+			this.daoProduto.alterar(pdto);
+			
+		} else {
+
+			throw new ProdutoNaoCadastradoException(MensagensExceptions.PRODUTO_NAO_CADASTRADO_EXCEPTION);
+		}
+	}
+	
+	
+	/**
+	 * Método para remover um produto.
+	 * 
+	 * @param produto
+	 * @throws ProdutoNaoCadastradoException 
+	 */
+	public void removeProduto(Produto produto) throws ProdutoNaoCadastradoException {
+
+		Produto pdto = this.daoProduto.consultarPorId(produto.getIdProduto());
+	
+		if (pdto != null) {
+			
+			pdto.setEstadoProduto(EstadoProdutoEnum.INATIVO);
+			this.daoProduto.alterar(pdto);
+
+		} else {
+
+			throw new ProdutoNaoCadastradoException(MensagensExceptions.PRODUTO_NAO_CADASTRADO_EXCEPTION);
+		}
 	}
 }
