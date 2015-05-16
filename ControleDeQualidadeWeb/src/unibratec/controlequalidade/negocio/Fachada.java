@@ -25,7 +25,7 @@ public class Fachada implements IFachada {
 
 	public Fachada() {
 		//this.negocioLote = new NegocioLote(em);
-		this.negocioProduto = new NegocioProduto();
+		//this.negocioProduto = new NegocioProduto();
 		this.negocioCategoria = new NegocioCategoria();
 		//this.negocioVenda = new NegocioVenda(em);
 	}
