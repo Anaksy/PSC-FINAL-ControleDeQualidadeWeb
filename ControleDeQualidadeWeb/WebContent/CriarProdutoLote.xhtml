@@ -10,21 +10,40 @@
 </head>
 <body>
 	<p:separator />
-	
+	<h:form id="formProdutoLote">
 		
 	
-	
-	
-	
-	
-	
-	
-	<h:form id="formProdutoLote">
+	Nome do Produto: <h:inputText
+			value="#{CriarProdutoLoteMB.produto.nomeProduto}" />
+		<br />
+	Fabricante: <h:inputText
+			value="#{CriarProdutoLoteMB.produto.fabricanteProduto}" />
+		<br />
+<!-- 	Categoria:
 		<h:selectOneMenu value="#{CriarProdutoLoteMB.categoria}">
 			<f:selectItems value="#{CriarProdutoLoteMB.listaCategoria}"
 				var="categoria" itemValue="#{categoria.idCategoria}"
 				itemLabel="#{categoria.nomeCategoria}" />
 		</h:selectOneMenu>
+ -->
+		<br />
+	Preço: <h:inputText value="#{CriarProdutoLoteMB.produto.precoProduto}" />
+		
+		<br />
+	<!-- Data de Validade do Lote: <h:inputText value="#{CriarProdutoLoteMB.lote.dataDeValidade}" /> -->
+	Data de Validade do Lote: <h:inputText value="#{CriarProdutoLoteMB.dataValidade}">
+   										 <f:convertDateTime pattern="MM/dd/yyyy" />
+								</h:inputText>
+	
+	
+		<br />
+	Quantidade de Produtos: <h:inputText
+			value="#{CriarProdutoLoteMB.lote.qtdProdutos}" />
+			
+	<h:commandButton value="Atualizar" action="#{CriarProdutoLoteMB.criarProdutoLote}"/>
+
+
+
 	</h:form>
 </body>
 </html>

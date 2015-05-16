@@ -10,7 +10,18 @@ import unibratec.controlequalidade.util.Funcoes;
 public class NegocioProdutoLote {
 
 	//Metodo que concluir o fluco de criação de um produto/lote
-	public void associaLoteProduto(Lote lote, Produto produto, Calendar dataValidadeLote, int qtdProdutosLote) throws dataDeValidadeMenorPermitidaCategoriaException{
+	public void associaLoteProduto(Lote lote, Produto produto) throws dataDeValidadeMenorPermitidaCategoriaException{
+		Calendar dataAtual = Calendar.getInstance();
+		
+		//Validando data de validade inserida
+		if (Funcoes.subtrairDiasDataCalendar(dataAtual, lote.getDataDeValidade()) <= produto.getCategoriaProduto().getNumeroDeDiasParaVencimento()) {
+			throw new dataDeValidadeMenorPermitidaCategoriaException("Data de validade inserida menor que a permitida para essa categoria");
+		}
+		produto.setLoteProduto(lote);
+		lote.setEstadoLote(EstadoLoteEnum.FECHADO);
+	}
+	
+/*	public void associaLoteProduto(Lote lote, Produto produto, Calendar dataValidadeLote, int qtdProdutosLote) throws dataDeValidadeMenorPermitidaCategoriaException{
 		Calendar dataAtual = Calendar.getInstance();
 		
 		//Validando data de validade inserida
@@ -21,5 +32,5 @@ public class NegocioProdutoLote {
 		lote.setQtdProdutos(qtdProdutosLote);
 		produto.setLoteProduto(lote);
 		lote.setEstadoLote(EstadoLoteEnum.FECHADO);
-	}
+	}*/
 }

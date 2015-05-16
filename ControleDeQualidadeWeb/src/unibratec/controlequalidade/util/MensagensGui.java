@@ -7,11 +7,14 @@ public class MensagensGui {
 	
 	public static final String CATEGORIA_REMOVIDA_SUCESSO = "Categoria removida com sucesso!";
 	public static final String CATEGORIA_REMOVIDA_FALHA = "Categoria não existe no sistema.";
+	public static final String CATEGORIA_BD_FALHA = "Nenhuma categoria encontrada no Banco de Dados.";
 	
 	public static final String CATEGORIA_ATUALIZADA_SUCESSO = "Categoria atualizada com sucesso!";
 	public static final String CATEGORIA_ATUALIZADA_JA_EXISTE = "Ja existe uma categoria com esse nome cadastrado.";
 	public static final String CATEGORIA_ATUALIZADA_NAO_EXISTE = "Categoria pesquisada não existe.";
 	
 	public static final String PRODUTO_COM_CATEGORIA= "Categoria selecionada possui produtos cadastrados";
+	
+	public static final String LOTE_DATA_VALIDADE_MENOR_CATEGORIA_EXCEPTION = "Data de validade inserida menor que a permitida para essa categoria.";
 	
 }

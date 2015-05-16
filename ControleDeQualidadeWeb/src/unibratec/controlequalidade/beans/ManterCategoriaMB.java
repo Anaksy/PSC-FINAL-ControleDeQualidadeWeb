@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
+import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
 import unibratec.controlequalidade.negocio.Fachada;
 import unibratec.controlequalidade.util.MensagensGui;
@@ -21,7 +22,13 @@ public class ManterCategoriaMB {
 	private static long categoriaId;
 
 	public List<Categoria> getListaCategoria() {
-		listaCategoria = fachada.listaTodasCategorias();
+		try {
+			listaCategoria = fachada.listaTodasCategorias();
+		} catch (NenhumaCategoriaCadastradaException e) {
+			setMensagem(MensagensGui.CATEGORIA_BD_FALHA);
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 		return listaCategoria;
 	}
 

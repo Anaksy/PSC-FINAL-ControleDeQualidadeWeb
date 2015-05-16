@@ -10,6 +10,8 @@ import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
+import unibratec.controlequalidade.exceptions.LoteCadastradoException;
+import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.exceptions.ProdutoNaoPrestesAVencerException;
@@ -17,17 +19,19 @@ import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCatego
 
 public class Fachada implements IFachada {
 
-	//private NegocioLote negocioLote;
+	private NegocioLote negocioLote;
 	private NegocioProduto negocioProduto;
 	private NegocioCategoria negocioCategoria;
 	//private NegocioVenda negocioVenda;
-	//private NegocioProdutoLote npl;
+	private NegocioProdutoLote negocioProdutoLote;
 
 	public Fachada() {
-		//this.negocioLote = new NegocioLote(em);
-		//this.negocioProduto = new NegocioProduto();
+		this.negocioLote = new NegocioLote();
+		this.negocioProduto = new NegocioProduto();
 		this.negocioCategoria = new NegocioCategoria();
 		//this.negocioVenda = new NegocioVenda(em);
+		this.negocioProdutoLote = new NegocioProdutoLote();
+		
 	}
 
 	@Override
@@ -37,7 +41,7 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public List<Categoria> listaTodasCategorias() {
+	public List<Categoria> listaTodasCategorias() throws NenhumaCategoriaCadastradaException{
 		return this.negocioCategoria.listaTodasCategorias();
 	}
 
@@ -57,9 +61,10 @@ public class Fachada implements IFachada {
 }
 
 	@Override
-	public void inserirProduto(Produto p) {
-		this.negocioProduto.inserirProduto(p);
-		
+	public void criarProdutoLote(Produto produto, Lote lote) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException {
+		this.negocioProdutoLote.associaLoteProduto(lote, produto);
+		this.negocioLote.inserirLote(lote);
+		this.negocioProduto.inserirProduto(produto);
 	}
 
 	//	@Override

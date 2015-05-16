@@ -1,28 +1,33 @@
 package unibratec.controlequalidade.negocio;
 
+import java.util.Calendar;
 import java.util.List;
 
 import unibratec.controlequalidade.entidades.Categoria;
+import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
+import unibratec.controlequalidade.exceptions.LoteCadastradoException;
+import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
+import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 
 
 public interface IFachada {
 	
 	public void inserirCategoria(Categoria categoria) throws CategoriaCadastradaException;
 	
-	public List<Categoria> listaTodasCategorias();
+	public List<Categoria> listaTodasCategorias() throws NenhumaCategoriaCadastradaException;
 	
 	public void alteraCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, CategoriaCadastradaException;
 
 	public void removeCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, ProdutoComCategoriaException;
 	
 	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException;
-	
-	public void inserirProduto(Produto p);
-	
+		
+	public void criarProdutoLote(Produto produto, Lote lote) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException;
+
 //	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException;
 //	
 //	public List<Produto> getListaProdutoPrestesVencer() throws ProdutoNaoEncontradoExcecption;

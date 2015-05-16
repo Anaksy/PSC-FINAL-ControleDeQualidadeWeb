@@ -12,9 +12,9 @@
 	<p:separator />
 	<h:form id="formCategoria">
 	<br />
-	Nome da Categoria: <h:inputText value="#{ManterCategoriaMB.categoria.nomeCategoria}"/>
+	Nome da Categoria: <h:inputText value="#{ManterCategoriaMB.categoria.nomeCategoria}" required="true"/>
 		<br />
-	Número de dias para vencer: <h:inputText value="#{ManterCategoriaMB.categoria.numeroDeDiasParaVencimento}"/>
+	Número de dias para vencer: <h:inputText value="#{ManterCategoriaMB.categoria.numeroDeDiasParaVencimento}" required="true"/>
 		<br /><br />
 		<h:commandButton value="Nova" action="#{ManterCategoriaMB.criarCategoria}" />&nbsp;
 		<h:commandButton value="Remover" action="#{ManterCategoriaMB.removerCategoria}" />&nbsp;
