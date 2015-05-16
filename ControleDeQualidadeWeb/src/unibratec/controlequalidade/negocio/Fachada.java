@@ -42,36 +42,21 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException {
-		return this.negocioCategoria.buscaCategoriaPorNomeCategoria(nomeCategoria);
-	}
-
-//	@Override
-//	public Categoria buscaCategoriaPorId(long idCategoria) throws CategoriaNaoCadastradaException {
-//		return this.negocioCategoria.buscaCategoriaPorId(idCategoria);
-//	}
-//
-	@Override
 	public void alteraCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, CategoriaCadastradaException {
 		this.negocioCategoria.alteraCategoria(categoria);
 	}
-
-//	@Override
-//	public void alteraNomeCategoria(Categoria categoria, String novoNomeCategoria) 
-//			throws CategoriaCadastradaException, CategoriaNaoCadastradaException {
-//		this.negocioCategoria.alteraNomeCategoria(categoria, novoNomeCategoria);
-//	}
-//
-//	@Override
-//	public void alteraDiasParaVencerCategoria(Categoria categoria, long novoNumeroDeDiasParaVencimento)
-//			throws CategoriaCadastradaException, CategoriaNaoCadastradaException {
-//		this.negocioCategoria.alteraDiasParaVencerCategoria(categoria, novoNumeroDeDiasParaVencimento);
-//	}
 
 	@Override
 	public void removeCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, ProdutoComCategoriaException {
 		this.negocioCategoria.removeCategoria(categoria);
 	}
+	
+	@Override
+	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException {
+		return this.negocioCategoria.buscaCategoriaPorNomeCategoria(nomeCategoria);
+	
+	
+}
 
 	//	@Override
 	//	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException {
