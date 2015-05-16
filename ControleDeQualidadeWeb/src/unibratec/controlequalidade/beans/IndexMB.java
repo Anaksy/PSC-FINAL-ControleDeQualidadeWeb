@@ -9,4 +9,8 @@ public class IndexMB {
 	public String manterCategoria(){
 		return "/ManterCategoria.xhtml";
 	}
+	
+	public String criarprodutoLote(){
+		return "/CriarProdutoLote.xhtml";
+	}
 }

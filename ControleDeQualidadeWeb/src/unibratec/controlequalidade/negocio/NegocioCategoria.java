@@ -22,7 +22,6 @@ public class NegocioCategoria {
 
 		this.daoCategoria = DAOFactory.getCategoriaDAO();
 		this.daoProduto = DAOFactory.getProdutoDAO();
-
 	}
 
 	/**
@@ -126,70 +125,6 @@ public class NegocioCategoria {
 			throw new CategoriaNaoCadastradaException(MensagensExceptions.CATEGORIA_NAO_CADASTRADA_EXCEPTION);
 		}
 
-	}
-
-	/**
-	 * Método para alterar nome de uma Categoria.
-	 * 
-	 * @param categoria
-	 * @param novoNomeCategoria
-	 * @param novoNumeroDeDiasParaVencimento
-	 * @throws CategoriaCadastradaException
-	 * @throws CategoriaNaoCadastradaException 
-	 */
-	public void alteraNomeCategoria(Categoria categoria, String novoNomeCategoria) throws CategoriaCadastradaException, CategoriaNaoCadastradaException{
-
-		Categoria cat = daoCategoria.buscaCategoria(categoria.getNomeCategoria());
-
-		if (cat != null) {
-
-			cat.setNomeCategoria(novoNomeCategoria);
-
-			if (daoCategoria.existeCategoria(cat)) {
-
-				throw new CategoriaCadastradaException(MensagensExceptions.CATEGORIA_CADASTRADA_EXCEPTION);
-
-			} else {
-
-				daoCategoria.alterar(cat);
-			}
-
-		} else {
-
-			throw new CategoriaNaoCadastradaException(MensagensExceptions.CATEGORIA_NAO_CADASTRADA_EXCEPTION);
-		}
-	}
-
-	/**
-	 * Método para alterar o número de dias para vencer de uma Categoria.
-	 * 
-	 * @param categoria
-	 * @param novoNomeCategoria
-	 * @param novoNumeroDeDiasParaVencimento
-	 * @throws CategoriaCadastradaException
-	 * @throws CategoriaNaoCadastradaException 
-	 */
-	public void alteraDiasParaVencerCategoria(Categoria categoria, long novoNumeroDeDiasParaVencimento) throws CategoriaCadastradaException, CategoriaNaoCadastradaException{
-
-		Categoria cat = daoCategoria.buscaCategoria(categoria.getNomeCategoria());
-
-		if (cat != null) {
-
-			cat.setNumeroDeDiasParaVencimento(novoNumeroDeDiasParaVencimento);
-
-			if (daoCategoria.existeCategoria(cat)) {
-
-				throw new CategoriaCadastradaException(MensagensExceptions.CATEGORIA_CADASTRADA_EXCEPTION);
-
-			} else {
-
-				daoCategoria.alterar(cat);
-			}
-
-		} else {
-
-			throw new CategoriaNaoCadastradaException(MensagensExceptions.CATEGORIA_NAO_CADASTRADA_EXCEPTION);
-		}
 	}
 
 	/**

@@ -14,19 +14,12 @@ public interface IFachada {
 	
 	public List<Categoria> listaTodasCategorias();
 	
-	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException;
-	
-	//public Categoria buscaCategoriaPorId(long idCategoria) throws CategoriaNaoCadastradaException;
-	
 	public void alteraCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, CategoriaCadastradaException;
-	
-	//public void alteraNomeCategoria(Categoria categoria, String novoNomeCategoria) throws CategoriaCadastradaException, CategoriaNaoCadastradaException;
-	
-	//public void alteraDiasParaVencerCategoria(Categoria categoria, long novoNumeroDeDiasParaVencimento) throws CategoriaCadastradaException, CategoriaNaoCadastradaException;
-	
+
 	public void removeCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, ProdutoComCategoriaException;
 	
-
+	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException;
+	
 //	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException;
 //	
 //	public List<Produto> getListaProdutoPrestesVencer() throws ProdutoNaoEncontradoExcecption;
