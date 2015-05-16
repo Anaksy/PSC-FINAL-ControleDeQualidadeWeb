@@ -10,6 +10,7 @@ import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
+import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
 import unibratec.controlequalidade.util.MensagensExceptions;
 
@@ -46,9 +47,17 @@ public class NegocioCategoria {
 	 * Método para listar todas as Categoria cadastradas na base
 	 * 
 	 * @return List<Categoria>
+	 * @throws NenhumaCategoriaCadastradaException 
 	 */
-	public List<Categoria> listaTodasCategorias(){
+	public List<Categoria> listaTodasCategorias() throws NenhumaCategoriaCadastradaException{
 
+		List<Categoria> categoriasLista = daoCategoria.consultarTodos();
+		
+		if (categoriasLista.isEmpty()) {
+			
+			throw new NenhumaCategoriaCadastradaException(MensagensExceptions.NENHUMA_CATEGORIA_CADASTRADA_EXCEPTION);
+		}
+		
 		return daoCategoria.consultarTodos();
 	}
 
