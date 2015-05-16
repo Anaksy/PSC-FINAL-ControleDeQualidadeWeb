@@ -10,10 +10,20 @@
 </head>
 <body>
 	<p:separator />
+	
+		
+	
+	
+	
+	
+	
+	
+	
 	<h:form id="formProdutoLote">
-		<h:selectOneMenu value=“#{CriarProdutoLoteMB.listaCategoria}>
-			<f:selectItem itemValue=“1” itemLabel=“Corinthians” />
-			<f:selectItem itemValue=“1” itemLabel=“Flamengo” />
+		<h:selectOneMenu value="#{CriarProdutoLoteMB.categoria}">
+			<f:selectItems value="#{CriarProdutoLoteMB.listaCategoria}"
+				var="categoria" itemValue="#{categoria.idCategoria}"
+				itemLabel="#{categoria.nomeCategoria}" />
 		</h:selectOneMenu>
 	</h:form>
 </body>

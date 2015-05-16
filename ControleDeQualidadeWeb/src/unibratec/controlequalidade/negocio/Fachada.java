@@ -18,14 +18,14 @@ import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCatego
 public class Fachada implements IFachada {
 
 	//private NegocioLote negocioLote;
-	//private NegocioProduto negocioProduto;
+	private NegocioProduto negocioProduto;
 	private NegocioCategoria negocioCategoria;
 	//private NegocioVenda negocioVenda;
 	//private NegocioProdutoLote npl;
 
 	public Fachada() {
 		//this.negocioLote = new NegocioLote(em);
-		//this.negocioProduto = new NegocioProduto(em);
+		this.negocioProduto = new NegocioProduto();
 		this.negocioCategoria = new NegocioCategoria();
 		//this.negocioVenda = new NegocioVenda(em);
 	}
@@ -54,9 +54,13 @@ public class Fachada implements IFachada {
 	@Override
 	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException {
 		return this.negocioCategoria.buscaCategoriaPorNomeCategoria(nomeCategoria);
-	
-	
 }
+
+	@Override
+	public void inserirProduto(Produto p) {
+		this.negocioProduto.inserirProduto(p);
+		
+	}
 
 	//	@Override
 	//	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException {
