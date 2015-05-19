@@ -1,49 +1,55 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Criação de produto/Lote</title>
-</head>
-<body>
-	<p:separator />
-	<h:form id="formProdutoLote">
-		
-	
-	Nome do Produto: <h:inputText
-			value="#{CriarProdutoLoteMB.produto.nomeProduto}" />
-		<br />
-	Fabricante: <h:inputText
-			value="#{CriarProdutoLoteMB.produto.fabricanteProduto}" />
-		<br />
-<!-- 	Categoria:
-		<h:selectOneMenu value="#{CriarProdutoLoteMB.categoria}">
-			<f:selectItems value="#{CriarProdutoLoteMB.listaCategoria}"
-				var="categoria" itemValue="#{categoria.idCategoria}"
-				itemLabel="#{categoria.nomeCategoria}" />
-		</h:selectOneMenu>
- -->
-		<br />
-	Preço: <h:inputText value="#{CriarProdutoLoteMB.produto.precoProduto}" />
-		
-		<br />
-	<!-- Data de Validade do Lote: <h:inputText value="#{CriarProdutoLoteMB.lote.dataDeValidade}" /> -->
-	Data de Validade do Lote: <h:inputText value="#{CriarProdutoLoteMB.dataValidade}">
-   										 <f:convertDateTime pattern="MM/dd/yyyy" />
-								</h:inputText>
-	
-	
-		<br />
-	Quantidade de Produtos: <h:inputText
-			value="#{CriarProdutoLoteMB.lote.qtdProdutos}" />
-			
-	<h:commandButton value="Atualizar" action="#{CriarProdutoLoteMB.criarProdutoLote}"/>
-
-
-
-	</h:form>
-</body>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Criar Produto/Lote</title>
+	<script name="jquery/jquery.js" library="primefaces"></script>
+</h:head>
+<h:body>
+	<div style="height: 500px" align="left">
+		<h:form>
+			<p:separator />
+			Nome do Produto: <p:inputText
+				value="#{CriarProdutoLoteMB.produto.nomeProduto}" />
+			<br />
+			<br /> 
+			Fabricante: <p:inputText
+				value="#{CriarProdutoLoteMB.produto.fabricanteProduto}" />
+			<br />
+			<br />
+			Categoria: 
+			<p:selectOneMenu value="#{CriarProdutoLoteMB.categoria.idCategoria}">
+				<f:selectItems value="#{CriarProdutoLoteMB.listaCategoria}"
+					var="categoria" itemValue="#{categoria.idCategoria}"
+					itemLabel="#{categoria.nomeCategoria}" />
+			</p:selectOneMenu>
+			<br />
+			<br />
+			Pre�o:
+			<p:inputText value="#{CriarProdutoLoteMB.produto.precoProduto}" />
+			<br />
+			<br /> 
+			Quantidade de Produtos:
+			<p:inputText value="#{CriarProdutoLoteMB.lote.qtdProdutos}" />
+			<br />
+			<br />
+			 Data de validade: <p:outputLabel for="button" />
+			<p:calendar id="button" value="#{CriarProdutoLoteMB.dataValidade}"
+				showOn="button" />
+			<br />
+			<br />
+			<h:commandButton value="Criar"
+				action="#{CriarProdutoLoteMB.criarProdutoLote}">
+			</h:commandButton>
+			<br />
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:separator />
+		</h:form>
+	</div>
+</h:body>
 </html>

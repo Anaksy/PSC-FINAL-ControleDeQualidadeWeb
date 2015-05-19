@@ -1,16 +1,21 @@
 package unibratec.controlequalidade.negocio;
 
 import java.util.Calendar;
+
 import unibratec.controlequalidade.entidades.EstadoLoteEnum;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
+import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 import unibratec.controlequalidade.util.Funcoes;
 
 public class NegocioProdutoLote {
 
+	private NegocioProduto negocioProduto = new NegocioProduto();
+	private NegocioLote negocioLote = new NegocioLote();
+	
 	//Metodo que concluir o fluco de criação de um produto/lote
-	public void associaLoteProduto(Lote lote, Produto produto) throws dataDeValidadeMenorPermitidaCategoriaException{
+	public void criarProdutoLote(Lote lote, Produto produto) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException{
 		Calendar dataAtual = Calendar.getInstance();
 		
 		//Validando data de validade inserida
@@ -19,6 +24,8 @@ public class NegocioProdutoLote {
 		}
 		produto.setLoteProduto(lote);
 		lote.setEstadoLote(EstadoLoteEnum.FECHADO);
+		negocioLote.inserirLote(lote);
+		negocioProduto.inserirProduto(produto);
 	}
 	
 /*	public void associaLoteProduto(Lote lote, Produto produto, Calendar dataValidadeLote, int qtdProdutosLote) throws dataDeValidadeMenorPermitidaCategoriaException{

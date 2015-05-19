@@ -89,9 +89,9 @@ public class NegocioCategoria {
 	 * @return
 	 * @throws CategoriaNaoCadastradaException
 	 */
-	public Categoria buscaCategoriaPorId(long idCategoria) throws CategoriaNaoCadastradaException{
-
-		Categoria cat = daoCategoria.consultarPorId(idCategoria);
+	public Categoria buscaCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException{
+		
+		Categoria cat = daoCategoria.consultarPorId(categoria.getIdCategoria());
 
 		if (cat != null) {
 

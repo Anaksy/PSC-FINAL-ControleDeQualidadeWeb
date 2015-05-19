@@ -28,6 +28,7 @@ public class NegocioProduto {
 	 * @param produto
 	 */
 	public void inserirProduto(Produto produto){
+		produto.setEstadoProduto(EstadoProdutoEnum.EM_ESTOQUE);
 		this.daoProduto.inserir(produto);
 	}
 	

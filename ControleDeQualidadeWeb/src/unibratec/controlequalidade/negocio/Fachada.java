@@ -62,9 +62,12 @@ public class Fachada implements IFachada {
 
 	@Override
 	public void criarProdutoLote(Produto produto, Lote lote) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException {
-		this.negocioProdutoLote.associaLoteProduto(lote, produto);
-		this.negocioLote.inserirLote(lote);
-		this.negocioProduto.inserirProduto(produto);
+		this.negocioProdutoLote.criarProdutoLote(lote, produto);
+	}
+
+	@Override
+	public Categoria buscarCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException {
+		return this.negocioCategoria.buscaCategoriaPorId(categoria); 
 	}
 
 	//	@Override

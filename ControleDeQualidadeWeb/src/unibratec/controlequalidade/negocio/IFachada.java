@@ -27,6 +27,9 @@ public interface IFachada {
 	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException;
 		
 	public void criarProdutoLote(Produto produto, Lote lote) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException;
+	
+	public Categoria buscarCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException;
+	
 
 //	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException;
 //	
