@@ -72,6 +72,7 @@ public class CriarProdutoLoteMB {
 			lote.setDataDeValidade(Datas.converterDateToCalendar(dataValidade));
 			fachada.criarProdutoLote(produto, lote);
 			infoMsg(MensagensGui.PRODUTO_LOTE_CRIADO_SUCESSO);
+			limparModelProdutoLote();
 		} 
 		catch(LoteCadastradoException e){
 			erroMsg(MensagensGui.LOTE_NOME_JA_EXISTE_FALHA);
@@ -115,5 +116,10 @@ public class CriarProdutoLoteMB {
 	
 	public String voltarTelaInicial(){
 		return "/index.xhtml";
+	}
+	
+	private void limparModelProdutoLote(){
+		produto = null;
+		lote = null;
 	}
 }

@@ -32,15 +32,15 @@ import unibratec.controlequalidade.negocio.NegocioVenda;
 public class TesteControleDeQualidade {
 
 	public static void main(String[] args) {
-	//############# ENTITY MANAGER ############# 
+/*	//############# ENTITY MANAGER ############# 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleDeQualidadePSC");
 		EntityManager etManager = emf.createEntityManager(); 
 		//############# ENTITY MANAGER #############
+*/		
 		
-		
-		NegocioVenda nv = new NegocioVenda(etManager);
+		NegocioVenda nv = new NegocioVenda();
 		try {
-			nv.atualizarProdutosVencer();
+			nv.executarRotinaProdutos();
 		} catch (ProdutoNaoEncontradoExcecption e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

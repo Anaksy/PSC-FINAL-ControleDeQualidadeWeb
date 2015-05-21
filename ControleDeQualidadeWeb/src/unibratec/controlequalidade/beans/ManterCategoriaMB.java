@@ -26,7 +26,7 @@ public class ManterCategoriaMB {
 		try {
 			listaCategoria = fachada.listaTodasCategorias();
 		} catch (NenhumaCategoriaCadastradaException e) {
-			erroMsg(MensagensGui.CATEGORIA_BD_FALHA);
+			//erroMsg(MensagensGui.CATEGORIA_BD_FALHA); // Ja temos uma mensagen de nenhum resultado no grid.
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
@@ -91,6 +91,7 @@ public class ManterCategoriaMB {
 	}
 
 	public String criarCategoria(){
+		categoria.setIdCategoria(0);// Talvez deveria botar isso no metodo do DAO ?
 		if (validarCamposCategoria(categoria) == true) {
 			try {
 				fachada.inserirCategoria(categoria);

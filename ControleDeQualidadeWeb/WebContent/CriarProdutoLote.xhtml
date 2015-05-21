@@ -37,7 +37,7 @@
 			<br /> 
 			Quantidade de Produtos:
 			<p:inputMask value="#{CriarProdutoLoteMB.lote.qtdProdutos}"
-				required="true" mask="9?999999"/>
+				required="true" mask="9?999999" />
 			<br />
 			<br />
 			 Data de validade: <p:outputLabel for="button" />
@@ -46,12 +46,11 @@
 			<br />
 			<br />
 			<h:commandButton value="Criar"
-				action="#{CriarProdutoLoteMB.criarProdutoLote}">
-			</h:commandButton>
+				action="#{CriarProdutoLoteMB.criarProdutoLote}"/>
+			<br />
 			<br />
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
-			<br />
 			<br />
 		</h:form>
 	</div>
