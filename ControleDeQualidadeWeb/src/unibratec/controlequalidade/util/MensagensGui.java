@@ -12,10 +12,15 @@ public class MensagensGui {
 	public static final String CATEGORIA_ATUALIZADA_NAO_EXISTE = "Categoria pesquisada não existe.";
 	public static final String CATEGORIA_SELECIONAR_FALHA = "Categoria pesquisada não existe.";
 	public static final String CATEGORIA_PRODUTO_COM_CATEGORIA= "Categoria selecionada possui produtos cadastrados";
+	public static final String CATEGORIA_DADOS_INCOMPLETOS = "Nome da categoria vazio ou número de dias igual a 0.";
 	
 	public static final String LOTE_DATA_VALIDADE_MENOR_CATEGORIA_EXCEPTION = "Data de validade inserida menor que a permitida para essa categoria.";
 	public static final String LOTE_NOME_JA_EXISTE_FALHA = "Nome de lote ja existe.";
 	public static final String PRODUTO_LOTE_CRIADO_SUCESSO = "Produto e lote criados com sucesso.";
+	
+
+	
+	
 	
 	
 	

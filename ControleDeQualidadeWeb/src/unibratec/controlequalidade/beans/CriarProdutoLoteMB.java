@@ -3,11 +3,14 @@ package unibratec.controlequalidade.beans;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
+
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
@@ -98,16 +101,19 @@ public class CriarProdutoLoteMB {
 		return listaCategoria;
 	}
 	
-	public void infoMsg(String msg) {
+	private void infoMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", msg));
 	}
 
-	public void avisoMsg(String msg) {
+	private void avisoMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", msg));
 	}
 
-	public void erroMsg(String msg) {
+	private void erroMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", msg));
 	}
-
+	
+	public String voltarTelaInicial(){
+		return "/index.xhtml";
+	}
 }

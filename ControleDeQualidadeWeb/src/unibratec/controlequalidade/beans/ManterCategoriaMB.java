@@ -1,9 +1,11 @@
 package unibratec.controlequalidade.beans;
 
 import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
@@ -42,7 +44,7 @@ public class ManterCategoriaMB {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
+
 	public String getMensagem() {
 		return mensagem;
 	}
@@ -66,31 +68,44 @@ public class ManterCategoriaMB {
 	} 
 
 	public String atualizarCategoria(){
-		try {
-			fachada.alteraCategoria(categoria);
-			infoMsg(MensagensGui.CATEGORIA_ATUALIZADA_SUCESSO);
-		} catch (CategoriaCadastradaException e) {
-			erroMsg(MensagensGui.CATEGORIA_ATUALIZADA_JA_EXISTE);
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		} catch (CategoriaNaoCadastradaException e) {
-			erroMsg(MensagensGui.CATEGORIA_ATUALIZADA_NAO_EXISTE);
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+		if (validarCamposCategoria(categoria) == true) {
+			try {
+				fachada.alteraCategoria(categoria);
+				infoMsg(MensagensGui.CATEGORIA_ATUALIZADA_SUCESSO);
+			} catch (CategoriaCadastradaException e) {
+				erroMsg(MensagensGui.CATEGORIA_ATUALIZADA_JA_EXISTE);
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			} catch (CategoriaNaoCadastradaException e) {
+				erroMsg(MensagensGui.CATEGORIA_ATUALIZADA_NAO_EXISTE);
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+			return null;
 		}
-		return null;
+		else {
+			erroMsg(MensagensGui.CATEGORIA_DADOS_INCOMPLETOS);
+			return null;
+		}
+
 	}
 
 	public String criarCategoria(){
-		try {
-			fachada.inserirCategoria(categoria);
-			infoMsg(MensagensGui.CATEGORIA_CADASTRADA_SUCESSO);
-		} catch (CategoriaCadastradaException e) {
-			avisoMsg(MensagensGui.CATEGORIA_CADASTRADA_FALHA);
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+		if (validarCamposCategoria(categoria) == true) {
+			try {
+				fachada.inserirCategoria(categoria);
+				infoMsg(MensagensGui.CATEGORIA_CADASTRADA_SUCESSO);
+			} catch (CategoriaCadastradaException e) {
+				avisoMsg(MensagensGui.CATEGORIA_CADASTRADA_FALHA);
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+			return null;
 		}
-		return null;
+		else {
+			erroMsg(MensagensGui.CATEGORIA_DADOS_INCOMPLETOS);
+			return null;
+		}
 	}
 
 	public String removerCategoria(){
@@ -108,16 +123,30 @@ public class ManterCategoriaMB {
 		}
 		return null;
 	}
-	
-	public void infoMsg(String msg) {
+
+	private void infoMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", msg));
 	}
 
-	public void avisoMsg(String msg) {
+	private void avisoMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", msg));
 	}
 
-	public void erroMsg(String msg) {
+	private void erroMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", msg));
+	}
+	
+	public String voltarTelaInicial(){
+		return "/index.xhtml";
+	}
+
+	private boolean validarCamposCategoria(Categoria categoria){
+		if ((categoria.getNomeCategoria().isEmpty() || (categoria.getNomeCategoria() == null) 
+				|| (categoria.getNumeroDeDiasParaVencimento() == 0))) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 }

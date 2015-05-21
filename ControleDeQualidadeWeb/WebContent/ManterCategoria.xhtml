@@ -10,50 +10,57 @@
 </h:head>
 <h:body>
 	<p:separator />
-		<h:form id="formCategoria">
-			<div align="left">
+	<h:form id="formCategoria">
+		<div align="left">
 			<br />
 			<h:inputHidden type="hidden"
 				value="#{ManterCategoriaMB.categoria.idCategoria}" />
-	NNome da Categoria: <p:inputText
-				value="#{ManterCategoriaMB.categoria.nomeCategoria}" required="true"/>
-			<br />
-	Número de dias para vencer: <p:inputMask
-				value="#{ManterCategoriaMB.categoria.numeroDeDiasParaVencimento}" required="true"  mask="9?9999" />
-			<br />
-			<br />
+			Nome da Categoria:
+			<p:inputText value="#{ManterCategoriaMB.categoria.nomeCategoria}" />
+			<br /> Número de dias para vencer:
+			<p:inputMask
+				value="#{ManterCategoriaMB.categoria.numeroDeDiasParaVencimento}"
+				mask="9?9999" />
+			<br /> <br />
 			<h:commandButton value="Criar Categoria"
-				action="#{ManterCategoriaMB.criarCategoria}" />&nbsp;
-		<h:commandButton value="Remover Categoria"
-				action="#{ManterCategoriaMB.removerCategoria}" />&nbsp;
-		<h:commandButton value="Atualizar Categoria"
+				action="#{ManterCategoriaMB.criarCategoria}" />
+			&nbsp;
+			<h:commandButton value="Remover Categoria"
+				action="#{ManterCategoriaMB.removerCategoria}" />
+			&nbsp;
+			<h:commandButton value="Atualizar Categoria"
 				action="#{ManterCategoriaMB.atualizarCategoria}" />
-			<br />
-			<br />
-			
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<br /> <br />
 
-			<br />
-			<br />
-		<p:separator />
-		<p:dataTable value="#{ManterCategoriaMB.listaCategoria}"
-			var="categoria" style="width:80%" styleClass="table table-hover"
-			emptyMessage="Nenhum resultado">
-			<p:column>
-				<f:facet name="header">Nome></f:facet>
-				<h:outputText value="#{categoria.nomeCategoria}"></h:outputText>
-			</p:column>
-			<p:column>
-				<f:facet name="header">Número de dias para vencer</f:facet>
-				<h:outputText value="#{categoria.numeroDeDiasParaVencimento}"></h:outputText>
-			</p:column>
-			<p:column style="width=100; text-align: center">
-				<h:commandButton value="Selecionar"
-					action="#{ManterCategoriaMB.selecionarCategoria(categoria)}">
-				</h:commandButton>
-			</p:column>
-		</p:dataTable>
-			</div>
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+
+			<br /> <br />
+			<p:separator />
+			<p:dataTable value="#{ManterCategoriaMB.listaCategoria}"
+				var="categoria" style="width:80%" styleClass="table table-hover"
+				emptyMessage="Nenhum resultado">
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{categoria.nomeCategoria}"></h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Número de dias para vencer</f:facet>
+					<h:outputText value="#{categoria.numeroDeDiasParaVencimento}"></h:outputText>
+				</p:column>
+				<p:column style="width=100; text-align: center">
+					<h:commandButton value="Selecionar"
+						action="#{ManterCategoriaMB.selecionarCategoria(categoria)}">
+					</h:commandButton>
+				</p:column>
+			</p:dataTable>
+			<br /> <br />
+		</div>
+		<div align="center">
+			<p:separator />
+			<h:commandButton value="Voltar"
+				action="#{ManterCategoriaMB.voltarTelaInicial}" />
+		</div>
 	</h:form>
 </h:body>
 </html>

@@ -6,19 +6,20 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Criar Produto/Lote</title>
-	<script name="jquery/jquery.js" library="primefaces"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:title>Criar Produto/Lote</h:title>
 </h:head>
 <h:body>
-	<div style="height: 500px" align="left">
+	<div align="left">
 		<h:form>
 			<p:separator />
 			Nome do Produto: <p:inputText
-				value="#{CriarProdutoLoteMB.produto.nomeProduto}" />
+				value="#{CriarProdutoLoteMB.produto.nomeProduto}" required="true" />
 			<br />
 			<br /> 
 			Fabricante: <p:inputText
-				value="#{CriarProdutoLoteMB.produto.fabricanteProduto}" />
+				value="#{CriarProdutoLoteMB.produto.fabricanteProduto}"
+				required="true" />
 			<br />
 			<br />
 			Categoria: 
@@ -30,16 +31,18 @@
 			<br />
 			<br />
 			Preço:
-			<p:inputText value="#{CriarProdutoLoteMB.produto.precoProduto}" />
+			<p:inputText value="#{CriarProdutoLoteMB.produto.precoProduto}"
+				required="true" />
 			<br />
 			<br /> 
 			Quantidade de Produtos:
-			<p:inputText value="#{CriarProdutoLoteMB.lote.qtdProdutos}" />
+			<p:inputMask value="#{CriarProdutoLoteMB.lote.qtdProdutos}"
+				required="true" mask="9?999999"/>
 			<br />
 			<br />
 			 Data de validade: <p:outputLabel for="button" />
 			<p:calendar id="button" value="#{CriarProdutoLoteMB.dataValidade}"
-				showOn="button" />
+				showOn="button" required="true" readonlyInput="true" />
 			<br />
 			<br />
 			<h:commandButton value="Criar"
@@ -48,8 +51,14 @@
 			<br />
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
-			<p:separator />
+			<br />
+			<br />
 		</h:form>
+	</div>
+	<div align="center">
+		<p:separator />
+		<h:commandButton value="Voltar"
+			action="#{CriarProdutoLoteMB.voltarTelaInicial}" />
 	</div>
 </h:body>
 </html>

@@ -37,7 +37,17 @@ public class TesteControleDeQualidade {
 		EntityManager etManager = emf.createEntityManager(); 
 		//############# ENTITY MANAGER #############
 		
-		Categoria c0 = new Categoria("Teste", 20);
+		
+		NegocioVenda nv = new NegocioVenda(etManager);
+		try {
+			nv.atualizarProdutosVencer();
+		} catch (ProdutoNaoEncontradoExcecption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+/*		Categoria c0 = new Categoria("Teste", 20);
 		c0.setIdCategoria(1);
 		
 		IDAOProduto idp = new DAOProduto(etManager);
@@ -48,7 +58,7 @@ public class TesteControleDeQualidade {
 		
 		for (Produto produto : produtoList) {
 			System.out.println(produto);
-		}
+		}*/
 		
 		
 		

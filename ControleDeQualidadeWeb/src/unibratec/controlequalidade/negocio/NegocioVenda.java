@@ -64,5 +64,40 @@ public class NegocioVenda {
 		
 		daoProduto.alterar(produto);
 	}
+	
+	public void atualizarProdutosPrestesAVencer() throws ProdutoNaoEncontradoExcecption {
 
+		List<Produto> produtosList = this.daoProduto.pesquisarProdutoPorEstadoList(EstadoProdutoEnum.EM_ESTOQUE);
+			
+		Calendar dataAtual = Calendar.getInstance();
+				
+		for (Produto p : produtosList) {
+
+			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) <= p.getCategoriaProduto().getNumeroDeDiasParaVencimento())) {
+				
+				p.setEstadoProduto(EstadoProdutoEnum.PRESTES_A_VENCER);
+				daoProduto.alterar(p);
+			}
+		}
+	}
+	
+	public void atualizarProdutosVencer() throws ProdutoNaoEncontradoExcecption {
+
+		List<Produto> produtosList = this.daoProduto.pesquisarProdutoPorEstadoList(EstadoProdutoEnum.EM_ESTOQUE);
+			
+		Calendar dataAtual = Calendar.getInstance();
+				
+		for (Produto p : produtosList) {
+
+			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) <= 0)) {
+				
+				p.setEstadoProduto(EstadoProdutoEnum.VENCIDO);
+				daoProduto.alterar(p);
+			}
+		}
+	}
 }
+
+
+
+
