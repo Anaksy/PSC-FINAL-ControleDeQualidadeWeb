@@ -14,12 +14,11 @@
 		<h:form>
 			<p:separator />
 			Nome do Produto: <p:inputText
-				value="#{CriarProdutoLoteMB.produto.nomeProduto}" required="true" />
+				value="#{CriarProdutoLoteMB.produto.nomeProduto}" />
 			<br />
 			<br /> 
 			Fabricante: <p:inputText
-				value="#{CriarProdutoLoteMB.produto.fabricanteProduto}"
-				required="true" />
+				value="#{CriarProdutoLoteMB.produto.fabricanteProduto}" />
 			<br />
 			<br />
 			Categoria: 
@@ -31,22 +30,25 @@
 			<br />
 			<br />
 			Preço:
-			<p:inputText value="#{CriarProdutoLoteMB.produto.precoProduto}"
-				required="true" />
+			<p:inputText value="#{CriarProdutoLoteMB.produto.precoProduto}" />
 			<br />
 			<br /> 
 			Quantidade de Produtos:
 			<p:inputMask value="#{CriarProdutoLoteMB.lote.qtdProdutos}"
-				required="true" mask="9?999999" />
+				mask="9?999999" />
 			<br />
 			<br />
 			 Data de validade: <p:outputLabel for="button" />
 			<p:calendar id="button" value="#{CriarProdutoLoteMB.dataValidade}"
-				showOn="button" required="true" readonlyInput="true" />
+				showOn="button" readonlyInput="true" />
 			<br />
 			<br />
 			<h:commandButton value="Criar"
-				action="#{CriarProdutoLoteMB.criarProdutoLote}" />
+				action="#{CriarProdutoLoteMB.criarProdutoLote}" /> 
+			&nbsp;
+			<h:commandButton value="Limpar"
+				action="#{CriarProdutoLoteMB.limparModelProdutoLote}" />
+			<br />
 			<br />
 			<br />
 			<p:messages id="messages" showDetail="true" autoUpdate="true"

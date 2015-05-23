@@ -66,11 +66,12 @@ public class ManterCategoriaMB {
 		}
 	} 
 
-	public void atualizarCategoria(){
+	public String atualizarCategoria(){
 		if (validarCamposCategoria(categoria) == true) {
 			try {
 				fachada.alteraCategoria(categoria);
 				infoMsg(MensagensGui.CATEGORIA_ATUALIZADA_SUCESSO);
+				categoria = new Categoria();
 			} catch (CategoriaCadastradaException e) {
 				erroMsg(MensagensGui.CATEGORIA_ATUALIZADA_JA_EXISTE);
 				e.printStackTrace();
@@ -81,33 +82,30 @@ public class ManterCategoriaMB {
 				System.out.println(e.getMessage());
 			}
 		}
-		else {
-			erroMsg(MensagensGui.CATEGORIA_DADOS_INCOMPLETOS);
-		}
-
+		return "";
 	}
 
-	public void criarCategoria(){
-		categoria.setIdCategoria(0);// Talvez deveria botar isso no metodo do DAO ?
+	public String criarCategoria(){
+		limparIdCategoria();// Talvez deveria botar isso no metodo do DAO ?
 		if (validarCamposCategoria(categoria) == true) {
 			try {
 				fachada.inserirCategoria(categoria);
 				infoMsg(MensagensGui.CATEGORIA_CADASTRADA_SUCESSO);
+				categoria = new Categoria();
 			} catch (CategoriaCadastradaException e) {
 				avisoMsg(MensagensGui.CATEGORIA_CADASTRADA_FALHA);
 				e.printStackTrace();
 				System.out.println(e.getMessage());
 			}
 		}
-		else {
-			erroMsg(MensagensGui.CATEGORIA_DADOS_INCOMPLETOS);
-		}
+		return "";
 	}
 
-	public void removerCategoria(){
+	public String removerCategoria(){
 		try {
 			fachada.removeCategoria(categoria);
 			infoMsg(MensagensGui.CATEGORIA_REMOVIDA_SUCESSO);
+			categoria = new Categoria();  
 		} catch (CategoriaNaoCadastradaException e) {
 			avisoMsg(MensagensGui.CATEGORIA_REMOVIDA_FALHA);
 			e.printStackTrace();
@@ -117,6 +115,7 @@ public class ManterCategoriaMB {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
+		return "";
 	}
 
 	private void infoMsg(String msg) {
@@ -130,7 +129,7 @@ public class ManterCategoriaMB {
 	private void erroMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", msg));
 	}
-	
+
 	public String voltarTelaInicial(){
 		return "/index.xhtml";
 	}
@@ -138,10 +137,15 @@ public class ManterCategoriaMB {
 	private boolean validarCamposCategoria(Categoria categoria){
 		if ((categoria.getNomeCategoria().isEmpty() || (categoria.getNomeCategoria() == null) 
 				|| (categoria.getNumeroDeDiasParaVencimento() == 0))) {
+			erroMsg(MensagensGui.CATEGORIA_VALIDACAO_DADOS_INCOMPLETOS);
 			return false;
 		}
 		else {
 			return true;
 		}
+	}
+
+	private void limparIdCategoria(){
+		categoria.setIdCategoria(0);
 	}
 }

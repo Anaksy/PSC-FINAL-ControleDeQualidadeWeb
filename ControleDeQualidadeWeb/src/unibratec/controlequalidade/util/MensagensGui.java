@@ -12,13 +12,14 @@ public class MensagensGui {
 	public static final String CATEGORIA_ATUALIZADA_NAO_EXISTE = "Categoria pesquisada não existe.";
 	public static final String CATEGORIA_SELECIONAR_FALHA = "Categoria pesquisada não existe.";
 	public static final String CATEGORIA_PRODUTO_COM_CATEGORIA= "Categoria selecionada possui produtos cadastrados";
-	public static final String CATEGORIA_DADOS_INCOMPLETOS = "Nome da categoria vazio ou número de dias igual a 0.";
-	
+	public static final String CATEGORIA_VALIDACAO_DADOS_INCOMPLETOS = "Nome da categoria vazio ou número de dias igual a 0.";
 	public static final String LOTE_DATA_VALIDADE_MENOR_CATEGORIA_EXCEPTION = "Data de validade inserida menor que a permitida para essa categoria.";
 	public static final String LOTE_NOME_JA_EXISTE_FALHA = "Nome de lote ja existe.";
-	
 	public static final String PRODUTO_LOTE_CRIADO_SUCESSO = "Produto e lote criados com sucesso.";
-	
+	public static final String PRODUTO_LOTE_VALIDACAO_NOME_PRODUTO = "Nome do produto não foi preenchido.";
+	public static final String PRODUTO_LOTE_VALIDACAO_NOME_FABRICANTE = "Nome do fabricante não foi preenchido.";
+	public static final String PRODUTO_LOTE_VALIDACAO_PRECO_QUANTIDADE = "Preço e quantidade de produtos tem que ser maior que 0.";
+	public static final String PRODUTO_LOTE_VALIDACAO_DATA_VALIDADE= "Data de validade tem que ser preenchida.";
 	public static final String ROTINA_PRODUTO_SUCESSO = "Rotina de validação de produtos executada com sucesso!";
 	public static final String ROTINA_PRODUTO_FALHA = "Não existem produtos com o status EM_ESTOQUE no sistema.";
 	

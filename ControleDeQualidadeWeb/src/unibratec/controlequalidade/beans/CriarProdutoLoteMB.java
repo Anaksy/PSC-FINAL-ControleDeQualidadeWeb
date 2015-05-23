@@ -3,14 +3,11 @@ package unibratec.controlequalidade.beans;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
@@ -65,29 +62,32 @@ public class CriarProdutoLoteMB {
 		this.listaCategoria = listaCategoria;
 	}
 
-	public void criarProdutoLote(){
-		try {
-			Categoria categoriaSelecionada = fachada.buscarCategoriaPorId(categoria);
-			produto.setCategoriaProduto(categoriaSelecionada);
-			lote.setDataDeValidade(Datas.converterDateToCalendar(dataValidade));
-			fachada.criarProdutoLote(produto, lote);
-			infoMsg(MensagensGui.PRODUTO_LOTE_CRIADO_SUCESSO);
-			limparModelProdutoLote();
-		} 
-		catch(LoteCadastradoException e){
-			erroMsg(MensagensGui.LOTE_NOME_JA_EXISTE_FALHA);
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+	public String criarProdutoLote(){
+		if (validarCampos() == true) {
+			try {
+				Categoria categoriaSelecionada = fachada.buscarCategoriaPorId(categoria);
+				produto.setCategoriaProduto(categoriaSelecionada);
+				lote.setDataDeValidade(Datas.converterDateToCalendar(dataValidade));
+				fachada.criarProdutoLote(produto, lote);
+				infoMsg(MensagensGui.PRODUTO_LOTE_CRIADO_SUCESSO);
+				limparModelProdutoLote();
+			} 
+			catch(LoteCadastradoException e){
+				erroMsg(MensagensGui.LOTE_NOME_JA_EXISTE_FALHA);
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+			catch (dataDeValidadeMenorPermitidaCategoriaException e) {
+				erroMsg(MensagensGui.LOTE_DATA_VALIDADE_MENOR_CATEGORIA_EXCEPTION);
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			} catch (CategoriaNaoCadastradaException e) {
+				erroMsg(MensagensGui.CATEGORIA_SELECIONAR_FALHA);
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
 		}
-		catch (dataDeValidadeMenorPermitidaCategoriaException e) {
-			erroMsg(MensagensGui.LOTE_DATA_VALIDADE_MENOR_CATEGORIA_EXCEPTION);
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		} catch (CategoriaNaoCadastradaException e) {
-			erroMsg(MensagensGui.CATEGORIA_SELECIONAR_FALHA);
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
+		return "";
 	}
 
 	public List<Categoria> getListaCategoria() {
@@ -117,8 +117,32 @@ public class CriarProdutoLoteMB {
 		return "/index.xhtml";
 	}
 	
-	private void limparModelProdutoLote(){
-		produto = null;
-		lote = null;
+	public String limparModelProdutoLote(){
+		produto = new Produto();
+		lote = new Lote();
+		dataValidade = null;
+		return "";
 	}
+	
+	private boolean validarCampos(){
+		if (produto.getNomeProduto().isEmpty() || produto.getNomeProduto() == null) {
+			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_NOME_PRODUTO);
+			return false;
+		}
+		else if (produto.getFabricanteProduto().isEmpty() || produto.getFabricanteProduto() == null) {
+			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_NOME_FABRICANTE);
+			return false;
+		}
+		else if (produto.getPrecoProduto() == 0 || lote.getQtdProdutos() == 0) {
+			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_PRECO_QUANTIDADE);
+			return false;
+		}
+		else if (dataValidade == null) {
+			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_DATA_VALIDADE);
+			return false;
+		}
+		else {
+			return true;
+		}
+	}	
 }
