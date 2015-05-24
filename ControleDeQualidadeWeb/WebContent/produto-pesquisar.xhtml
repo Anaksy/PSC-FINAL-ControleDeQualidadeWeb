@@ -11,11 +11,8 @@
 </h:head>
 <h:body>
 	<h:form>
-
 		<div>
-
 			<div align="left">
-
 				<h:selectOneMenu id="estadoProdutoEnum"
 					value="#{PesquisarProdutosMB.estadoProdutoEnum}">
 					<f:selectItem itemLabel="Selecione" />
@@ -24,44 +21,34 @@
 				</h:selectOneMenu>
 
 				&nbsp;
-
 				<h:selectBooleanCheckbox
 					value="#{PesquisarProdutosMB.checkboxSituacao}"
 					id="checkBoxSituacao" />
-
-
 
 				<br /> <br /> Nome do Produto:
 				<p:inputText value="#{PesquisarProdutosMB.nomeProduto}" />
 
 				&nbsp;
-
 				<h:selectBooleanCheckbox value="#{PesquisarProdutosMB.checkboxNome}"
 					id="checkBoxNome" />
-
 
 				<br /> <br /> Data inicial
 				<p:outputLabel for="button" />
 				<p:calendar id="button" value="#{PesquisarProdutosMB.dataInicial}"
 					showOn="button" readonlyInput="true" />
 
-				<br /> <br /> Data final
+				&nbsp; <br /> <br /> Data final
 				<p:outputLabel for="button" />
-				<p:calendar id="a" value="#{PesquisarProdutosMB.dataFinal}"
+				<p:calendar id="buttonB" value="#{PesquisarProdutosMB.dataFinal}"
 					showOn="button" readonlyInput="true" />
 
-				<br /> <br />
-
+				&nbsp;
 				<h:selectBooleanCheckbox
 					value="#{PesquisarProdutosMB.checkboxFaixaDataValidade}"
 					id="checkBoxDataValidade" />
 
-
-
 				<br /> <br />
-				<h:commandButton value="Teste" action="#{PesquisarProdutosMB.teste}" />
-
-
+				<h:commandButton value="Pesquisar" action="#{PesquisarProdutosMB.teste}" />
 			</div>
 
 			<br /> <br />

@@ -3,6 +3,7 @@ package unibratec.controlequalidade.teste;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,11 +31,32 @@ import unibratec.controlequalidade.negocio.NegocioLote;
 import unibratec.controlequalidade.negocio.NegocioProduto;
 import unibratec.controlequalidade.negocio.NegocioProdutoLote;
 import unibratec.controlequalidade.negocio.NegocioVenda;
+import unibratec.controlequalidade.util.Datas;
 
 public class TesteControleDeQualidade {
 
+	private static boolean between (Date date, Date dateStart, Date dateEnd) {
+		if (date != null && dateStart != null && dateEnd != null) {
+			if (date.after(dateStart) && date.before(dateEnd)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		/*
+		Date dataProcurada = Datas.criarData(10, 10, 2015);
+		
+		Date dataInicial = Datas.criarData(11, 10, 2015);
+		Date dataFinal = Datas.criarData(12, 10, 2015);
+		
+		System.out.println(between(dataProcurada, dataInicial, dataFinal));
+
+			
 		//############# ENTITY MANAGER ############# 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleDeQualidadePSC");
 		EntityManager etManager = emf.createEntityManager(); 
@@ -42,7 +64,7 @@ public class TesteControleDeQualidade {
 
 		NegocioProduto np = new NegocioProduto();
 		try {
-			List <Produto> listaDeProduto = np.buscaProdutosPorNome("NomeProduto");
+			List<Produto> listaDeProduto = np.listaTodosProdutos();
 			System.out.println(listaDeProduto);
 		} catch (ProdutoNaoCadastradoException e) {
 			// TODO Auto-generated catch block
@@ -52,10 +74,14 @@ public class TesteControleDeQualidade {
 
 
 
-
-
-
-
+		NegocioProduto np = new NegocioProduto();
+		try {
+			List <Produto> listaDeProduto = np.buscaProdutosPorNome("NomeProduto");
+			System.out.println(listaDeProduto);
+		} catch (ProdutoNaoCadastradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		NegocioVenda nv = new NegocioVenda();
 		try {

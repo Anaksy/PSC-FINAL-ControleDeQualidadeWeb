@@ -81,6 +81,11 @@ public class Fachada implements IFachada {
 		return negocioProduto.buscaProdutosPorNome(nomeProduto);
 	}
 
+	@Override
+	public List<Produto> listaTodosProdutos() throws ProdutoNaoCadastradoException {
+		return negocioProduto.listaTodosProdutos();
+	}
+
 	//	@Override
 	//	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException {
 	//		npl.associaLoteProduto(lote, produto, dataValidade, qtdProdutos);

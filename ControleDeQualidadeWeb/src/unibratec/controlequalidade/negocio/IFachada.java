@@ -39,6 +39,8 @@ public interface IFachada {
 	
 	public List<Produto> buscaProdutosPorNome(String nomeProduto) throws ProdutoNaoCadastradoException;
 	
+	public List<Produto> listaTodosProdutos() throws ProdutoNaoCadastradoException;
+	
 
 //	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException;
 //	

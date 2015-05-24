@@ -4,6 +4,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 public abstract class Funcoes {
+	
+	//Metodo que retorna um boolean se uma data entre outras definidas pelos parametros.
+	public static boolean procurarEntreDatas (Date date, Date dateStart, Date dateEnd) {
+		if (date != null && dateStart != null && dateEnd != null) {
+			if (date.after(dateStart) && date.before(dateEnd)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
+	}
 
 	// Método que retorna o resultado da subtração de duas datas
 	public static long subtrairDiasDataCalendar(Calendar menorData, Calendar maiorData){

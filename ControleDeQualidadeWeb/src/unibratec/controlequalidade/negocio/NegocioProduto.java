@@ -41,14 +41,14 @@ public class NegocioProduto {
 	 */
 	public List<Produto> listaTodosProdutos() throws ProdutoNaoCadastradoException{
 
-		List<Produto> produtosList= new ArrayList<Produto>();
+		List<Produto> produtosList = daoProduto.consultarTodos();
 		
 		if (produtosList.isEmpty()) {
 			
 			throw new ProdutoNaoCadastradoException(MensagensExceptions.NENHUM_PRODUTO_CADASTRADO_EXCEPTION);
 		}
 		
-		return this.daoProduto.consultarTodos();
+		return produtosList;
 	}
 	
 	/**

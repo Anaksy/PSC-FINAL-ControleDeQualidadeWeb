@@ -1,6 +1,8 @@
 package unibratec.controlequalidade.beans;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -109,14 +111,12 @@ public class PesquisarProdutosMB {
 		this.dataFinal = dataFinal;
 	}
 	
-	
-	
-
 	//Somente um teste.
 	public void teste(){
 		if (checkboxSituacao == true) {
 			try {
-				listaProduto = fachada.buscaProdutosPorSituacaoList(getEstadoProdutoEnum());
+				setListaProduto(fachada.buscaProdutosPorSituacaoList(getEstadoProdutoEnum()));
+				//listaProduto = fachada.buscaProdutosPorSituacaoList(getEstadoProdutoEnum());
 			} catch (ProdutoNaoEncontradoExcecption e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
@@ -127,7 +127,8 @@ public class PesquisarProdutosMB {
 			if (checkboxNome == true) {
 				
 				try {
-					listaProduto = fachada.buscaProdutosPorNome(getNomeProduto());
+					//listaProduto = fachada.buscaProdutosPorNome(getNomeProduto());
+					setListaProduto(fachada.buscaProdutosPorNome(getNomeProduto()));
 				} catch (ProdutoNaoCadastradoException e) {
 					e.printStackTrace();
 					System.out.println(e.getMessage());
@@ -137,8 +138,31 @@ public class PesquisarProdutosMB {
 			}
 			
 			if (checkboxFaixaDataValidade == true) {
+
+//				long resDataPesquisa = Funcoes.subtrairDiasDataCalendar(Datas.converterDateToCalendar(dataInicial), Datas.converterDateToCalendar(dataFinal));
+//				Calendar dataAtual = Calendar.getInstance();
+							
+				try {
+					List<Produto> listaProduto = fachada.listaTodosProdutos();
+					List<Produto> novaListaProduto = new ArrayList<Produto>();
+					for (Produto produto : listaProduto) {
+						//long resDataProdutos =  Funcoes.subtrairDiasDataCalendar(dataAtual, produto.getLoteProduto().getDataDeValidade());
+						//if (resDataProdutos < resDataPesquisa) {
+						Date dataProdutoLote = produto.getLoteProduto().getDataDeValidade().getTime();
+						if(Funcoes.procurarEntreDatas(dataProdutoLote, getDataInicial(), getDataFinal()) == true){
+							novaListaProduto.add(produto);
+						}
+						setListaProduto(novaListaProduto);   
+					}
+			
+				} catch (ProdutoNaoCadastradoException e) {
+					e.printStackTrace();
+					System.out.println(e.getMessage());
+					erroMsg("Nao tem nada no banco booooy!");
+				}
 				
-				long resDataParametro = Funcoes.subtrairDiasDataCalendar(Datas.converterDateToCalendar(dataInicial), Datas.converterDateToCalendar(dataFinal));
+		
+				
 				
 			}
 
