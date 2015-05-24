@@ -12,6 +12,7 @@ public abstract class MensagensExceptions {
 	public static final String NENHUMA_CATEGORIA_CADASTRADA_EXCEPTION = "Nenhuma categoria cadastrada até o momento.";
 	public static final String NENHUM_PRODUTO_CADASTRADO_NOME_EXCEPTION = "Nenhum produto cadastrado com esse nome até o momento.";
 	public static final String NENHUM_PRODUTO_CADASTRADO_EXCEPTION = "Nenhum produto cadastrado até o momento.";
+	public static final String NENHUM_PRODUTO_CADASTRADO_SITUACAO_EXCEPTION = "Nenhum produto cadastrado com esse estado.";
 	
 	public static final String ROTINA_PRODUTO_FALHA = "Não existem produtos com o status EM_ESTOQUE no sistema.";
 }

@@ -1,11 +1,8 @@
 package unibratec.controlequalidade.negocio;
 
-import java.util.Calendar;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import unibratec.controlequalidade.entidades.Categoria;
+import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
@@ -14,19 +11,16 @@ import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
-import unibratec.controlequalidade.exceptions.ProdutoNaoPrestesAVencerException;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 
 public class Fachada implements IFachada {
 
-	private NegocioLote negocioLote;
 	private NegocioProduto negocioProduto;
 	private NegocioCategoria negocioCategoria;
 	private NegocioVenda negocioVenda;
 	private NegocioProdutoLote negocioProdutoLote;
 
 	public Fachada() {
-		this.negocioLote = new NegocioLote();
 		this.negocioProduto = new NegocioProduto();
 		this.negocioCategoria = new NegocioCategoria();
 		this.negocioVenda = new NegocioVenda();
@@ -73,6 +67,11 @@ public class Fachada implements IFachada {
 	@Override
 	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption {
 		this.negocioVenda.executarRotinaProdutos();
+	}
+
+	@Override
+	public List<Produto> buscaProdutosPorSituacaoList(EstadoProdutoEnum estadoProdutoEnum) throws ProdutoNaoEncontradoExcecption {
+		return this.negocioProduto.buscaProdutosPorSituacaoList(estadoProdutoEnum); 
 	}
 
 	//	@Override

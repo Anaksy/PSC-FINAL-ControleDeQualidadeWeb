@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import unibratec.controlequalidade.entidades.Categoria;
+import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
@@ -32,6 +33,8 @@ public interface IFachada {
 	public Categoria buscarCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException;
 	
 	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption;
+	
+	public List<Produto> buscaProdutosPorSituacaoList(EstadoProdutoEnum estadoProdutoEnum) throws ProdutoNaoEncontradoExcecption;
 	
 
 //	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException;

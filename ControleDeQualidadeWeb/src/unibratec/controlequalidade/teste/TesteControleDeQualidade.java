@@ -1,6 +1,7 @@
 package unibratec.controlequalidade.teste;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -32,12 +33,12 @@ import unibratec.controlequalidade.negocio.NegocioVenda;
 public class TesteControleDeQualidade {
 
 	public static void main(String[] args) {
-/*	//############# ENTITY MANAGER ############# 
+		/*	//############# ENTITY MANAGER ############# 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleDeQualidadePSC");
 		EntityManager etManager = emf.createEntityManager(); 
 		//############# ENTITY MANAGER #############
-*/		
-		
+
+
 		NegocioVenda nv = new NegocioVenda();
 		try {
 			nv.executarRotinaProdutos();
@@ -45,25 +46,33 @@ public class TesteControleDeQualidade {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 */	
 		
+		//List<EstadoProdutoEnum> estadoList = new ArrayList<EstadoProdutoEnum>();
+		   List<EstadoProdutoEnum> list = Arrays.asList(EstadoProdutoEnum.values());
+		    System.out.println(list);
+		Produto p = new Produto();
+		p.setEstadoProduto(list.get(2));
+		System.out.println(p);
 		
-/*		Categoria c0 = new Categoria("Teste", 20);
+
+		/*		Categoria c0 = new Categoria("Teste", 20);
 		c0.setIdCategoria(1);
-		
+
 		IDAOProduto idp = new DAOProduto(etManager);
-		
+
 		List <Produto> produtoList = new ArrayList<Produto>();
-		
+
 		produtoList =  idp.pesquisarProdutoPorCategoria(c0);
-		
+
 		for (Produto produto : produtoList) {
 			System.out.println(produto);
 		}*/
-		
-		
-		
-		
-		
+
+
+
+
+
 		/*
 		//============================================================================================		
 		//Simulando o comboBox de categoria previamente definidas
@@ -105,14 +114,14 @@ public class TesteControleDeQualidade {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		 */
 		//=========== Alterando Lote
-/*		Lote l0 = new Lote();
+		/*		Lote l0 = new Lote();
 		l0.setNomeLote("LT2015MAI9-T068697x");
-		
+
 		Calendar cl0 = Calendar.getInstance();
 		cl0.set(2015, 4, 10);
-		
+
 		NegocioLote negocioLote = new NegocioLote();
 		try {
 			negocioLote.alteraLote(l0, cl0);
@@ -166,7 +175,7 @@ public class TesteControleDeQualidade {
 		Categoria c3 = new Categoria("teste3", 20);
 		NegocioCategoria ngCategoria = new NegocioCategoria();
 
-		
+
 		// INSERINDO UMA CATEGORIA
 		try {
 			ngCategoria.inserirCategoria(c0);
@@ -174,16 +183,16 @@ public class TesteControleDeQualidade {
 			System.out.println(e.getMessage());
 		}
 
-		
+
 		// LISTANDO TODAS AS CATEGORIAS
 		List<Categoria> listaCategorias = new ArrayList<Categoria>();
-		
+
 		listaCategorias = ngCategoria.listaTodasCategorias();
-		
+
 		for (Categoria categoria : listaCategorias) {
 			System.out.println(categoria);
 		}
-		
+
 		// BUSCANDO CATEGORIA POR NOME
 		try {
 			ngCategoria.buscaCategoriaPorNomeCategoria(c1.getNomeCategoria());
@@ -201,13 +210,13 @@ public class TesteControleDeQualidade {
 		// ALTERANDO CATEGORIA COMPLETA
 		try {
 			ngCategoria.alteraCategoria(c3, "teste3", 20);
-		
+
 		} catch (CategoriaNaoCadastradaException e) {
-		
+
 			System.out.println(e.getMessage());
-		
+
 		} catch (CategoriaCadastradaException e) {
-			
+
 			System.out.println(e.getMessage());
 		}
 
@@ -217,7 +226,7 @@ public class TesteControleDeQualidade {
 		} catch (CategoriaNaoCadastradaException e) {
 			System.out.println(e.getMessage());
 		}
-*/
-		
+		 */
+
 	}
 }

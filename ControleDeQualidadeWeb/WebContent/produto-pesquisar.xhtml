@@ -1,11 +1,67 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<h:title>Pesquisar Produto</h:title>
+</h:head>
+<h:body>
+	<h:form>
 
-</body>
+		<div>
+
+
+			<h:selectOneMenu id="estadoProdutoEnum"
+				value="#{PesquisarProdutosMB.estadoProdutoEnum}">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItems value="#{PesquisarProdutosMB.estadoProdutoEnumList}"
+					var="n" itemLabel="#{n}" itemValue="#{n}" />
+			</h:selectOneMenu>
+
+			<h:commandButton value="Teste"
+				action="#{PesquisarProdutosMB.teste}" />
+
+
+			<p:separator />
+			<p:dataTable value="#{PesquisarProdutosMB.listaProduto}"
+				var="produto" style="width:100%" styleClass="table table-hover"
+				emptyMessage="Nenhum resultado">
+				<p:column>
+					<f:facet name="header">Situação</f:facet>
+					<h:outputText value="#{produto.estadoProduto}"></h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Fabricate</f:facet>
+					<h:outputText value="#{produto.fabricanteProduto}"></h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{produto.nomeProduto}"></h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Preço</f:facet>
+					<h:outputText value="#{produto.precoProduto}"></h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Categoria</f:facet>
+					<h:outputText value="#{produto.categoriaProduto.nomeCategoria}"></h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Lote</f:facet>
+					<h:outputText value="#{produto.loteProduto.nomeLote}"></h:outputText>
+				</p:column>
+
+
+
+
+			</p:dataTable>
+
+
+		</div>
+	</h:form>
+</h:body>
 </html>

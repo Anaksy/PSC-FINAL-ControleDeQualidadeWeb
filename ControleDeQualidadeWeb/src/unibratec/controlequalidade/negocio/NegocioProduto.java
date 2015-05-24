@@ -11,6 +11,7 @@ import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
+import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.util.MensagensExceptions;
 
 public class NegocioProduto {
@@ -87,6 +88,28 @@ public class NegocioProduto {
 		if (produtosList.isEmpty()) {
 
 			throw new ProdutoNaoCadastradoException(MensagensExceptions.NENHUM_PRODUTO_CADASTRADO_NOME_EXCEPTION);
+
+		}
+		
+		return produtosList;	
+	}
+	
+	/**
+	 * Método para buscar uma Produto por situação 
+	 * 
+	 * @param estadoProdutoEnum
+	 * @return
+	 * @throws ProdutoNaoEncontradoExcecption 
+	 */
+	public List<Produto> buscaProdutosPorSituacaoList(EstadoProdutoEnum estadoProdutoEnum) throws ProdutoNaoEncontradoExcecption{
+
+		List<Produto> produtosList = new ArrayList<Produto>();
+				
+		produtosList = this.daoProduto.pesquisarProdutoPorEstadoList(estadoProdutoEnum);
+
+		if (produtosList.isEmpty()) {
+
+			throw new ProdutoNaoEncontradoExcecption(MensagensExceptions.NENHUM_PRODUTO_CADASTRADO_SITUACAO_EXCEPTION);
 
 		}
 		
