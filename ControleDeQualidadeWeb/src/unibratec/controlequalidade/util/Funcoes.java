@@ -6,10 +6,10 @@ import java.util.Date;
 public abstract class Funcoes {
 
 	// Método que retorna o resultado da subtração de duas datas
-	public static long subtrairDiasDataCalendar(Calendar primeiraDataCalendar, Calendar seundaDataCalendar){
+	public static long subtrairDiasDataCalendar(Calendar menorData, Calendar maiorData){
 
-		Date primeiraDataDate = primeiraDataCalendar.getTime();     
-		Date segundaDataDate = seundaDataCalendar.getTime();     
+		Date primeiraDataDate = menorData.getTime();     
+		Date segundaDataDate = maiorData.getTime();     
 		
 		long resultado = segundaDataDate.getTime() - primeiraDataDate.getTime();     
 		

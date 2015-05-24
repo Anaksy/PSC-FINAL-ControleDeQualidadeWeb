@@ -1,6 +1,7 @@
 package unibratec.controlequalidade.beans;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -13,6 +14,8 @@ import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.negocio.Fachada;
+import unibratec.controlequalidade.util.Datas;
+import unibratec.controlequalidade.util.Funcoes;
 
 @ManagedBean(name="PesquisarProdutosMB")
 public class PesquisarProdutosMB {
@@ -26,6 +29,8 @@ public class PesquisarProdutosMB {
 	private EstadoProdutoEnum estadoProdutoEnum;
 	private List<EstadoProdutoEnum> estadoProdutoEnumList;
 	private String nomeProduto;
+	private Date dataInicial;
+	private Date dataFinal;
 	private boolean pesquisarPorEstado;
 	private boolean pesquisarPorNome;
 	private boolean pesquisarPorFaixaData;
@@ -54,6 +59,7 @@ public class PesquisarProdutosMB {
 	public void setCheckboxFaixaDataValidade(boolean checkboxFaixaDataValidade) {
 		this.checkboxFaixaDataValidade = checkboxFaixaDataValidade;
 	}
+	
 	public List<Produto> getListaProduto() {
 		//		try {
 		//			listaProduto = fachada.buscaProdutosPorSituacaoList(getEstadoProdutoEnum());
@@ -82,6 +88,29 @@ public class PesquisarProdutosMB {
 	public void setEstadoProdutoEnumList(List<EstadoProdutoEnum> estadoProdutoEnumList) {
 		this.estadoProdutoEnumList = estadoProdutoEnumList;
 	}
+	
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+
+	public Date getDataInicial() {
+		return dataInicial;
+	}
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+	public Date getDataFinal() {
+		return dataFinal;
+	}
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
+	}
+	
+	
+	
 
 	//Somente um teste.
 	public void teste(){
@@ -106,6 +135,12 @@ public class PesquisarProdutosMB {
 				}
 	
 			}
+			
+			if (checkboxFaixaDataValidade == true) {
+				
+				long resDataParametro = Funcoes.subtrairDiasDataCalendar(Datas.converterDateToCalendar(dataInicial), Datas.converterDateToCalendar(dataFinal));
+				
+			}
 
 
 
@@ -122,13 +157,6 @@ public class PesquisarProdutosMB {
 
 
 
-	}
-
-	public String getNomeProduto() {
-		return nomeProduto;
-	}
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
 	}
 
 
