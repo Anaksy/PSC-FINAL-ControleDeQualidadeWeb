@@ -14,16 +14,44 @@
 
 		<div>
 
+			<div align="left">
 
-			<h:selectOneMenu id="estadoProdutoEnum"
-				value="#{PesquisarProdutosMB.estadoProdutoEnum}">
-				<f:selectItem itemLabel="Selecione" />
-				<f:selectItems value="#{PesquisarProdutosMB.estadoProdutoEnumList}"
-					var="n" itemLabel="#{n}" itemValue="#{n}" />
-			</h:selectOneMenu>
+				<h:selectOneMenu id="estadoProdutoEnum"
+					value="#{PesquisarProdutosMB.estadoProdutoEnum}">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{PesquisarProdutosMB.estadoProdutoEnumList}"
+						var="n" itemLabel="#{n}" itemValue="#{n}" />
+				</h:selectOneMenu>
 
-			<h:commandButton value="Teste"
-				action="#{PesquisarProdutosMB.teste}" />
+				&nbsp;
+
+				<h:selectBooleanCheckbox
+					value="#{PesquisarProdutosMB.checkboxSituacao}"
+					id="checkBoxSituacao" />
+
+
+
+				<br /> <br /> Nome do Produto:
+				<p:inputText value="#{PesquisarProdutosMB.nomeProduto}" />
+
+				&nbsp;
+
+				<h:selectBooleanCheckbox value="#{PesquisarProdutosMB.checkboxNome}"
+					id="checkBoxNome" />
+
+
+				<br /> <br />
+
+
+				<h:commandButton value="Teste" action="#{PesquisarProdutosMB.teste}" />
+
+
+			</div>
+
+			<br /> <br />
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<br /> <br />
 
 
 			<p:separator />

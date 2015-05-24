@@ -1,6 +1,7 @@
 package unibratec.controlequalidade.negocio;
 
 import java.util.List;
+
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
@@ -10,6 +11,7 @@ import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
+import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 
@@ -72,6 +74,11 @@ public class Fachada implements IFachada {
 	@Override
 	public List<Produto> buscaProdutosPorSituacaoList(EstadoProdutoEnum estadoProdutoEnum) throws ProdutoNaoEncontradoExcecption {
 		return this.negocioProduto.buscaProdutosPorSituacaoList(estadoProdutoEnum); 
+	}
+
+	@Override
+	public List<Produto> buscaProdutosPorNome(String nomeProduto) throws ProdutoNaoCadastradoException {
+		return negocioProduto.buscaProdutosPorNome(nomeProduto);
 	}
 
 	//	@Override

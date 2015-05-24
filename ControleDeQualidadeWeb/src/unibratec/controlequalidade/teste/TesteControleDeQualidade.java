@@ -22,6 +22,7 @@ import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.ContateOAdministradorException;
 import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 import unibratec.controlequalidade.exceptions.LoteNaoCadastradoException;
+import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 import unibratec.controlequalidade.negocio.NegocioCategoria;
@@ -33,10 +34,27 @@ import unibratec.controlequalidade.negocio.NegocioVenda;
 public class TesteControleDeQualidade {
 
 	public static void main(String[] args) {
-		/*	//############# ENTITY MANAGER ############# 
+		/*
+		//############# ENTITY MANAGER ############# 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleDeQualidadePSC");
 		EntityManager etManager = emf.createEntityManager(); 
 		//############# ENTITY MANAGER #############
+
+		NegocioProduto np = new NegocioProduto();
+		try {
+			List <Produto> listaDeProduto = np.buscaProdutosPorNome("NomeProduto");
+			System.out.println(listaDeProduto);
+		} catch (ProdutoNaoCadastradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+
+
+
+
 
 
 		NegocioVenda nv = new NegocioVenda();
@@ -47,14 +65,14 @@ public class TesteControleDeQualidade {
 			e.printStackTrace();
 		}
 		 */	
-		
-		//List<EstadoProdutoEnum> estadoList = new ArrayList<EstadoProdutoEnum>();
+
+		/*		//List<EstadoProdutoEnum> estadoList = new ArrayList<EstadoProdutoEnum>();
 		   List<EstadoProdutoEnum> list = Arrays.asList(EstadoProdutoEnum.values());
 		    System.out.println(list);
 		Produto p = new Produto();
 		p.setEstadoProduto(list.get(2));
-		System.out.println(p);
-		
+		System.out.println(p);*/
+
 
 		/*		Categoria c0 = new Categoria("Teste", 20);
 		c0.setIdCategoria(1);
