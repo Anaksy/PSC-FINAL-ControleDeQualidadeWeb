@@ -6,6 +6,7 @@ import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
+import unibratec.controlequalidade.entidades.Usuario;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.LoteCadastradoException;
@@ -13,6 +14,8 @@ import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaExceptio
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
+import unibratec.controlequalidade.exceptions.UsuarioNaoCadastradoException;
+import unibratec.controlequalidade.exceptions.UsuarioSenhaIncorretaException;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 
 public class Fachada implements IFachada {
@@ -21,13 +24,14 @@ public class Fachada implements IFachada {
 	private NegocioCategoria negocioCategoria;
 	private NegocioVenda negocioVenda;
 	private NegocioProdutoLote negocioProdutoLote;
+	private NegocioUsuario negocioUsuario;
 
 	public Fachada() {
 		this.negocioProduto = new NegocioProduto();
 		this.negocioCategoria = new NegocioCategoria();
 		this.negocioVenda = new NegocioVenda();
 		this.negocioProdutoLote = new NegocioProdutoLote();
-		
+		this.negocioUsuario = new NegocioUsuario();		
 	}
 
 	@Override
@@ -84,6 +88,11 @@ public class Fachada implements IFachada {
 	@Override
 	public List<Produto> listaTodosProdutos() throws ProdutoNaoCadastradoException {
 		return negocioProduto.listaTodosProdutos();
+	}
+
+	@Override
+	public Usuario buscaUsuario(String nomeUsuario, String senhaUsuario) throws UsuarioNaoCadastradoException, UsuarioSenhaIncorretaException {
+		return negocioUsuario.buscaUsuario(nomeUsuario, senhaUsuario);
 	}
 
 	//	@Override

@@ -22,11 +22,8 @@ public class MensagensGui {
 	public static final String PRODUTO_LOTE_VALIDACAO_DATA_VALIDADE= "Data de validade tem que ser preenchida.";
 	public static final String ROTINA_PRODUTO_SUCESSO = "Rotina de validação de produtos executada com sucesso!";
 	public static final String ROTINA_PRODUTO_FALHA = "Não existem produtos com o status EM_ESTOQUE no sistema.";
-	
-
-	
-	
-	
-	
-	
+	public static final String LOGIN_USUARIO_NAO_CADASTRADO = "Usuário não cadastrado!";
+	public static final String LOGIN_USUARIO_SENHA_INCORRETO = "Usuário ou senha inseridos estão incorretos.";
+	public static final String LOGIN_ACESSO_PERMITIDO = "Acesso Permitido";
+		
 }

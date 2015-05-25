@@ -11,13 +11,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import unibratec.controlequalidade.dao.DAOCategoria;
+import unibratec.controlequalidade.dao.DAOFactory;
 import unibratec.controlequalidade.dao.DAOLote;
 import unibratec.controlequalidade.dao.DAOProduto;
 import unibratec.controlequalidade.dao.IDAOProduto;
+import unibratec.controlequalidade.dao.IDAOUsuario;
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
+import unibratec.controlequalidade.entidades.Usuario;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.ContateOAdministradorException;
@@ -271,6 +274,10 @@ public class TesteControleDeQualidade {
 			System.out.println(e.getMessage());
 		}
 		 */
-
+		
+		IDAOUsuario daoUsuario = DAOFactory.getUsuarioDAO();
+		Usuario user = new Usuario("wilkie", "teste123");
+		
+		daoUsuario.inserir(user);
 	}
 }

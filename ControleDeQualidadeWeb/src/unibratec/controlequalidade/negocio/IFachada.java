@@ -1,12 +1,12 @@
 package unibratec.controlequalidade.negocio;
 
-import java.util.Calendar;
 import java.util.List;
 
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
+import unibratec.controlequalidade.entidades.Usuario;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.LoteCadastradoException;
@@ -14,6 +14,8 @@ import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaExceptio
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
+import unibratec.controlequalidade.exceptions.UsuarioNaoCadastradoException;
+import unibratec.controlequalidade.exceptions.UsuarioSenhaIncorretaException;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 
 
@@ -40,6 +42,8 @@ public interface IFachada {
 	public List<Produto> buscaProdutosPorNome(String nomeProduto) throws ProdutoNaoCadastradoException;
 	
 	public List<Produto> listaTodosProdutos() throws ProdutoNaoCadastradoException;
+	
+	public Usuario buscaUsuario(String usuario, String senha) throws UsuarioNaoCadastradoException, UsuarioSenhaIncorretaException;
 	
 
 //	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException;

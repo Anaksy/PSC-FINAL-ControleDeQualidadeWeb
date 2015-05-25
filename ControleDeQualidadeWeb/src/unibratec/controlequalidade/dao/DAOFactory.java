@@ -9,6 +9,7 @@ public abstract class DAOFactory {
 	private static IDAOCategoria categoriaDAO;
 	private static IDAOLote loteDAO;
 	private static IDAOProduto produtoDAO;
+	private static IDAOUsuario usuarioDAO;
 
 	static {
 		factory = Persistence.createEntityManagerFactory("controleDeQualidadePSC");
@@ -23,11 +24,18 @@ public abstract class DAOFactory {
 		loteDAO = new DAOLote(factory.createEntityManager());
 		return loteDAO;
 	}
+
 	public static IDAOProduto getProdutoDAO() {
 		produtoDAO = new DAOProduto(factory.createEntityManager());
 		return produtoDAO;
 	}
-	
+
+
+	public static IDAOUsuario getUsuarioDAO() {
+		usuarioDAO = new DAOUsuario(factory.createEntityManager());		
+		return usuarioDAO;
+	}
+
 	public static void close() {
 		if (factory != null && factory.isOpen()) {
 			factory.close();
