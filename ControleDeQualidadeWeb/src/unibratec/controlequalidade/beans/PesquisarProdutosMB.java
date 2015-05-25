@@ -113,7 +113,7 @@ public class PesquisarProdutosMB {
 	
 	//Somente um teste.
 	public void teste(){
-		if (checkboxSituacao == true) {
+		if (checkboxSituacao == true && checkboxNome == false && checkboxFaixaDataValidade == false) {
 			try {
 				setListaProduto(fachada.buscaProdutosPorSituacaoList(getEstadoProdutoEnum()));
 				//listaProduto = fachada.buscaProdutosPorSituacaoList(getEstadoProdutoEnum());
@@ -124,7 +124,7 @@ public class PesquisarProdutosMB {
 
 			}
 		}
-			if (checkboxNome == true) {
+			if (checkboxNome == true && checkboxSituacao == false && checkboxFaixaDataValidade == false) {
 				
 				try {
 					//listaProduto = fachada.buscaProdutosPorNome(getNomeProduto());
@@ -137,7 +137,7 @@ public class PesquisarProdutosMB {
 	
 			}
 			
-			if (checkboxFaixaDataValidade == true) {
+			if (checkboxFaixaDataValidade == true && checkboxSituacao == false && checkboxFaixaDataValidade == false) {
 
 //				long resDataPesquisa = Funcoes.subtrairDiasDataCalendar(Datas.converterDateToCalendar(dataInicial), Datas.converterDateToCalendar(dataFinal));
 //				Calendar dataAtual = Calendar.getInstance();

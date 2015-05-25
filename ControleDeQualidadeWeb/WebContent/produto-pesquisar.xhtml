@@ -48,7 +48,8 @@
 					id="checkBoxDataValidade" />
 
 				<br /> <br />
-				<h:commandButton value="Pesquisar" action="#{PesquisarProdutosMB.teste}" />
+				<h:commandButton value="Pesquisar"
+					action="#{PesquisarProdutosMB.teste}" />
 			</div>
 
 			<br /> <br />
@@ -84,6 +85,12 @@
 				<p:column>
 					<f:facet name="header">Lote</f:facet>
 					<h:outputText value="#{produto.loteProduto.nomeLote}"></h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Data de Validade</f:facet>
+					<h:outputText value="#{produto.loteProduto.dataDeValidade.time}">
+						       <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" timeZone="GMT-03:00"/> 
+					</h:outputText>
 				</p:column>
 
 
