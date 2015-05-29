@@ -16,6 +16,7 @@ public class DAOProduto extends DAOGenerico<Produto> implements IDAOProduto {
 	protected String NAMED_QUERY_FIND_PRODUTO_BY_CATEGORIAID = "Produto.findProdutoByCategoriaId";
 	protected String NAMED_QUERY_FIND_BY_ESTADO = "Produto.findByEstado";
 	protected String NAMED_QUERY_FIND_BY_NAME = "Produto.findByName";
+	protected String NAMED_QUERY_FIND_BY_NOME_E_SITUACAO = "Produto.findBySituacaoENome";
 
 	public DAOProduto(EntityManager em) {
 		super(em);
@@ -81,24 +82,25 @@ public class DAOProduto extends DAOGenerico<Produto> implements IDAOProduto {
 		query.setParameter("nomeProduto", nomeProduto);
 				
 		return query.getResultList();
-//
-//		try {
-//
-//			Categoria cat = query.setMaxResults(1).getSingleResult();
-//
-//			System.out.println(cat); // APAGAR DEPOIS
-//
-//			if (!cat.equals(null)) {
-//				System.out.println("Retorno da base diferente de nulo!"); // APAGAR DEPOIS
-//				return cat;
-//			}
-//
-//		} catch (NoResultException e) {
-//
-//			System.out.println("Retorno nulo da base! - NoResultException"); // APAGAR DEPOIS
-//			return null;
-//		}
-//		
-//		return null;
+
+	}
+	
+	/**
+	 * Método para buscar produtos pelo nome e situacao.
+	 * 
+	 * @param nomeProduto, situacaoProduto
+	 * 
+	 * @return List<Produto>
+	 */
+	@Override
+	public List<Produto> pesquisaProdutoPorNomeSituacaoList(String nomeProduto, EstadoProdutoEnum estadoProduto) {
+
+		TypedQuery<Produto> query = this.entityManager.createNamedQuery(NAMED_QUERY_FIND_BY_NOME_E_SITUACAO, this.classePersistente);
+
+		query.setParameter("nomeProduto", nomeProduto);
+		query.setParameter("estadoProduto", estadoProduto);
+				
+		return query.getResultList();
+
 	}
 }

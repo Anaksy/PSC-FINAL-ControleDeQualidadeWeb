@@ -16,5 +16,7 @@ public interface IDAOProduto extends IDAOGenerico<Produto> {
 	public List <Produto> pesquisarProdutoPorCategoria(Categoria categoria);
 
 	List<Produto> pesquisaProdutoPorNomeList(String nomeProduto);
+	
+	public List<Produto> pesquisaProdutoPorNomeSituacaoList(String nomeProduto, EstadoProdutoEnum estadoProduto);
 
 }

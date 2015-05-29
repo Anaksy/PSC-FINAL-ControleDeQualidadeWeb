@@ -16,4 +16,7 @@ public abstract class MensagensExceptions {
 	public static final String ROTINA_PRODUTO_FALHA = "Não existem produtos com o status EM_ESTOQUE no sistema.";
 	public static final String USUARIO_NAO_CADASTRADO_EXCEPTION = "Usuário não cadastrado na base.";
 	public static final String USUARIO_SENHA_ERRADA_EXCEPTION = "Senha incorreta.";
+	public static final String FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO = "Produto não encontrado com esse filtro de pesquisa.";
+	public static final String DESCONTO_VALOR_EXCEPTION = "Valor de desconto menor que o valor do produto.";
+	public static final String DESCONTO_PRODUTO_COM_ESTADO_INCORRETO = "Desconto somente é permitidi em produdos com a situação PRESTES_A_VENCER";
 }

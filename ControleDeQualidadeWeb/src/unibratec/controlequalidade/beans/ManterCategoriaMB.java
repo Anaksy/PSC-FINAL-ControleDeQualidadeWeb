@@ -12,21 +12,20 @@ import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
 import unibratec.controlequalidade.negocio.Fachada;
+import unibratec.controlequalidade.negocio.IFachada;
 import unibratec.controlequalidade.util.MensagensGui;
 
 @ManagedBean(name="ManterCategoriaMB")
 public class ManterCategoriaMB {
 
 	private Categoria categoria = new Categoria();
-	private String mensagem;
-	private Fachada fachada = new Fachada();
+	private IFachada fachada = new Fachada();
 	private List<Categoria> listaCategoria;
 
 	public List<Categoria> getListaCategoria() {
 		try {
 			listaCategoria = fachada.listaTodasCategorias();
 		} catch (NenhumaCategoriaCadastradaException e) {
-			//erroMsg(MensagensGui.CATEGORIA_BD_FALHA); // Ja temos uma mensagen de nenhum resultado no grid.
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
@@ -43,14 +42,6 @@ public class ManterCategoriaMB {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}
-
-	public String getMensagem() {
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
 	}
 
 	public void selecionarCategoria(Categoria c){

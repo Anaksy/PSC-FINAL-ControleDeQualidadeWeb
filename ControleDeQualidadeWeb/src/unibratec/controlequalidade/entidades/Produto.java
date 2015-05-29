@@ -19,7 +19,8 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Produto.findByEstado", query = "Select p from Produto p where p.estadoProduto like :estadoProduto"),
 	@NamedQuery(name = "Produto.findByLoteId", query = "Select p from Produto p where p.loteProduto.idLote = :idLoteProduto"),
 	@NamedQuery(name = "Produto.findProdutoByCategoriaId", query = "Select p from Produto p where p.categoriaProduto.idCategoria = :idCategoria"),
-	@NamedQuery(name = "Produto.findByName", query = "Select p from Produto p where p.nomeProduto like :nomeProduto")
+	@NamedQuery(name = "Produto.findByName", query = "Select p from Produto p where p.nomeProduto like :nomeProduto"),
+	@NamedQuery(name = "Produto.findBySituacaoENome", query = "Select p from Produto p where p.nomeProduto like :nomeProduto and p.estadoProduto like :estadoProduto")
 })
 public class Produto {
 

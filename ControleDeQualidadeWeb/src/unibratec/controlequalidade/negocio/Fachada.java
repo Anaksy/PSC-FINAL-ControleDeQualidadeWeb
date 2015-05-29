@@ -1,5 +1,6 @@
 package unibratec.controlequalidade.negocio;
 
+import java.util.Date;
 import java.util.List;
 
 import unibratec.controlequalidade.entidades.Categoria;
@@ -9,6 +10,9 @@ import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.entidades.Usuario;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
+import unibratec.controlequalidade.exceptions.DescontoProdutoPrestesAVencerException;
+import unibratec.controlequalidade.exceptions.DescontoValorException;
+import unibratec.controlequalidade.exceptions.FiltroPesquisaProdutoNaoEncontradoException;
 import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
@@ -20,18 +24,20 @@ import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCatego
 
 public class Fachada implements IFachada {
 
-	private NegocioProduto negocioProduto;
 	private NegocioCategoria negocioCategoria;
 	private NegocioVenda negocioVenda;
 	private NegocioProdutoLote negocioProdutoLote;
 	private NegocioUsuario negocioUsuario;
+	private NegocioFiltroPesquisa negocioFiltroPesquisa;
+	private NegocioProduto negocioProduto;
 
 	public Fachada() {
-		this.negocioProduto = new NegocioProduto();
+		this.negocioFiltroPesquisa = new NegocioFiltroPesquisa();
 		this.negocioCategoria = new NegocioCategoria();
 		this.negocioVenda = new NegocioVenda();
 		this.negocioProdutoLote = new NegocioProdutoLote();
-		this.negocioUsuario = new NegocioUsuario();		
+		this.negocioUsuario = new NegocioUsuario();
+		this.negocioProduto = new NegocioProduto();
 	}
 
 	@Override
@@ -54,11 +60,11 @@ public class Fachada implements IFachada {
 	public void removeCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, ProdutoComCategoriaException {
 		this.negocioCategoria.removeCategoria(categoria);
 	}
-	
+
 	@Override
 	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException {
 		return this.negocioCategoria.buscaCategoriaPorNomeCategoria(nomeCategoria);
-}
+	}
 
 	@Override
 	public void criarProdutoLote(Produto produto, Lote lote) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException {
@@ -74,20 +80,45 @@ public class Fachada implements IFachada {
 	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption {
 		this.negocioVenda.executarRotinaProdutos();
 	}
-
+	
 	@Override
-	public List<Produto> buscaProdutosPorSituacaoList(EstadoProdutoEnum estadoProdutoEnum) throws ProdutoNaoEncontradoExcecption {
-		return this.negocioProduto.buscaProdutosPorSituacaoList(estadoProdutoEnum); 
+	public Produto buscaProdutoPorId(long idProduto) throws ProdutoNaoCadastradoException {
+		return negocioProduto.buscaProdutoPorId(idProduto);
 	}
 
 	@Override
-	public List<Produto> buscaProdutosPorNome(String nomeProduto) throws ProdutoNaoCadastradoException {
-		return negocioProduto.buscaProdutosPorNome(nomeProduto);
+	public List<Produto> filtrarPesquisaSituacao(EstadoProdutoEnum estadoProdutoEnum) throws ProdutoNaoEncontradoExcecption {
+		return negocioFiltroPesquisa.filtrarPesquisaSituacao(estadoProdutoEnum);
 	}
 
 	@Override
-	public List<Produto> listaTodosProdutos() throws ProdutoNaoCadastradoException {
-		return negocioProduto.listaTodosProdutos();
+	public List<Produto> filtrarPesquisaNome(String nomeProduto)throws ProdutoNaoCadastradoException {
+		return negocioFiltroPesquisa.filtrarPesquisaNome(nomeProduto);
+	}
+
+	@Override
+	public List<Produto> filtrarPesquisaFaixaDataValidade(Date dataInicial, Date dataFinal) throws ProdutoNaoCadastradoException, FiltroPesquisaProdutoNaoEncontradoException {
+		return negocioFiltroPesquisa.filtrarPesquisaFaixaDataValidade(dataInicial, dataFinal);
+	}
+
+	@Override
+	public List<Produto> filtrarPesquisaNomeSituacao(String nomeProduto, EstadoProdutoEnum estadoProdutoEnum) throws FiltroPesquisaProdutoNaoEncontradoException {
+		return negocioFiltroPesquisa.filtrarPesquisaNomeSituacao(nomeProduto, estadoProdutoEnum);
+	}
+	
+	@Override
+	public List<Produto> filtrarPesquisaFaixaDataNome(Date dataInicial, Date dataFinal, String nomeProduto) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException {
+		return negocioFiltroPesquisa.filtrarPesquisaFaixaDataNome(dataInicial, dataFinal, nomeProduto);
+	}
+
+	@Override
+	public List<Produto> filtrarPesquisaFaixaDataSituacao(Date dataInicial, Date dataFinal, EstadoProdutoEnum estadoProdutoEnum) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException {
+		return negocioFiltroPesquisa.filtrarPesquisaFaixaDataSituacao(dataInicial, dataFinal, estadoProdutoEnum);
+	}
+	
+	@Override
+	public List<Produto> filtrarPesquisaFaixaDataSituacaoNome(Date dataInicial, Date dataFinal, EstadoProdutoEnum estadoProdutoEnum, String nomeProduto) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException {
+		return negocioFiltroPesquisa.filtrarPesquisaFaixaDataSituacaoNome(dataInicial, dataFinal, estadoProdutoEnum, nomeProduto);
 	}
 
 	@Override
@@ -95,35 +126,13 @@ public class Fachada implements IFachada {
 		return negocioUsuario.buscaUsuario(nomeUsuario, senhaUsuario);
 	}
 
-	//	@Override
-	//	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException {
-	//		npl.associaLoteProduto(lote, produto, dataValidade, qtdProdutos);
-	//		negocioLote.gerarLote(lote);
-	//		negocioProduto.inserirProduto(produto);
-	//		
-	//	}
-	//
-	//	@Override
-	//	public void inserirCategoria(Categoria categoria) {
-	//		negocioCategoria.inserirCategoria(categoria);
-	//		
-	//	}
-	//
-	//	@Override
-	//	public List<Produto> getListaProdutoPrestesVencer() throws ProdutoNaoEncontradoExcecption {
-	//		return negocioVenda.retornaListaProdutosPrestesAVencer();
-	//	}
-	//
-	//	@Override
-	//	public Produto getProdutoPrestesVencer(Produto produto) throws ProdutoNaoPrestesAVencerException, ProdutoNaoEncontradoExcecption {
-	//		
-	//		return negocioVenda.retornaProdutoPrestesAVencer(produto);
-	//	}
-	//
-	//	@Override
-	//	public void setDescontoProdutoPrestesVencer(Produto produto, double desconto) {
-	//		negocioVenda.darDescontoProdutoPrestesAVencer(produto, desconto);
-	//		
-	//	}
+	@Override
+	public void DescontoProduto(Produto produto, double desconto) throws ProdutoNaoCadastradoException, DescontoValorException, DescontoProdutoPrestesAVencerException {
+		negocioVenda.DescontoProduto(produto, desconto);
+	}
+
+
+
+
 
 }

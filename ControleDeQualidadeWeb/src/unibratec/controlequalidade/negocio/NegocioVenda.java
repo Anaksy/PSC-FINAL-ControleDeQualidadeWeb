@@ -8,6 +8,9 @@ import unibratec.controlequalidade.dao.DAOFactory;
 import unibratec.controlequalidade.dao.IDAOProduto;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Produto;
+import unibratec.controlequalidade.exceptions.DescontoProdutoPrestesAVencerException;
+import unibratec.controlequalidade.exceptions.DescontoValorException;
+import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.exceptions.ProdutoNaoPrestesAVencerException;
 import unibratec.controlequalidade.util.Funcoes;
@@ -16,7 +19,8 @@ import unibratec.controlequalidade.util.MensagensExceptions;
 public class NegocioVenda {
 	
 	private IDAOProduto daoProduto;
-
+	private NegocioProduto negocioProduto = new NegocioProduto();
+	
 	public NegocioVenda() {
 
 		this.daoProduto = DAOFactory.getProdutoDAO();
@@ -60,15 +64,34 @@ public class NegocioVenda {
 		}
 
 	}
-
-	// Método que dar desconto no produto
-	public void darDescontoProdutoPrestesAVencer(Produto produto, double desconto) {
-		
-		produto.setPrecoProduto(produto.getPrecoProduto() - desconto);
-		
-		daoProduto.alterar(produto);
-	}
 	*/
+
+	// Método que inseri um desconto no produto
+	public void DescontoProduto(Produto produto, double desconto) throws ProdutoNaoCadastradoException, DescontoValorException, DescontoProdutoPrestesAVencerException {
+		
+		Produto produtoEncontrado = negocioProduto.buscaProdutoPorId(produto.getIdProduto());
+		
+		if (desconto > produtoEncontrado.getPrecoProduto()) {
+			
+			throw new DescontoValorException(MensagensExceptions.DESCONTO_VALOR_EXCEPTION);
+		}
+		
+		else {
+			
+			if (produtoEncontrado.getEstadoProduto().equals(EstadoProdutoEnum.PRESTES_A_VENCER)) {
+		
+				produtoEncontrado.setPrecoProduto(produtoEncontrado.getPrecoProduto() - desconto);
+				
+				daoProduto.alterar(produtoEncontrado);
+			}
+			
+			else {
+				throw new DescontoProdutoPrestesAVencerException(MensagensExceptions.DESCONTO_PRODUTO_COM_ESTADO_INCORRETO);
+			}
+
+		}
+	}
+
 	
 	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption {
 

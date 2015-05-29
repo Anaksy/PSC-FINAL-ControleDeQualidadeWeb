@@ -6,12 +6,13 @@ import javax.faces.context.FacesContext;
 
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.negocio.Fachada;
+import unibratec.controlequalidade.negocio.IFachada;
 import unibratec.controlequalidade.util.MensagensGui;
 
 @ManagedBean(name="RotinaProdutoMB")
 public class RotinaProdutoMB {
 	
-	private Fachada fachada = new Fachada();
+	private IFachada fachada = new Fachada();
 	
 	public void executarRotinaProduto(){
 		try {

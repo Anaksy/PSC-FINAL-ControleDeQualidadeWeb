@@ -49,21 +49,38 @@ public class TesteControleDeQualidade {
 		}
 		return false;
 	}
-	
-	public static void main(String[] args) {
-		/*
-		Date dataProcurada = Datas.criarData(10, 10, 2015);
-		
-		Date dataInicial = Datas.criarData(11, 10, 2015);
-		Date dataFinal = Datas.criarData(12, 10, 2015);
-		
-		System.out.println(between(dataProcurada, dataInicial, dataFinal));
 
-			
+	public static void main(String[] args) {
+		
+		
+		String teste01 = "Produdo prestes a vencer";
+		String teste02 = "Produdo prestes";
+		
+		if (teste01.contains(teste02)) {
+			System.out.println("Contem");
+		}
+		
+		
+		
+		/*
 		//############# ENTITY MANAGER ############# 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleDeQualidadePSC");
 		EntityManager etManager = emf.createEntityManager(); 
 		//############# ENTITY MANAGER #############
+		
+		IDAOProduto idp = new DAOProduto(etManager);
+		List<Produto> testeList = idp.pesquisaProdutoPorNomeSituacaoList("Esse Prestes a Vencer", EstadoProdutoEnum.PRESTES_A_VENCER);
+		System.out.println(testeList);
+		
+	
+		Date dataProcurada = Datas.criarData(10, 10, 2015);
+
+		Date dataInicial = Datas.criarData(11, 10, 2015);
+		Date dataFinal = Datas.criarData(12, 10, 2015);
+
+		System.out.println(between(dataProcurada, dataInicial, dataFinal));
+
+
 
 		NegocioProduto np = new NegocioProduto();
 		try {
@@ -274,10 +291,10 @@ public class TesteControleDeQualidade {
 			System.out.println(e.getMessage());
 		}
 		 */
-		
-		IDAOUsuario daoUsuario = DAOFactory.getUsuarioDAO();
-		Usuario user = new Usuario("wilkie", "teste123");
-		
-		daoUsuario.inserir(user);
+
+//		IDAOUsuario daoUsuario = DAOFactory.getUsuarioDAO();
+//		Usuario user = new Usuario("wilkie", "teste123");
+//
+//		daoUsuario.inserir(user);
 	}
 }
