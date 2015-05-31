@@ -16,6 +16,7 @@ import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.negocio.Fachada;
 import unibratec.controlequalidade.negocio.IFachada;
+import unibratec.controlequalidade.util.MensagensGui;
 
 @ViewScoped
 @ManagedBean(name="PesquisarProdutosMB")
@@ -112,7 +113,6 @@ public class PesquisarProdutosMB {
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
 	}
-	
 	public boolean isPesquisarPorEstado() {
 		return pesquisarPorEstado;
 	}
@@ -141,7 +141,7 @@ public class PesquisarProdutosMB {
 			} catch (ProdutoNaoEncontradoExcecption e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				avisoMsg("Não existem produtos cadastrados com essa situação.");
+				avisoMsg(MensagensGui.PRODUTO_PESQUISA_FALHA);
 
 			}
 		}
@@ -154,7 +154,7 @@ public class PesquisarProdutosMB {
 			} catch (ProdutoNaoCadastradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				avisoMsg("Não existem produtos cadastrados com esse nome.");
+				erroMsg(MensagensGui.PRODUTO_BD_FALHA);
 			}
 
 		}
@@ -167,11 +167,11 @@ public class PesquisarProdutosMB {
 			} catch (ProdutoNaoCadastradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				erroMsg("Nenhum produto encontrado no banco de dados.");
+				erroMsg(MensagensGui.PRODUTO_BD_FALHA);
 			} catch (FiltroPesquisaProdutoNaoEncontradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				avisoMsg("Não existe produto cadastrado com essa faixa de validade.");
+				avisoMsg(MensagensGui.PRODUTO_PESQUISA_FALHA);
 			}
 		}
 		
@@ -182,7 +182,7 @@ public class PesquisarProdutosMB {
 			} catch (FiltroPesquisaProdutoNaoEncontradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				avisoMsg("Não existe produto cadastrado com esse nome e situação.");
+				avisoMsg(MensagensGui.PRODUTO_PESQUISA_FALHA);
 			}
 		}
 		
@@ -193,11 +193,11 @@ public class PesquisarProdutosMB {
 			} catch (FiltroPesquisaProdutoNaoEncontradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				avisoMsg("Não existe produto cadastrado com essa condição de pesquisa.");
+				avisoMsg(MensagensGui.PRODUTO_PESQUISA_FALHA);
 			} catch (ProdutoNaoCadastradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				erroMsg("Nenhum produto encontrado no banco de dados.");
+				erroMsg(MensagensGui.PRODUTO_BD_FALHA);
 			}
 		}
 		
@@ -208,11 +208,11 @@ public class PesquisarProdutosMB {
 			} catch (FiltroPesquisaProdutoNaoEncontradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				avisoMsg("Não existe produto cadastrado com essa condição de pesquisa.");
+				avisoMsg(MensagensGui.PRODUTO_PESQUISA_FALHA);
 			} catch (ProdutoNaoCadastradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				erroMsg("Nenhum produto encontrado no banco de dados.");
+				erroMsg(MensagensGui.PRODUTO_BD_FALHA);
 			}
 		}
 		
@@ -223,11 +223,11 @@ public class PesquisarProdutosMB {
 			} catch (FiltroPesquisaProdutoNaoEncontradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				avisoMsg("Não existe produto cadastrado com essa condição de pesquisa.");
+				avisoMsg(MensagensGui.PRODUTO_PESQUISA_FALHA);
 			} catch (ProdutoNaoCadastradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				erroMsg("Nenhum produto encontrado no banco de dados.");
+				erroMsg(MensagensGui.PRODUTO_BD_FALHA);
 			}
 		}
 		return null;
@@ -248,7 +248,7 @@ public class PesquisarProdutosMB {
 		if (produto != null) {
 			try {
 				fachada.DescontoProduto(getProduto(), getValorDesconto());
-				infoMsg("Desconto inserido com sucesso!");
+				infoMsg(MensagensGui.DESCONTO_INSERIDO_SUCESSO);
 				limparBean();
 			} catch (ProdutoNaoCadastradoException e) {
 				e.printStackTrace();
@@ -256,15 +256,15 @@ public class PesquisarProdutosMB {
 			} catch (DescontoValorException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				erroMsg("Valor do desconto maior que o valor do produto!");
+				erroMsg(MensagensGui.DESCONTO_VALOR_FALHA);
 			} catch (DescontoProdutoPrestesAVencerException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				erroMsg("Desconto permitido somente para produtos em situação PRESTES_A_VENCER");
+				erroMsg(MensagensGui.DESCONTO_SITUACAO_FALHA);
 			}
 		}
 		else {
-			erroMsg("Nenhum produto selecionado.");
+			erroMsg(MensagensGui.NENHUM_PRODUTO_SELECIONADO);
 		}
 		return null;
 	}

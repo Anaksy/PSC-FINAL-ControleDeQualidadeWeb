@@ -27,17 +27,4 @@ public class NegocioProdutoLote {
 		negocioLote.inserirLote(lote);
 		negocioProduto.inserirProduto(produto);
 	}
-	
-/*	public void associaLoteProduto(Lote lote, Produto produto, Calendar dataValidadeLote, int qtdProdutosLote) throws dataDeValidadeMenorPermitidaCategoriaException{
-		Calendar dataAtual = Calendar.getInstance();
-		
-		//Validando data de validade inserida
-		if (Funcoes.subtrairDiasDataCalendar(dataAtual, dataValidadeLote) <= produto.getCategoriaProduto().getNumeroDeDiasParaVencimento()) {
-			throw new dataDeValidadeMenorPermitidaCategoriaException("Data de validade inserida menor que a permitida para essa categoria");
-		}
-		lote.setDataDeValidade(dataValidadeLote);
-		lote.setQtdProdutos(qtdProdutosLote);
-		produto.setLoteProduto(lote);
-		lote.setEstadoLote(EstadoLoteEnum.FECHADO);
-	}*/
 }

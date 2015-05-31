@@ -1,9 +1,7 @@
 package unibratec.controlequalidade.negocio;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import unibratec.controlequalidade.dao.DAOFactory;
 import unibratec.controlequalidade.dao.IDAOProduto;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
@@ -12,7 +10,6 @@ import unibratec.controlequalidade.exceptions.DescontoProdutoPrestesAVencerExcep
 import unibratec.controlequalidade.exceptions.DescontoValorException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
-import unibratec.controlequalidade.exceptions.ProdutoNaoPrestesAVencerException;
 import unibratec.controlequalidade.util.Funcoes;
 import unibratec.controlequalidade.util.MensagensExceptions;
 
@@ -27,45 +24,6 @@ public class NegocioVenda {
 
 	}
 		
-/*	// Método que retorna uma lista com o produtos prestes a vencer
-	public List<Produto> retornaListaProdutosPrestesAVencer() throws ProdutoNaoEncontradoExcecption {
-
-		List<Produto> produtosList = this.daoProduto.pesquisarProdutoPorEstadoList(EstadoProdutoEnum.EM_ESTOQUE);
-		
-		List<Produto> produtosPrestesAVencerList = new ArrayList<Produto>();
-	
-		Calendar dataAtual = Calendar.getInstance();
-				
-		for (Produto p : produtosList) {
-
-			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) <= p.getCategoriaProduto().getNumeroDeDiasParaVencimento())) {
-				
-				produtosPrestesAVencerList.add(p);
-			}
-		}
-		
-		return produtosPrestesAVencerList;
-	}
-	
-	// Método que retorna uma produto prestes a vencer
-	public Produto retornaProdutoPrestesAVencer(Produto produto) throws ProdutoNaoPrestesAVencerException, ProdutoNaoEncontradoExcecption {
-		
-		Produto p = this.daoProduto.pesquisarProdutoPorEstado(produto);
-				
-		Calendar dataAtual = Calendar.getInstance();
-				
-		if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) <= p.getCategoriaProduto().getNumeroDeDiasParaVencimento())) {
-				
-				return p;
-				
-		} else {
-			
-			throw new ProdutoNaoPrestesAVencerException("O produto não está prestes a vencer.");
-		}
-
-	}
-	*/
-
 	// Método que inseri um desconto no produto
 	public void DescontoProduto(Produto produto, double desconto) throws ProdutoNaoCadastradoException, DescontoValorException, DescontoProdutoPrestesAVencerException {
 		

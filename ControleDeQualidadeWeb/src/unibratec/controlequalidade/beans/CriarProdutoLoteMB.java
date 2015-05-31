@@ -1,16 +1,10 @@
 package unibratec.controlequalidade.beans;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
-
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
@@ -20,7 +14,6 @@ import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaExceptio
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 import unibratec.controlequalidade.negocio.Fachada;
 import unibratec.controlequalidade.negocio.IFachada;
-import unibratec.controlequalidade.negocio.NegocioProdutoLote;
 import unibratec.controlequalidade.util.Datas;
 import unibratec.controlequalidade.util.MensagensGui;
 

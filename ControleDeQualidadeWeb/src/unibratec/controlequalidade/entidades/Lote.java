@@ -72,7 +72,6 @@ public class Lote {
 	}
 
 	public void setDataDeValidade(Calendar dataDeValidade) {
-		// Formatação da data fica a cargo da regra de negocio.
 		this.dataDeValidade = dataDeValidade;
 	}
 

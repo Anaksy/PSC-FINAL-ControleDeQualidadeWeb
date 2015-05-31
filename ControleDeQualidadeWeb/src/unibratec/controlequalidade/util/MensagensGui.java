@@ -25,5 +25,11 @@ public class MensagensGui {
 	public static final String LOGIN_USUARIO_NAO_CADASTRADO = "Usuário não cadastrado!";
 	public static final String LOGIN_USUARIO_SENHA_INCORRETO = "Usuário ou senha inseridos estão incorretos.";
 	public static final String LOGIN_ACESSO_PERMITIDO = "Acesso Permitido";
+	public static final String NENHUM_PRODUTO_SELECIONADO = "Nenhum produto selecionado.";
+	public static final String DESCONTO_SITUACAO_FALHA = "Desconto permitido somente para produtos em situação PRESTES_A_VENCER.";
+	public static final String DESCONTO_VALOR_FALHA = "Valor do desconto maior que o valor do produto!";
+	public static final String DESCONTO_INSERIDO_SUCESSO = "Desconto inserido com sucesso!";
+	public static final String PRODUTO_BD_FALHA = "Nenhum produto encontrado.";
+	public static final String PRODUTO_PESQUISA_FALHA = "Não existem produtos cadastrados com essa condição de pesquisa.";
 		
 }

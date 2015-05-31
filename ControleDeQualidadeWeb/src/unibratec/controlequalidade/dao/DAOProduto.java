@@ -1,11 +1,8 @@
 package unibratec.controlequalidade.dao;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Produto;
@@ -30,14 +27,7 @@ public class DAOProduto extends DAOGenerico<Produto> implements IDAOProduto {
 
 		query.setParameter("estadoProduto", estadoProduto);
 		
-//		if (query.getResultList() == null || query.getResultList().isEmpty()) {
-//			
-//			throw new ProdutoNaoEncontradoExcecption("Produto não encontrado.");
-//		
-//		} else {
-			
 			return query.getResultList();
-//		}
 	}
 	
 	@Override
@@ -48,14 +38,7 @@ public class DAOProduto extends DAOGenerico<Produto> implements IDAOProduto {
 
 		query.setParameter("estadoProduto", produto.getEstadoProduto());
 		
-//		if (query.setMaxResults(1).getSingleResult() == null) {
-//			
-//			throw new ProdutoNaoEncontradoExcecption("Produto não encontrado.");
-//
-//		} else {
-			
 			return query.setMaxResults(1).getSingleResult();
-//		}
 	}
 
 	@Override

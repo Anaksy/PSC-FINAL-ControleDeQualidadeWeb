@@ -2,14 +2,10 @@ package unibratec.controlequalidade.negocio;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import unibratec.controlequalidade.dao.DAOFactory;
 import unibratec.controlequalidade.dao.IDAOProduto;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Produto;
-import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
-import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
-import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.util.MensagensExceptions;
