@@ -85,7 +85,9 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">Preço</f:facet>
-					<h:outputText value="#{produto.precoProduto}"></h:outputText>
+					<h:outputText value="#{produto.precoProduto}">
+						<f:convertNumber currencySymbol="R$" type="currency" />
+					</h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">Categoria</f:facet>
