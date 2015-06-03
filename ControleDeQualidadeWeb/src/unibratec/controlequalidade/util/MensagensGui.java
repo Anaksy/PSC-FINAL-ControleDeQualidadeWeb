@@ -1,6 +1,6 @@
 package unibratec.controlequalidade.util;
 
-public class MensagensGui {
+public abstract class MensagensGui {
 
 	public static final String CATEGORIA_CADASTRADA_SUCESSO = "Categoria cadastrada com sucesso!";
 	public static final String CATEGORIA_CADASTRADA_FALHA = "Categoria já existente.";

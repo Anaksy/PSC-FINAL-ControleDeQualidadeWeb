@@ -3,6 +3,7 @@ package unibratec.controlequalidade.beans;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.negocio.Fachada;
 import unibratec.controlequalidade.negocio.IFachada;
@@ -33,7 +34,7 @@ public class RotinaProdutoMB {
 	}
 	
 	public String voltarTelaInicial(){
-		return "/index.xhtml";
+		return "/menu-acoes.xhtml";
 	}
 
 }

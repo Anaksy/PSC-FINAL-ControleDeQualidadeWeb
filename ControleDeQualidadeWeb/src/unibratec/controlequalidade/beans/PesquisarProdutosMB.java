@@ -3,10 +3,12 @@ package unibratec.controlequalidade.beans;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.DescontoProdutoPrestesAVencerException;
@@ -282,7 +284,7 @@ public class PesquisarProdutosMB {
 	}
 
 	public String voltarTelaInicial(){
-		return "/index.xhtml";
+		return "/menu-acoes.xhtml";
 	}
 	
 	private void limparBean(){

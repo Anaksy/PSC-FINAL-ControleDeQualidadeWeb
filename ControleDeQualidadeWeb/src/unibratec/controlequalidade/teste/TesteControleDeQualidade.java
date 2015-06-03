@@ -19,6 +19,7 @@ import unibratec.controlequalidade.dao.IDAOUsuario;
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
+import unibratec.controlequalidade.entidades.PerfilUsuarioEnum;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.entidades.Usuario;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
@@ -292,9 +293,9 @@ public class TesteControleDeQualidade {
 		}
 		 */
 
-//		IDAOUsuario daoUsuario = DAOFactory.getUsuarioDAO();
-//		Usuario user = new Usuario("wilkie", "123", PerfilUsuarioEnum.ADMIN);
-//		
-//		daoUsuario.inserir(user);
+		IDAOUsuario daoUsuario = DAOFactory.getUsuarioDAO();
+		Usuario user = new Usuario("pedro", "tirant", PerfilUsuarioEnum.ADMIN);
+		
+		daoUsuario.inserir(user);
 	}
 }

@@ -2,9 +2,11 @@ package unibratec.controlequalidade.beans;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+
 import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
@@ -111,7 +113,7 @@ public class CriarProdutoLoteMB {
 	}
 	
 	public String voltarTelaInicial(){
-		return "/index.xhtml";
+		return "/menu-acoes.xhtml";
 	}
 	
 	public String limparModelProdutoLote(){

@@ -121,7 +121,7 @@ public class ManterCategoriaMB {
 	}
 
 	public String voltarTelaInicial(){
-		return "/index.xhtml";
+		return "/menu-acoes.xhtml";
 	}
 
 	private boolean validarCamposCategoria(Categoria categoria){
