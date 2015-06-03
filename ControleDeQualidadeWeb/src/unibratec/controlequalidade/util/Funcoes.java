@@ -3,6 +3,9 @@ package unibratec.controlequalidade.util;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 public abstract class Funcoes {
 	
 	//Metodo que retorna um boolean se uma data entre outras definidas pelos parametros.
@@ -44,6 +47,18 @@ public abstract class Funcoes {
 	private static String getNomeMesDeInt(int mes){
 		String[] meses = {"JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEC"};
 		return meses[mes];
+	}
+	
+	public static void infoMsg(String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
+	}
+
+	public static void avisoMsg(String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, msg, null));
+	}
+
+	public static void erroMsg(String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null));
 	}
 	
 }

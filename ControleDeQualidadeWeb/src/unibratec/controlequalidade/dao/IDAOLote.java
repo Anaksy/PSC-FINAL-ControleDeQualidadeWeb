@@ -9,6 +9,6 @@ public interface IDAOLote extends IDAOGenerico<Lote> {
 
 	public Lote buscaLote(String nomeLote);
 	
-	public long pesquisaNDiasPVenderCategoriaDeLote(Lote lote);
+	public Long pesquisaNDiasPVenderCategoriaDeLote(Lote lote);
 
 }

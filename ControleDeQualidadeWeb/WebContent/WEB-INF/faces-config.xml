@@ -5,4 +5,38 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
 
+<navigation-rule>
+	<description>Regra de navegação para login</description>
+	<from-view-id>/usuario-login.xhtml</from-view-id>
+	<navigation-case>
+		<from-outcome>login</from-outcome>
+		<to-view-id>/menu-acoes.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+	<description>Regra de navegação para logout</description>
+	<from-view-id>/*</from-view-id>
+	<navigation-case>
+		<from-outcome>logout</from-outcome>
+		<to-view-id>/usuario-login.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+	<description>Regra de navegação para sessões inexistentes</description>
+	<from-view-id>/*</from-view-id>
+	<navigation-case>
+		<from-outcome>sessao_invalida</from-outcome>
+		<to-view-id>/usuario-login.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+</navigation-rule>
+
+<lifecycle>
+	<phase-listener>unibratec.controlequalidade.beans.AutorizadorAcesso</phase-listener>
+</lifecycle>
+
 </faces-config>

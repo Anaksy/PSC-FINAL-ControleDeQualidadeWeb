@@ -29,13 +29,14 @@ public class NegocioLote {
 	 */
 	public void inserirLote(Lote lote) throws LoteCadastradoException {
 
-		if (daoLote.existeLote(lote)) {
+		if (this.daoLote.existeLote(lote)) {
+			
 			throw new LoteCadastradoException(MensagensExceptions.LOTE_CADASTRADO_EXCEPTION);
-		}
-		else {
+			
+		} 
 			lote.setNomeLote(Funcoes.geraNomeLote());
+			
 			this.daoLote.inserir(lote);
-		}
 	}
 
 	/**
@@ -48,35 +49,41 @@ public class NegocioLote {
 	 * @throws LoteNaoCadastradoException 
 	 * @throws dataDeValidadeMenorPermitidaCategoriaException 
 	 */
-	public void alteraLote(Lote lote, Calendar novaDataLote) throws CategoriaNaoCadastradaException, LoteCadastradoException, LoteNaoCadastradoException, dataDeValidadeMenorPermitidaCategoriaException{
+	public void alteraLote(Lote lote, Calendar novaDataLote) throws CategoriaNaoCadastradaException, LoteCadastradoException,
+	LoteNaoCadastradoException, dataDeValidadeMenorPermitidaCategoriaException {
 
-		Lote PesquisaLote = daoLote.buscaLote(lote.getNomeLote());
+		Lote lotePesquisado = this.daoLote.buscaLote(lote.getNomeLote());
 
-		if (PesquisaLote == null) {
-			throw new LoteNaoCadastradoException(MensagensExceptions.LOTE_NAO_CADASTRADA_EXCEPTION);
+		if (lotePesquisado == null) {
+
+			throw new LoteNaoCadastradoException(MensagensExceptions.LOTE_NAO_CADASTRADO_EXCEPTION);
+
 		}
 
-		Long nDiasCatgLote = daoLote.pesquisaNDiasPVenderCategoriaDeLote(PesquisaLote);
+		Long nDiasCatgLote = this.daoLote.pesquisaNDiasPVenderCategoriaDeLote(lotePesquisado);
 
-		if (nDiasCatgLote == -1) {
-			throw new LoteNaoCadastradoException(MensagensExceptions.LOTE_NAO_CADASTRADA_EXCEPTION);
+		if (nDiasCatgLote == null) {
+
+			throw new LoteNaoCadastradoException(MensagensExceptions.LOTE_NAO_CADASTRADO_EXCEPTION);
+
 		}
 
 		//Validando data de validade inserida
 		Calendar dataAtual = Calendar.getInstance();
+
 		if (Funcoes.subtrairDiasDataCalendar(dataAtual, novaDataLote) <= nDiasCatgLote) {
+
 			throw new dataDeValidadeMenorPermitidaCategoriaException(MensagensExceptions.DATA_VALIDADE_MENOR_CATEGORIA_EXCEPTION);
 		}
 
-		if (PesquisaLote != null) {
+		if (lotePesquisado != null) {
 
-			PesquisaLote.setDataDeValidade(novaDataLote);
+			lotePesquisado.setDataDeValidade(novaDataLote);
 
-			daoLote.alterar(PesquisaLote);
+			this.daoLote.alterar(lotePesquisado);
+
 			System.out.println("Lote alterado com sucesso!");
-
 		}
-
 	}
 
 }

@@ -293,8 +293,8 @@ public class TesteControleDeQualidade {
 		 */
 
 //		IDAOUsuario daoUsuario = DAOFactory.getUsuarioDAO();
-//		Usuario user = new Usuario("wilkie", "teste123");
-//
+//		Usuario user = new Usuario("wilkie", "123", PerfilUsuarioEnum.ADMIN);
+//		
 //		daoUsuario.inserir(user);
 	}
 }

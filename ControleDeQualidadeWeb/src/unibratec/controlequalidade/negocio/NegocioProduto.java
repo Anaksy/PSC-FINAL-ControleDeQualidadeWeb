@@ -25,7 +25,9 @@ public class NegocioProduto {
 	 * @param produto
 	 */
 	public void inserirProduto(Produto produto){
+		
 		produto.setEstadoProduto(EstadoProdutoEnum.EM_ESTOQUE);
+		
 		this.daoProduto.inserir(produto);
 	}
 	
@@ -37,7 +39,7 @@ public class NegocioProduto {
 	 */
 	public List<Produto> listaTodosProdutos() throws ProdutoNaoCadastradoException{
 
-		List<Produto> produtosList = daoProduto.consultarTodos();
+		List<Produto> produtosList = this.daoProduto.consultarTodos();
 		
 		if (produtosList.isEmpty()) {
 			
@@ -152,6 +154,7 @@ public class NegocioProduto {
 		if (pdto != null) {
 			
 			pdto.setEstadoProduto(EstadoProdutoEnum.INATIVO);
+			
 			this.daoProduto.alterar(pdto);
 
 		} else {

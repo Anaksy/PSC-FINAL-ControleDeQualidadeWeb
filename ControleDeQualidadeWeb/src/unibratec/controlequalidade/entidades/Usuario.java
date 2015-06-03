@@ -2,6 +2,8 @@ package unibratec.controlequalidade.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,11 +14,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_USUARIO")
 @NamedQueries({
-	@NamedQuery(name="Usuario.findUsuarioByName", query="Select u from Usuario u where u.nomeUsuario = :nomeUsuario"),
-	@NamedQuery(name="Usuario.findUsuario", query="Select u from Usuario u where u.nomeUsuario = :nomeUsuario and u.senhaUsuario = :senhaUsuario")
+	@NamedQuery(name="Usuario.findByName", query="Select u from Usuario u where u.nomeUsuario = :nomeUsuario"),
+	@NamedQuery(name="Usuario.findByNameAndSenha", query="Select u from Usuario u where u.nomeUsuario = :nomeUsuario and u.senhaUsuario = :senhaUsuario")
 })
 
 public class Usuario {
+	
+	public static final String FIND_BY_NAME = "Usuario.findByName";
+	public static final String FIND_BY_NAME_AND_SENHA = "Usuario.findByNameAndSenha";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,11 +34,20 @@ public class Usuario {
     @Column(name="SENHA_USUARIO", nullable=false)
     private String senhaUsuario;
     
+    @Enumerated(EnumType.STRING)
+    @Column(name="PERFIL_USUARIO", nullable=false)
+    private PerfilUsuarioEnum perfilUsuario;
+    
+    @Column(name="STATUS_SESSAO_USUARIO", nullable=false)
+    private int statusUsuario;
+    
     public Usuario() {}
     
-    public Usuario(String nomeUsuario, String senhaUsuario) {
+    public Usuario(String nomeUsuario, String senhaUsuario, PerfilUsuarioEnum perfilUsuario) {
     	this.setNomeUsuario(nomeUsuario);
     	this.setSenhaUsuario(senhaUsuario);
+    	this.setPerfilUsuario(perfilUsuario);
+    	this.setStatusUsuario(StatusUsuarioEnum.INATIVO.getValue());
     }
 
 	public long getIdUsuario() {
@@ -58,6 +72,22 @@ public class Usuario {
 
 	public void setSenhaUsuario(String senhaUsuario) {
 		this.senhaUsuario = senhaUsuario;
+	}
+
+	public PerfilUsuarioEnum getPerfilUsuario() {
+		return perfilUsuario;
+	}
+
+	public void setPerfilUsuario(PerfilUsuarioEnum perfilUsuario) {
+		this.perfilUsuario = perfilUsuario;
+	}
+
+	public int getStatusUsuario() {
+		return statusUsuario;
+	}
+
+	public void setStatusUsuario(int statusUsuario) {
+		this.statusUsuario = statusUsuario;
 	}
 
 	@Override

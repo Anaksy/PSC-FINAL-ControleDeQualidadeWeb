@@ -15,9 +15,11 @@ import javax.persistence.Table;
 	@NamedQuery(name="Categoria.findByNome", query="Select c from Categoria c where c.nomeCategoria like :nomeCategoria"),
 	@NamedQuery(name="Categoria.findByNomeDiferenteId", query="Select c from Categoria c where c.idCategoria <> :idCategoria and c.nomeCategoria like :nomeCategoria")
 })
-
 public class Categoria {
-
+	
+	public static final String FIND_BY_NOME = "Categoria.findByNome";
+	public static final String FIND_BY_NOME_DIFERENTE_ID = "Categoria.findByNomeDiferenteId";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_CATEGORIA")

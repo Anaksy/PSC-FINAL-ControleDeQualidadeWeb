@@ -9,17 +9,14 @@ import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 
 public class DAOLote extends DAOGenerico<Lote> implements IDAOLote {
 
-	protected String NAMED_QUERY_BYNOME = "Lote.findByNome";
-	protected String NAMED_QUERY_PRODUTO_BYLOTEID = "Produto.findByLoteId";
-
 	public DAOLote(EntityManager em) {
 		super(em);
 	}
 
 	/**
-	 * Verifica a existencia de um lote no banco de dados
+	 * Verifica a existencia de um lote.
 	 * 
-	 * @param Nome do lote
+	 * @param Lote
 	 * 
 	 * @return true/false
 	 * @throws LoteCadastradoException 
@@ -27,7 +24,7 @@ public class DAOLote extends DAOGenerico<Lote> implements IDAOLote {
 	@Override
 	public boolean existeLote(Lote lote) throws LoteCadastradoException {
 
-		TypedQuery<Lote> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME, this.classePersistente);
+		TypedQuery<Lote> query = this.entityManager.createNamedQuery(Lote.FIND_BY_NOME, this.classePersistente);
 
 		query.setParameter("nomeLote", "%" + lote.getNomeLote() + "%");
 
@@ -35,34 +32,31 @@ public class DAOLote extends DAOGenerico<Lote> implements IDAOLote {
 
 			Lote lt = query.setMaxResults(1).getSingleResult();
 
-			if (!lt.equals(null)) {
-				System.out.println("Retorno da base diferente de nulo!"); // APAGAR DEPOIS
-				return true;
-			}
-
+			System.out.println(lt);
+				
+			return true;
+		
 		} catch (NoResultException e) {
+
 			e.printStackTrace();
-			e.getMessage();
-			System.out.println("Retorno nulo da base!"); // APAGAR DEPOIS
+
+			System.out.println(e.getMessage());
+			
 			return false;
 		}
-
-		System.out.println("Retorno nulo da base!"); // APAGAR DEPOIS
-		return false;
-
 	}
 
 	/**
 	 * Método para buscar um Lote pelo nome.
 	 * 
-	 * @param nomeLote
+	 * @param String nomeLote
 	 * 
 	 * @return Lote
 	 */
 	@Override
 	public Lote buscaLote(String nomeLote) {
 
-		TypedQuery<Lote> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME, this.classePersistente);
+		TypedQuery<Lote> query = this.entityManager.createNamedQuery(Lote.FIND_BY_NOME, this.classePersistente);
 
 		query.setParameter("nomeLote", nomeLote);
 
@@ -70,20 +64,19 @@ public class DAOLote extends DAOGenerico<Lote> implements IDAOLote {
 
 			Lote lt = query.setMaxResults(1).getSingleResult();
 
-			System.out.println(lt); // APAGAR DEPOIS
-
-			if (!lt.equals(null)) {
-				System.out.println("Retorno da base diferente de nulo!"); // APAGAR DEPOIS
-				return lt;
-			}
+			System.out.println(lt);
+			
+			return lt;
+			
 
 		} catch (NoResultException e) {
 
-			System.out.println("Retorno nulo da base! - NoResultException"); // APAGAR DEPOIS
+			e.printStackTrace();
+
+			System.out.println(e.getMessage());
+
 			return null;
 		}
-
-		return null;
 	}
 
 	/**
@@ -94,27 +87,29 @@ public class DAOLote extends DAOGenerico<Lote> implements IDAOLote {
 	 * @return Long
 	 */
 	@Override
-	public long pesquisaNDiasPVenderCategoriaDeLote(Lote lote){
+	public Long pesquisaNDiasPVenderCategoriaDeLote(Lote lote){
 
-		TypedQuery<Produto> query = this.entityManager.createNamedQuery(NAMED_QUERY_PRODUTO_BYLOTEID, Produto.class);
+		TypedQuery<Produto> query = this.entityManager.createNamedQuery(Produto.FIND_BY_LOTE_ID, Produto.class);
 
 		query.setParameter("idLoteProduto", lote.getIdLote());
+		
 		try{
 
 			Produto pdto = query.setMaxResults(1).getSingleResult();
 
-			System.out.println(pdto); //APAGAR DEPOIS
+			System.out.println(pdto);
 
 			return pdto.getCategoriaProduto().getNumeroDeDiasParaVencimento();
-		}
-		catch (NoResultException e) {
+		
+		} catch (NoResultException e) {
 
-			System.out.println("Retorno nulo da base! - NoResultException"); // APAGAR DEPOIS
-			return -1;
+			e.printStackTrace();
+
+			System.out.println(e.getMessage());
+			
+			return null;
 		}
 	}
-
-
 
 }
 

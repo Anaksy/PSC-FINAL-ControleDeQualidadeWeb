@@ -16,18 +16,18 @@ import unibratec.controlequalidade.util.MensagensExceptions;
 public class NegocioVenda {
 	
 	private IDAOProduto daoProduto;
-	private NegocioProduto negocioProduto = new NegocioProduto();
+	private NegocioProduto negocioProduto;
 	
 	public NegocioVenda() {
 
 		this.daoProduto = DAOFactory.getProdutoDAO();
-
+		this.negocioProduto = new NegocioProduto();
 	}
 		
 	// Método que inseri um desconto no produto
 	public void DescontoProduto(Produto produto, double desconto) throws ProdutoNaoCadastradoException, DescontoValorException, DescontoProdutoPrestesAVencerException {
 		
-		Produto produtoEncontrado = negocioProduto.buscaProdutoPorId(produto.getIdProduto());
+		Produto produtoEncontrado = this.negocioProduto.buscaProdutoPorId(produto.getIdProduto());
 		
 		if (desconto > produtoEncontrado.getPrecoProduto()) {
 			
@@ -40,10 +40,11 @@ public class NegocioVenda {
 		
 				produtoEncontrado.setPrecoProduto(produtoEncontrado.getPrecoProduto() - desconto);
 				
-				daoProduto.alterar(produtoEncontrado);
+				this.daoProduto.alterar(produtoEncontrado);
 			}
 			
 			else {
+				
 				throw new DescontoProdutoPrestesAVencerException(MensagensExceptions.DESCONTO_PRODUTO_COM_ESTADO_INCORRETO);
 			}
 
@@ -58,27 +59,31 @@ public class NegocioVenda {
 		Calendar dataAtual = Calendar.getInstance();
 				
 		if (produtosList.isEmpty()) {
+			
 			throw new ProdutoNaoEncontradoExcecption(MensagensExceptions.ROTINA_PRODUTO_FALHA);
 		}		
 				
-		for (Produto p : produtosList) {
+		for (Produto produto : produtosList) {
 			
-			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) <= p.getCategoriaProduto().getNumeroDeDiasParaVencimento())) {
+			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, produto.getLoteProduto().getDataDeValidade()) <= produto.getCategoriaProduto().getNumeroDeDiasParaVencimento())) {
 				
-				p.setEstadoProduto(EstadoProdutoEnum.PRESTES_A_VENCER);
-				daoProduto.alterar(p);
+				produto.setEstadoProduto(EstadoProdutoEnum.PRESTES_A_VENCER);
+				
+				this.daoProduto.alterar(produto);
 			}
 
-			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) < 0)) {
+			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, produto.getLoteProduto().getDataDeValidade()) < 0)) {
 				
-				p.setEstadoProduto(EstadoProdutoEnum.VENCIDO);
-				daoProduto.alterar(p);
+				produto.setEstadoProduto(EstadoProdutoEnum.VENCIDO);
+				
+				this.daoProduto.alterar(produto);
 			}
 			
-			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) < -5)) {
+			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, produto.getLoteProduto().getDataDeValidade()) < -5)) {
 				
-				p.setEstadoProduto(EstadoProdutoEnum.INATIVO);
-				daoProduto.alterar(p);
+				produto.setEstadoProduto(EstadoProdutoEnum.INATIVO);
+				
+				this.daoProduto.alterar(produto);
 			}
 		}
 	}

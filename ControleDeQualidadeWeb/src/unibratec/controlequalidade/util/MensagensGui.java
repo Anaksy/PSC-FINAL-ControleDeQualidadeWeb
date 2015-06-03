@@ -24,7 +24,9 @@ public class MensagensGui {
 	public static final String ROTINA_PRODUTO_FALHA = "Não existem produtos com o status EM_ESTOQUE no sistema.";
 	public static final String LOGIN_USUARIO_NAO_CADASTRADO = "Usuário não cadastrado!";
 	public static final String LOGIN_USUARIO_SENHA_INCORRETO = "Usuário ou senha inseridos estão incorretos.";
-	public static final String LOGIN_ACESSO_PERMITIDO = "Acesso Permitido";
+	public static final String LOGIN_USUARIO_LOGADO_OUTRA_SESSAO = "Usuário logado em outra sessão.";
+	public static final String LOGIN_PREENCHER_CAMPOS = "Preencha todos os campos abaixo!";
+	public static final String LOGIN_ACESSO_NEGADO = "Faça login para ter acesso ao sistema!";
 	public static final String NENHUM_PRODUTO_SELECIONADO = "Nenhum produto selecionado.";
 	public static final String DESCONTO_SITUACAO_FALHA = "Desconto permitido somente para produtos em situação PRESTES_A_VENCER.";
 	public static final String DESCONTO_VALOR_FALHA = "Valor do desconto maior que o valor do produto!";

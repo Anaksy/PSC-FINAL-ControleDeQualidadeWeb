@@ -8,15 +8,13 @@ import unibratec.controlequalidade.entidades.Categoria;
 public class DAOCategoria extends DAOGenerico<Categoria> implements
 IDAOCategoria {
 
-	protected String NAMED_QUERY_BYNOME = "Categoria.findByNome";
-	protected String NAMED_QUERY_BYNOME_DIFERENTE_ID = "Categoria.findByNomeDiferenteId";
-
 	public DAOCategoria(EntityManager em) {
 		super(em);
 	}
 
 	/**
-	 * Método para verificar a existência de uma categoria no banco de dados
+	 * Método para verificar a existência de uma categoria com mesmo nome
+	 * da categoria recebida por parâmetro.
 	 * 
 	 * @param Categoria
 	 * 
@@ -25,7 +23,7 @@ IDAOCategoria {
 	@Override
 	public boolean existeCategoria(Categoria categoria) {
 
-		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME, this.classePersistente);
+		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(Categoria.FIND_BY_NOME, this.classePersistente);
 
 		query.setParameter("nomeCategoria", categoria.getNomeCategoria());
 
@@ -33,25 +31,24 @@ IDAOCategoria {
 
 			Categoria cat = query.setMaxResults(1).getSingleResult();
 
-			System.out.println(cat); // APAGAR DEPOIS
+			System.out.println(cat);
 
-			if (!cat.equals(null)) {
-				System.out.println("Retorno da base diferente de nulo!"); // APAGAR DEPOIS
-				return true;
-			}
-
+			return true;
+		
 		} catch (NoResultException e) {
 			
-			System.out.println("Retorno nulo da base! - NoResultException"); // APAGAR DEPOIS
+			e.printStackTrace();
+
+			System.out.println(e.getMessage());
+			
 			return false;
 		}
-		
-		System.out.println("Retorno nulo da base!"); // APAGAR DEPOIS
-		return false;
+
 	}
 	
 	/**
-	 * Método para verificar a existência de uma categoria no banco de dados
+	 * Método para verificar a existência de uma categoria com mesmo nome, 
+	 * e id diferente da categoria recebida por parâmetro.
 	 * 
 	 * @param Categoria
 	 * 
@@ -60,7 +57,7 @@ IDAOCategoria {
 	@Override
 	public boolean existeCategoriaDiferenteId(Categoria categoria) {
 
-		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME_DIFERENTE_ID, this.classePersistente);
+		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(Categoria.FIND_BY_NOME_DIFERENTE_ID, this.classePersistente);
 
 		query.setParameter("nomeCategoria", categoria.getNomeCategoria());
 		
@@ -70,34 +67,32 @@ IDAOCategoria {
 
 			Categoria cat = query.setMaxResults(1).getSingleResult();
 
-			System.out.println(cat); // APAGAR DEPOIS
+			System.out.println(cat);
 
-			if (!cat.equals(null)) {
-				System.out.println("Retorno da base diferente de nulo!"); // APAGAR DEPOIS
-				return true;
-			}
+			return true;
 
 		} catch (NoResultException e) {
 			
-			System.out.println("Retorno nulo da base! - NoResultException"); // APAGAR DEPOIS
+			e.printStackTrace();
+
+			System.out.println(e.getMessage());
+			
 			return false;
 		}
-		
-		System.out.println("Retorno nulo da base!"); // APAGAR DEPOIS
-		return false;
+
 	}
 	
 	/**
 	 * Método para buscar uma categoria pelo nome.
 	 * 
-	 * @param nomeCategoria
+	 * @param String nomeCategoria
 	 * 
 	 * @return Categoria
 	 */
 	@Override
 	public Categoria buscaCategoria(String nomeCategoria) {
 
-		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME, this.classePersistente);
+		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(Categoria.FIND_BY_NOME, this.classePersistente);
 
 		query.setParameter("nomeCategoria", nomeCategoria);
 
@@ -105,20 +100,18 @@ IDAOCategoria {
 
 			Categoria cat = query.setMaxResults(1).getSingleResult();
 
-			System.out.println(cat); // APAGAR DEPOIS
-
-			if (!cat.equals(null)) {
-				System.out.println("Retorno da base diferente de nulo!"); // APAGAR DEPOIS
-				return cat;
-			}
+			System.out.println(cat);
+			
+			return cat;
 
 		} catch (NoResultException e) {
 
-			System.out.println("Retorno nulo da base! - NoResultException"); // APAGAR DEPOIS
+			e.printStackTrace();
+
+			System.out.println(e.getMessage());
+			
 			return null;
 		}
-		
-		return null;
 	}
 	
 }

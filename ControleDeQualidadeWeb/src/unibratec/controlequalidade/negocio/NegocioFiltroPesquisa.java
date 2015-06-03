@@ -15,26 +15,31 @@ import unibratec.controlequalidade.util.MensagensExceptions;
 
 public class NegocioFiltroPesquisa {
 
-	private NegocioProduto negocioProduto = new NegocioProduto();
+	private NegocioProduto negocioProduto;
 	private IDAOProduto daoProduto;
 
 	public NegocioFiltroPesquisa() {
+		
+		this.negocioProduto = new NegocioProduto();
 		this.daoProduto = DAOFactory.getProdutoDAO();
 	}
 
 	public List <Produto> filtrarPesquisaSituacao(EstadoProdutoEnum estadoProdutoEnum) throws ProdutoNaoEncontradoExcecption{
-		return negocioProduto.buscaProdutosPorSituacaoList(estadoProdutoEnum);
+		
+		return this.negocioProduto.buscaProdutosPorSituacaoList(estadoProdutoEnum);
 	}
 
 
 	public List <Produto> filtrarPesquisaNome(String nomeProduto) throws ProdutoNaoCadastradoException{
-		return negocioProduto.buscaProdutosPorNome(nomeProduto);
+		
+		return this.negocioProduto.buscaProdutosPorNome(nomeProduto);
 	}
 
 
-	public List<Produto> filtrarPesquisaFaixaDataValidade(Date dataInicial, Date dataFinal) throws ProdutoNaoCadastradoException, FiltroPesquisaProdutoNaoEncontradoException{
+	public List<Produto> filtrarPesquisaFaixaDataValidade(Date dataInicial, Date dataFinal)
+			throws ProdutoNaoCadastradoException, FiltroPesquisaProdutoNaoEncontradoException{
 
-		List<Produto> listaProduto = negocioProduto.listaTodosProdutos();
+		List<Produto> listaProduto = this.negocioProduto.listaTodosProdutos();
 
 		List<Produto> novaListaProduto = new ArrayList<Produto>();
 
@@ -43,34 +48,41 @@ public class NegocioFiltroPesquisa {
 			Date dataProdutoLote = produto.getLoteProduto().getDataDeValidade().getTime();
 
 			if(Funcoes.procurarEntreDatas(dataProdutoLote, dataInicial, dataFinal) == true){
+				
 				novaListaProduto.add(produto);
 			}
 		}
 
 		if (novaListaProduto.isEmpty()) {
+			
 			throw new FiltroPesquisaProdutoNaoEncontradoException(MensagensExceptions.FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO);
-		}
-		else {
+		
+		}else {
+			
 			return novaListaProduto;
 		}
 
 	}
 
-	public List<Produto> filtrarPesquisaNomeSituacao(String nomeProduto, EstadoProdutoEnum estadoProdutoEnum) throws FiltroPesquisaProdutoNaoEncontradoException{
+	public List<Produto> filtrarPesquisaNomeSituacao(String nomeProduto, EstadoProdutoEnum estadoProdutoEnum) 
+			throws FiltroPesquisaProdutoNaoEncontradoException{
 
-		List<Produto> listaProduto = daoProduto.pesquisaProdutoPorNomeSituacaoList(nomeProduto, estadoProdutoEnum);
+		List<Produto> listaProduto = this.daoProduto.pesquisaProdutoPorNomeSituacaoList(nomeProduto, estadoProdutoEnum);
 
 		if (listaProduto.isEmpty()) {
+			
 			throw new FiltroPesquisaProdutoNaoEncontradoException(MensagensExceptions.FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO);
-		}
-		else {
+		
+		}else {
+			
 			return listaProduto;
 		}
 	}
 
-	public List<Produto> filtrarPesquisaFaixaDataNome(Date dataInicial, Date dataFinal, String nomeProduto) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException{
+	public List<Produto> filtrarPesquisaFaixaDataNome(Date dataInicial, Date dataFinal, String nomeProduto) 
+			throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException{
 
-		List<Produto> listaTodosProdutos = negocioProduto.listaTodosProdutos();
+		List<Produto> listaTodosProdutos = this.negocioProduto.listaTodosProdutos();
 
 		List<Produto> listaFiltradaData = new ArrayList<Produto>();
 
@@ -81,37 +93,43 @@ public class NegocioFiltroPesquisa {
 			Date dataProdutoLote = produto.getLoteProduto().getDataDeValidade().getTime();
 
 			if(Funcoes.procurarEntreDatas(dataProdutoLote, dataInicial, dataFinal) == true){
+				
 				listaFiltradaData.add(produto);
 			}
 		}
 
 		if (listaFiltradaData.isEmpty()) {
+			
 			throw new FiltroPesquisaProdutoNaoEncontradoException(MensagensExceptions.FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO);
-		}
-		else {
+		
+		}else {
 
 			for (Produto produto : listaFiltradaData) {
 
 				String nomeDoproduto = produto.getNomeProduto();
 
 				if (nomeDoproduto.toLowerCase().contains(nomeProduto.toLowerCase())) {
+					
 					listaFiltradaNome.add(produto);
 				}
 			}
 
 			if (listaFiltradaNome.isEmpty()) {
+				
 				throw new FiltroPesquisaProdutoNaoEncontradoException(MensagensExceptions.FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO);
-			}
-			else {
+			
+			} else {
+				
 				return listaFiltradaNome;
 			}
 		}
 
 	}
 
-	public List<Produto> filtrarPesquisaFaixaDataSituacao(Date dataInicial, Date dataFinal, EstadoProdutoEnum estadoProdutoEnum) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException{
+	public List<Produto> filtrarPesquisaFaixaDataSituacao(Date dataInicial, Date dataFinal, EstadoProdutoEnum estadoProdutoEnum) 
+			throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException{
 
-		List<Produto> listaTodosProdutos = negocioProduto.listaTodosProdutos();
+		List<Produto> listaTodosProdutos = this.negocioProduto.listaTodosProdutos();
 
 		List<Produto> listaFiltradaData = new ArrayList<Produto>();
 
@@ -122,37 +140,43 @@ public class NegocioFiltroPesquisa {
 			Date dataProdutoLote = produto.getLoteProduto().getDataDeValidade().getTime();
 
 			if(Funcoes.procurarEntreDatas(dataProdutoLote, dataInicial, dataFinal) == true){
+				
 				listaFiltradaData.add(produto);
 			}
 		}
 
 		if (listaFiltradaData.isEmpty()) {
+			
 			throw new FiltroPesquisaProdutoNaoEncontradoException(MensagensExceptions.FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO);
-		}
-		else {
+		
+		} else {
 
 			for (Produto produto : listaFiltradaData) {
 
 				EstadoProdutoEnum situacaoDoProduto = produto.getEstadoProduto();
 
 				if (situacaoDoProduto.equals(estadoProdutoEnum)) {
+					
 					listaFiltradaSituacao.add(produto);
 				}
 			}
 
 			if (listaFiltradaSituacao.isEmpty()) {
+				
 				throw new FiltroPesquisaProdutoNaoEncontradoException(MensagensExceptions.FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO);
-			}
-			else {
+			
+			} else {
+				
 				return listaFiltradaSituacao;
 			}
 		}
 
 	}
 
-	public List<Produto> filtrarPesquisaFaixaDataSituacaoNome(Date dataInicial, Date dataFinal, EstadoProdutoEnum estadoProdutoEnum, String nomeProduto) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException{
+	public List<Produto> filtrarPesquisaFaixaDataSituacaoNome(Date dataInicial, Date dataFinal, EstadoProdutoEnum estadoProdutoEnum, 
+			String nomeProduto) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException{
 
-		List<Produto> listaTodosProdutos = negocioProduto.listaTodosProdutos();
+		List<Produto> listaTodosProdutos = this.negocioProduto.listaTodosProdutos();
 
 		List<Produto> listaFiltradaData = new ArrayList<Produto>();
 
@@ -165,42 +189,49 @@ public class NegocioFiltroPesquisa {
 			Date dataProdutoLote = produto.getLoteProduto().getDataDeValidade().getTime();
 
 			if(Funcoes.procurarEntreDatas(dataProdutoLote, dataInicial, dataFinal) == true){
+
 				listaFiltradaData.add(produto);
 			}
 		}
 
 		if (listaFiltradaData.isEmpty()) {
+			
 			throw new FiltroPesquisaProdutoNaoEncontradoException(MensagensExceptions.FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO);
-		}
-		else {
+		
+		} else {
 
 			for (Produto produto : listaFiltradaData) {
 
 				EstadoProdutoEnum situacaoDoProduto = produto.getEstadoProduto();
 
 				if (situacaoDoProduto.equals(estadoProdutoEnum)) {
+					
 					listaFiltradaSituacao.add(produto);
 				}
 			}
 
 			if (listaFiltradaSituacao.isEmpty()) {
+				
 				throw new FiltroPesquisaProdutoNaoEncontradoException(MensagensExceptions.FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO);
-			}
-			else {
+			
+			} else {
 
 				for (Produto produto : listaFiltradaSituacao) {
 
 					String nomeDoproduto = produto.getNomeProduto();
 
 					if (nomeDoproduto.toLowerCase().contains(nomeProduto.toLowerCase())) {
+						
 						listaFiltradaNome.add(produto);
 					}
 				}
 
 				if (listaFiltradaNome.isEmpty()) {
+					
 					throw new FiltroPesquisaProdutoNaoEncontradoException(MensagensExceptions.FILTRO_PESQUISA_PRODUTO_NAO_ENCONTRADO);
-				}
-				else {
+				
+				} else {
+					
 					return listaFiltradaNome;
 				}
 			}

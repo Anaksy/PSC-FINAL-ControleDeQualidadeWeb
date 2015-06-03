@@ -4,23 +4,45 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
+
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Login</title>
+	
+	<title>Controle de Qualidade - Login</title>
+	
+	<style>
+		.tadiwa{
+			background-image:url("resources/images/login-controle-qualidade-backgournd.jpg");
+			background-color:transparent;"
+			background-position:center;
+			background-size:100% 770%;
+			background-repeat:no-repeat;>
+		}
+		
+		.ui-widget{font-size:90% !important;}
+		
+	</style>
+	
 </h:head>
-<h:body>
-	<h:form>
-		<p:messages id="messages" />
-		<p:panelGrid columns="2">
-			<p:outputLabel for="nomeUsuario" value="Nome Usuário:" />
-			<p:inputText id="nomeUsuario" value="#{LoginMB.usuario.nomeUsuario}" />
-		
-			<p:outputLabel for="senhaUsuario" value="Senha:" />
-			<p:password id="senhaUsuario" value="#{LoginMB.usuario.senhaUsuario}" />
-		</p:panelGrid>
-		
-		<p:commandButton value="Enviar" action="#{LoginMB.fazLogin}" ajax="false"/>
-	</h:form>
-		
+
+<h:body styleClass="tadiwa">
+	<div id="tudo" align="center" style="background-color: transparent;">
+		<h:form id="form" style="background-color: transparent;">
+			<p:panel style="background-color: transparent;">
+				<p:messages id="messages" />
+				<p:panelGrid columns="2" style="background-color: transparent;">
+
+					<h:outputLabel for="nomeUsuario" value="Usuário" />
+					<p:inputText id="nomeUsuario" value="#{loginMB.usuario.nomeUsuario}" size="45" />
+
+					<h:outputLabel for="senhaUsuario" value="Senha" />
+					<p:password id="senhaUsuario" value="#{loginMB.usuario.senhaUsuario}" size="45" />
+				</p:panelGrid>
+
+				<p:commandButton ajax="false" value="Limpar" action="#{loginMB.limparTela}" />
+				<p:commandButton ajax="false" value="Entrar" action="#{loginMB.fazLogin}" />
+			</p:panel>
+		</h:form>
+	</div>
 </h:body>
 </html>

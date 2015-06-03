@@ -33,14 +33,13 @@ public class NegocioCategoria {
 	 */
 	public void inserirCategoria(Categoria categoria) throws CategoriaCadastradaException { 
 
-		if (daoCategoria.existeCategoria(categoria)) {
+		if (this.daoCategoria.existeCategoria(categoria)) {
 
 			throw new CategoriaCadastradaException(MensagensExceptions.CATEGORIA_CADASTRADA_EXCEPTION);
 
-		} else {
-
-			daoCategoria.inserir(categoria);
 		}
+
+		this.daoCategoria.inserir(categoria);
 	}
 
 	/**
@@ -51,14 +50,14 @@ public class NegocioCategoria {
 	 */
 	public List<Categoria> listaTodasCategorias() throws NenhumaCategoriaCadastradaException{
 
-		List<Categoria> categoriasLista = daoCategoria.consultarTodos();
+		List<Categoria> categoriasLista = this.daoCategoria.consultarTodos();
 		
 		if (categoriasLista.isEmpty()) {
 			
 			throw new NenhumaCategoriaCadastradaException(MensagensExceptions.NENHUMA_CATEGORIA_CADASTRADA_EXCEPTION);
 		}
 		
-		return daoCategoria.consultarTodos();
+		return categoriasLista;
 	}
 
 	/**
@@ -70,7 +69,7 @@ public class NegocioCategoria {
 	 */
 	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException{
 
-		Categoria cat = daoCategoria.buscaCategoria(nomeCategoria);
+		Categoria cat = this.daoCategoria.buscaCategoria(nomeCategoria);
 
 		if (cat != null) {
 
@@ -91,7 +90,7 @@ public class NegocioCategoria {
 	 */
 	public Categoria buscaCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException{
 		
-		Categoria cat = daoCategoria.consultarPorId(categoria.getIdCategoria());
+		Categoria cat = this.daoCategoria.consultarPorId(categoria.getIdCategoria());
 
 		if (cat != null) {
 
@@ -111,20 +110,21 @@ public class NegocioCategoria {
 	 */
 	public void alteraCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, CategoriaCadastradaException{
 
-		Categoria cat = daoCategoria.consultarPorId(categoria.getIdCategoria());
+		Categoria cat = this.daoCategoria.consultarPorId(categoria.getIdCategoria());
 
 		if (cat != null) {
 
 			cat.setNomeCategoria(categoria.getNomeCategoria());
+			
 			cat.setNumeroDeDiasParaVencimento(categoria.getNumeroDeDiasParaVencimento());
 
-			if (daoCategoria.existeCategoriaDiferenteId(cat)) {
+			if (this.daoCategoria.existeCategoriaDiferenteId(cat)) {
 
 				throw new CategoriaCadastradaException(MensagensExceptions.CATEGORIA_CADASTRADA_EXCEPTION);
 
 			} else {
 
-				daoCategoria.alterar(cat);
+				this.daoCategoria.alterar(cat);
 			}
 
 		} else {
@@ -143,18 +143,20 @@ public class NegocioCategoria {
 	 */
 	public void removeCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, ProdutoComCategoriaException {
 
-		Categoria cat = daoCategoria.buscaCategoria(categoria.getNomeCategoria());
+		Categoria cat = this.daoCategoria.buscaCategoria(categoria.getNomeCategoria());
 	
 		if (cat != null) {
 			
 			List<Produto> produtoList = new ArrayList<Produto>(); 
 					
-			produtoList = daoProduto.pesquisarProdutoPorCategoria(cat);
+			produtoList = this.daoProduto.pesquisarProdutoPorCategoria(cat);
 			
 			if (produtoList.isEmpty()) {
-				daoCategoria.remover(cat);
-			}
-			else {
+				
+				this.daoCategoria.remover(cat);
+			
+			} else {
+				
 				throw new ProdutoComCategoriaException(MensagensExceptions.PRODUTO_COM_CATEGORIA_EXCEPTION);
 			}
 

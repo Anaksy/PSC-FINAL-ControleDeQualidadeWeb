@@ -17,12 +17,13 @@ import javax.persistence.TemporalType;
 
 import unibratec.controlequalidade.util.Funcoes;
 
-@Table(name = "TB_LOTE")
 @Entity
-
+@Table(name = "TB_LOTE")
 @NamedQuery(name="Lote.findByNome", query="Select l from Lote l where l.nomeLote like :nomeLote")
 public class Lote {
-
+	
+	public static final String FIND_BY_NOME = "Lote.findByNome";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_LOTE")

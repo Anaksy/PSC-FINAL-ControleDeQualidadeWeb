@@ -2,10 +2,9 @@ package unibratec.controlequalidade.beans;
 
 import javax.faces.bean.ManagedBean;
 
-@ManagedBean(name="IndexMB")
-public class IndexMB {
+@ManagedBean(name="MenuAcoesMB")
+public class MenuAcoesMB {
 	
-
 	public String manterCategoria(){
 		return "/categoria-manter.xhtml";
 	}

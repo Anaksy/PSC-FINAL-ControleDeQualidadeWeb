@@ -24,6 +24,12 @@ import javax.persistence.Table;
 })
 public class Produto {
 
+	public static final String FIND_BY_ESTADO = "Produto.findByEstado";
+	public static final String FIND_BY_LOTE_ID = "Produto.findByLoteId";
+	public static final String FIND_PRODUTO_BY_CATEGORIA_ID = "Produto.findProdutoByCategoriaId";
+	public static final String FIND_BY_NOME = "Produto.findByName";
+	public static final String FIND_BY_SITUACAO_E_NOME = "Produto.findBySituacaoENome";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_PRODUTO")

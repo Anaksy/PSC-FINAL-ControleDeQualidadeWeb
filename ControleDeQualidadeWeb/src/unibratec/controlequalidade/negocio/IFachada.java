@@ -57,11 +57,15 @@ public interface IFachada {
 	
 	public List<Produto> filtrarPesquisaFaixaDataSituacaoNome(Date dataInicial, Date dataFinal, EstadoProdutoEnum estadoProdutoEnum, String nomeProduto) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException;
 
-	public Usuario buscaUsuario(String usuario, String senha) throws UsuarioNaoCadastradoException, UsuarioSenhaIncorretaException;
-	
 	public void DescontoProduto(Produto produto, double desconto) throws ProdutoNaoCadastradoException, DescontoValorException, DescontoProdutoPrestesAVencerException;
 
-
+	public Usuario autenticaUsuario(String usuario, String senha) throws UsuarioNaoCadastradoException, UsuarioSenhaIncorretaException;
+	
+	public void atualizaStatusUsuario(Usuario usuario);
+	
+	public Usuario getUsarioByNome(String usuario) throws UsuarioNaoCadastradoException;
+	
+	public boolean isUsuarioLogado(Usuario usuario);
 
 
 

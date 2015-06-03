@@ -122,16 +122,29 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public Usuario buscaUsuario(String nomeUsuario, String senhaUsuario) throws UsuarioNaoCadastradoException, UsuarioSenhaIncorretaException {
-		return negocioUsuario.buscaUsuario(nomeUsuario, senhaUsuario);
-	}
-
-	@Override
 	public void DescontoProduto(Produto produto, double desconto) throws ProdutoNaoCadastradoException, DescontoValorException, DescontoProdutoPrestesAVencerException {
 		negocioVenda.DescontoProduto(produto, desconto);
 	}
 
+	@Override
+	public Usuario autenticaUsuario(String usuario, String senha) throws UsuarioNaoCadastradoException, UsuarioSenhaIncorretaException {
+		return negocioUsuario.buscaUsuario(usuario, senha);
+	}
+	
+	@Override
+	public void atualizaStatusUsuario(Usuario usuario){
+		this.negocioUsuario.uptadeUsuario(usuario);
+	}
 
+	@Override
+	public Usuario getUsarioByNome(String usuario) throws UsuarioNaoCadastradoException {
+		return this.negocioUsuario.buscaUsuarioPorNome(usuario);
+	}
+	
+	@Override
+	public boolean isUsuarioLogado(Usuario usuario){
+		return this.negocioUsuario.isUsuarioLogado(usuario);
+	}
 
 
 
