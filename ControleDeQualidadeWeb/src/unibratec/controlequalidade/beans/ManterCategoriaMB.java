@@ -76,7 +76,6 @@ public class ManterCategoriaMB {
 	}
 
 	public String criarCategoria(){
-		limparIdCategoria();// Talvez deveria botar isso no metodo do DAO ?
 		if (validarCamposCategoria(categoria) == true) {
 			try {
 				fachada.inserirCategoria(categoria);
@@ -133,9 +132,5 @@ public class ManterCategoriaMB {
 		else {
 			return true;
 		}
-	}
-
-	private void limparIdCategoria(){
-		categoria.setIdCategoria(0);
 	}
 }

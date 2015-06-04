@@ -7,6 +7,19 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script type="text/javascript" src="resources/js/jquery.js"></script>
+	<script type="text/javascript">var $j = jQuery.noConflict(true);</script>
+	<script type="text/javascript" src="resources/js/jquery.maskMoney.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("input.dinheiro").maskMoney({
+				showSymbol : true,
+				symbol : "R$",
+				decimal : ",",
+				thousands : "."
+			});
+		});
+	</script>
 	<h:title>Pesquisar Produto</h:title>
 </h:head>
 <h:body>
@@ -15,12 +28,12 @@
 			<div align="left">
 				<p:separator />
 				<br />
-				<h:selectOneMenu id="estadoProdutoEnum"
+				<p:selectOneMenu id="estadoProdutoEnum"
 					value="#{PesquisarProdutosMB.estadoProdutoEnum}">
-					<f:selectItem itemLabel="Selecione" />
+					<f:selectItem itemLabel="Selecione"/>
 					<f:selectItems value="#{PesquisarProdutosMB.estadoProdutoEnumList}"
-						var="n" itemLabel="#{n}" itemValue="#{n}" />
-				</h:selectOneMenu>
+						var="n" itemLabel="#{n}" itemValue="#{n}"/>
+				</p:selectOneMenu>
 
 				&nbsp;
 				<h:selectBooleanCheckbox
@@ -54,11 +67,11 @@
 					action="#{PesquisarProdutosMB.pesquisar}" ajax="false" />
 
 				<br /> <br /> Desconto:
-				<p:inputText value="#{PesquisarProdutosMB.valorDesconto}" />
+				<p:inputText value="#{PesquisarProdutosMB.valorDesconto}" styleClass="dinheiro"/>
 
 				&nbsp;
 				<p:commandButton value="Desconto"
-					action="#{PesquisarProdutosMB.desconto}" ajax="false" />
+					action="#{PesquisarProdutosMB.desconto}" ajax="false"/>
 
 			</div>
 

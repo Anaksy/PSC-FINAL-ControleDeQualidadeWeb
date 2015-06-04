@@ -27,7 +27,7 @@ public class PesquisarProdutosMB {
 
 	private IFachada fachada = new Fachada();
 	private Produto produto;
-	private double valorDesconto;
+	private String valorDesconto;
 	private boolean checkboxNome;
 	private boolean checkboxSituacao;
 	private boolean checkboxFaixaDataValidade;
@@ -96,10 +96,10 @@ public class PesquisarProdutosMB {
 		this.nomeProduto = nomeProduto;
 	}
 	
-	public double getValorDesconto() {
+	public String getValorDesconto() {
 		return valorDesconto;
 	}
-	public void setValorDesconto(double valorDesconto) {
+	public void setValorDesconto(String valorDesconto) {
 		this.valorDesconto = valorDesconto;
 	}
 	
@@ -232,7 +232,7 @@ public class PesquisarProdutosMB {
 				erroMsg(MensagensGui.PRODUTO_BD_FALHA);
 			}
 		}
-		return null;
+		return "";
 	}
 	
 	public void selecionarProduto(Produto p){
@@ -249,7 +249,7 @@ public class PesquisarProdutosMB {
 	public String desconto(){
 		if (produto != null) {
 			try {
-				fachada.DescontoProduto(getProduto(), getValorDesconto());
+				fachada.DescontoProduto(getProduto(), tratarValorDesconto());
 				infoMsg(MensagensGui.DESCONTO_INSERIDO_SUCESSO);
 				limparBean();
 			} catch (ProdutoNaoCadastradoException e) {
@@ -268,7 +268,7 @@ public class PesquisarProdutosMB {
 		else {
 			erroMsg(MensagensGui.NENHUM_PRODUTO_SELECIONADO);
 		}
-		return null;
+		return "";
 	}
 
 	private void infoMsg(String msg) {
@@ -289,6 +289,15 @@ public class PesquisarProdutosMB {
 	
 	private void limparBean(){
 		FacesContext.getCurrentInstance().getViewRoot().getViewMap().remove("PesquisarProdutosMB");
+	}
+	
+	private double tratarValorDesconto(){
+		String valorDescontoString = getValorDesconto();
+		valorDescontoString = valorDescontoString.replace(",", "");
+		valorDescontoString = valorDescontoString.replace(".", "");
+		valorDescontoString = new StringBuilder(valorDescontoString).insert(valorDescontoString.length()-2, ".").toString();
+		double valorDescontoDouble = Double.parseDouble(valorDescontoString);
+		return valorDescontoDouble;
 	}
 }
 

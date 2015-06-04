@@ -38,7 +38,7 @@ public class NegocioCategoria {
 			throw new CategoriaCadastradaException(MensagensExceptions.CATEGORIA_CADASTRADA_EXCEPTION);
 
 		}
-
+		categoria.setIdCategoria(0);
 		this.daoCategoria.inserir(categoria);
 	}
 

@@ -7,6 +7,20 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script type="text/javascript" src="resources/js/jquery.js"></script>
+	<script type="text/javascript"> var $j = jQuery.noConflict(true);
+	</script>
+	<script type="text/javascript" src="resources/js/jquery.maskMoney.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("input.dinheiro").maskMoney({
+				showSymbol : true,
+				symbol : "R$",
+				decimal : ",",
+				thousands : "."
+			});
+		});
+	</script>
 	<h:title>Criar Produto/Lote</h:title>
 </h:head>
 <h:body>
@@ -30,7 +44,7 @@
 			<br />
 			<br />
 			Preço:
-			<p:inputText value="#{CriarProdutoLoteMB.produto.precoProduto}" />
+			<p:inputText value="#{CriarProdutoLoteMB.valorPreco}" styleClass="dinheiro"/>
 			<br />
 			<br /> 
 			Quantidade de Produtos:

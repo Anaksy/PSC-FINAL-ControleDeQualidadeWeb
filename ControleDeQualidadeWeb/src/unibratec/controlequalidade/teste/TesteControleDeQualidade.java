@@ -54,15 +54,34 @@ public class TesteControleDeQualidade {
 	public static void main(String[] args) {
 		
 		
-		String teste01 = "Produdo prestes a vencer";
-		String teste02 = "Produdo prestes";
+//		String teste01 = "Produdo prestes a vencer";
+//		String teste02 = "Produdo prestes";
+//		
+//		if (teste01.contains(teste02)) {
+//			System.out.println("Contem");
+//		}
 		
-		if (teste01.contains(teste02)) {
-			System.out.println("Contem");
-		}
+//		String st = "10000000000000000000000000000000000";
+//		System.out.println(st);
+//		double vl = Double.parseDouble(st);
+//		System.out.println(vl);
+//		double teste = vl;
+//		System.out.println(teste);
+
+		
+		String valorDescontoString = "10.000,67";
+		System.out.println(valorDescontoString);
+		valorDescontoString = valorDescontoString.replace(",", "");
+		System.out.println(valorDescontoString);
+		valorDescontoString = valorDescontoString.replace(".", "");
+		System.out.println(valorDescontoString);
+		valorDescontoString = new StringBuilder(valorDescontoString).insert(valorDescontoString.length()-1, ".").toString();
+		System.out.println(valorDescontoString);
+		double valorDescontoDouble = Double.parseDouble(valorDescontoString);
+		System.out.println(valorDescontoDouble);
 		
 		
-		
+
 		/*
 		//############# ENTITY MANAGER ############# 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleDeQualidadePSC");
@@ -291,11 +310,12 @@ public class TesteControleDeQualidade {
 		} catch (CategoriaNaoCadastradaException e) {
 			System.out.println(e.getMessage());
 		}
-		 */
+		
 
 		IDAOUsuario daoUsuario = DAOFactory.getUsuarioDAO();
 		Usuario user = new Usuario("pedro", "tirant", PerfilUsuarioEnum.ADMIN);
 		
 		daoUsuario.inserir(user);
+		 */
 	}
 }

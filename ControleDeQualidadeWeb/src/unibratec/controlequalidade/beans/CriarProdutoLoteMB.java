@@ -27,6 +27,7 @@ public class CriarProdutoLoteMB {
 	private Produto produto = new Produto();
 	private Lote lote = new Lote();
 	private Date dataValidade;
+	String valorPreco;
 	private List<Categoria> listaCategoria;
 
 	public Categoria getCategoria() {
@@ -48,13 +49,21 @@ public class CriarProdutoLoteMB {
 	public void setLote(Lote lote) {
 		this.lote = lote;
 	}
-	
+
 	public Date getDataValidade() {
 		return dataValidade;
 	}
 
 	public void setDataValidade(Date dataValidade) {
 		this.dataValidade = dataValidade;
+	}
+
+	public String getValorPreco() {
+		return valorPreco;
+	}
+
+	public void setValorPreco(String valorPreco) {
+		this.valorPreco = valorPreco;
 	}
 
 	public void setListaCategoria(List<Categoria> listaCategoria) {
@@ -66,6 +75,7 @@ public class CriarProdutoLoteMB {
 			try {
 				Categoria categoriaSelecionada = fachada.buscarCategoriaPorId(categoria);
 				produto.setCategoriaProduto(categoriaSelecionada);
+				produto.setPrecoProduto(tratarValorDesconto());
 				lote.setDataDeValidade(Datas.converterDateToCalendar(dataValidade));
 				fachada.criarProdutoLote(produto, lote);
 				infoMsg(MensagensGui.PRODUTO_LOTE_CRIADO_SUCESSO);
@@ -99,7 +109,7 @@ public class CriarProdutoLoteMB {
 		}
 		return listaCategoria;
 	}
-	
+
 	private void infoMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação:", msg));
 	}
@@ -111,18 +121,19 @@ public class CriarProdutoLoteMB {
 	private void erroMsg(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", msg));
 	}
-	
+
 	public String voltarTelaInicial(){
 		return "/menu-acoes.xhtml";
 	}
-	
+
 	public String limparModelProdutoLote(){
 		produto = new Produto();
 		lote = new Lote();
 		dataValidade = null;
+		valorPreco = null;
 		return "";
 	}
-	
+
 	private boolean validarCampos(){
 		if (produto.getNomeProduto().isEmpty() || produto.getNomeProduto() == null) {
 			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_NOME_PRODUTO);
@@ -132,7 +143,11 @@ public class CriarProdutoLoteMB {
 			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_NOME_FABRICANTE);
 			return false;
 		}
-		else if (produto.getPrecoProduto() == 0 || lote.getQtdProdutos() == 0) {
+		else if (getValorPreco().isEmpty() || getValorPreco() == null || getValorPreco() == "0,00") {
+			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_PRECO_QUANTIDADE);
+			return false;
+		}
+		else if (lote.getQtdProdutos() == 0) {
 			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_PRECO_QUANTIDADE);
 			return false;
 		}
@@ -144,4 +159,13 @@ public class CriarProdutoLoteMB {
 			return true;
 		}
 	}	
+
+	private double tratarValorDesconto(){
+		String valorPrecoString = getValorPreco();
+		valorPrecoString = valorPrecoString.replace(",", "");
+		valorPrecoString = valorPrecoString.replace(".", "");
+		valorPrecoString = new StringBuilder(valorPrecoString).insert(valorPrecoString.length()-2, ".").toString();
+		double valorDescontoDouble = Double.parseDouble(valorPrecoString);
+		return valorDescontoDouble;
+	}
 }
