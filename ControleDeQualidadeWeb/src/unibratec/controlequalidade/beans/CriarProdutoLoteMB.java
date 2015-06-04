@@ -143,12 +143,12 @@ public class CriarProdutoLoteMB {
 			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_NOME_FABRICANTE);
 			return false;
 		}
-		else if (getValorPreco().isEmpty() || getValorPreco() == null || getValorPreco() == "0,00") {
-			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_PRECO_QUANTIDADE);
+		else if (getValorPreco().isEmpty() || getValorPreco() == null) {
+			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_PRECO);
 			return false;
 		}
 		else if (lote.getQtdProdutos() == 0) {
-			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_PRECO_QUANTIDADE);
+			avisoMsg(MensagensGui.PRODUTO_LOTE_VALIDACAO_QUANTIDADE);
 			return false;
 		}
 		else if (dataValidade == null) {

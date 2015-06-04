@@ -18,7 +18,8 @@ public abstract class MensagensGui {
 	public static final String PRODUTO_LOTE_CRIADO_SUCESSO = "Produto e lote criados com sucesso.";
 	public static final String PRODUTO_LOTE_VALIDACAO_NOME_PRODUTO = "Nome do produto não foi preenchido.";
 	public static final String PRODUTO_LOTE_VALIDACAO_NOME_FABRICANTE = "Nome do fabricante não foi preenchido.";
-	public static final String PRODUTO_LOTE_VALIDACAO_PRECO_QUANTIDADE = "Preço e quantidade de produtos tem que ser maior que 0.";
+	public static final String PRODUTO_LOTE_VALIDACAO_PRECO = "Preço do produto tem que ser maior que 0.";
+	public static final String PRODUTO_LOTE_VALIDACAO_QUANTIDADE = "Quantidade do produto tem que ser maior que 0.";
 	public static final String PRODUTO_LOTE_VALIDACAO_DATA_VALIDADE= "Data de validade tem que ser preenchida.";
 	public static final String ROTINA_PRODUTO_SUCESSO = "Rotina de validação de produtos executada com sucesso!";
 	public static final String ROTINA_PRODUTO_FALHA = "Não existem produtos com o status EM_ESTOQUE no sistema.";
