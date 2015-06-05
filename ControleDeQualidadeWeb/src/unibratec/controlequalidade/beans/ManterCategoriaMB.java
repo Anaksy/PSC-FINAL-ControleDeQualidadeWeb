@@ -1,7 +1,6 @@
 package unibratec.controlequalidade.beans;
 
 import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -21,7 +20,7 @@ public class ManterCategoriaMB {
 	private IFachada fachada = new Fachada();
 	private List<Categoria> listaCategoria;
 
-	public List<Categoria> getListaCategoria() {
+	public List<Categoria> getListaCategoria() { //Metodo que popula a lista de categorinas na GUI.
 		try {
 			listaCategoria = fachada.listaTodasCategorias();
 		} catch (NenhumaCategoriaCadastradaException e) {
@@ -45,8 +44,8 @@ public class ManterCategoriaMB {
 
 	public void selecionarCategoria(Categoria c){
 		try {
-			Categoria CategoriaEncontrada = fachada.buscaCategoriaPorNomeCategoria(c.getNomeCategoria());
-			categoria.setIdCategoria(CategoriaEncontrada.getIdCategoria());
+			Categoria CategoriaEncontrada = fachada.buscaCategoriaPorNomeCategoria(c.getNomeCategoria()); //Cria o contexto de persistencia com a categoria selecionada.
+			categoria.setIdCategoria(CategoriaEncontrada.getIdCategoria()); //Atribui essa categoria ao model do bean.
 			categoria.setNomeCategoria(CategoriaEncontrada.getNomeCategoria());
 			categoria.setNumeroDeDiasParaVencimento(CategoriaEncontrada.getNumeroDeDiasParaVencimento());
 		} catch (CategoriaNaoCadastradaException e) {
@@ -122,8 +121,16 @@ public class ManterCategoriaMB {
 	public String voltarTelaInicial(){
 		return "/menu-acoes.xhtml";
 	}
-
-	private boolean validarCamposCategoria(Categoria categoria){
+	
+	public void limparTelaManterCategoria() {
+		
+		System.out.println("public String limparTela()"); // APAGAR DEPOIS
+		
+		this.categoria = new Categoria();
+	}
+	
+	// valida os campos.
+	private boolean validarCamposCategoria(Categoria categoria){ 
 		if ((categoria.getNomeCategoria().isEmpty() || (categoria.getNomeCategoria() == null) 
 				|| (categoria.getNumeroDeDiasParaVencimento() == 0))) {
 			erroMsg(MensagensGui.CATEGORIA_VALIDACAO_DADOS_INCOMPLETOS);

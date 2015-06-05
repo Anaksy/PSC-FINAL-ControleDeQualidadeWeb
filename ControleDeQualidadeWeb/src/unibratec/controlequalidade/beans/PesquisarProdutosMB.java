@@ -249,17 +249,17 @@ public class PesquisarProdutosMB {
 	public String desconto(){
 		if (produto != null) {
 			try {
-				fachada.DescontoProduto(getProduto(), tratarValorDesconto());
+				fachada.DescontoProduto(getProduto(), tratarValorDesconto()); //Inserindo desconto
 				infoMsg(MensagensGui.DESCONTO_INSERIDO_SUCESSO);
 				limparBean();
 			} catch (ProdutoNaoCadastradoException e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-			} catch (DescontoValorException e) {
+			} catch (DescontoValorException e) { //Se o valor do desconto for maior que o valor do produto.
 				e.printStackTrace();
 				System.out.println(e.getMessage());
 				erroMsg(MensagensGui.DESCONTO_VALOR_FALHA);
-			} catch (DescontoProdutoPrestesAVencerException e) {
+			} catch (DescontoProdutoPrestesAVencerException e) { //Se o produto for de fato "PRESTES_A_VENCER.
 				e.printStackTrace();
 				System.out.println(e.getMessage());
 				erroMsg(MensagensGui.DESCONTO_SITUACAO_FALHA);
@@ -290,7 +290,7 @@ public class PesquisarProdutosMB {
 	private void limparBean(){
 		FacesContext.getCurrentInstance().getViewRoot().getViewMap().remove("PesquisarProdutosMB");
 	}
-	
+	//Metodo para tratar como o campo de texto de desconto é capturado. Por conta do Jquery de mascara o mesmo necessita desse tratamento.
 	private double tratarValorDesconto(){
 		String valorDescontoString = getValorDesconto();
 		valorDescontoString = valorDescontoString.replace(",", "");

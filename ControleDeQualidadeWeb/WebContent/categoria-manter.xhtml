@@ -9,57 +9,81 @@
 	<h:title>Manter Categoria</h:title>
 </h:head>
 <h:body>
+
 	<div align="right">
 		<h:form style="font-size:90% !important">
-			<p:commandLink id="logoutID" action="#{loginMB.fazLogout}" ajax="false">
-        		<h:outputText value="Logout" />
-    		</p:commandLink>
+			<p:commandLink id="logoutID" action="#{loginMB.fazLogout}"
+				ajax="false">
+				<h:outputText value="Logout" />
+			</p:commandLink>
 		</h:form>
 	</div>
+
 	<p:separator />
+
 	<h:form id="formCategoria">
 		<div align="left">
-			<br />
+
 			<h:inputHidden type="hidden"
 				value="#{ManterCategoriaMB.categoria.idCategoria}" />
-			Nome da Categoria:
-			<p:inputText value="#{ManterCategoriaMB.categoria.nomeCategoria}" />
-			<br /> Número de dias para vencer:
-			<p:inputMask
-				value="#{ManterCategoriaMB.categoria.numeroDeDiasParaVencimento}"
-				mask="9?9999" />
-			<br /> <br />
-			<h:commandButton value="Criar Categoria"
-				action="#{ManterCategoriaMB.criarCategoria}" />
-			&nbsp;
-			<h:commandButton value="Remover Categoria"
-				action="#{ManterCategoriaMB.removerCategoria}" />
-			&nbsp;
-			<h:commandButton value="Atualizar Categoria"
-				action="#{ManterCategoriaMB.atualizarCategoria}" />
-			<br /> <br />
 
-			<p:messages id="messages" showDetail="true" autoUpdate="true"
-				closable="true" />
+			<p:panelGrid columns="2">
 
-			<br /> <br />
+				<h:outputLabel for="nomeCategoria" value="Nome da Categoria:" />
+				<p:inputText id="nomeCategoria"
+					value="#{ManterCategoriaMB.categoria.nomeCategoria}" size="45" />
+
+				<h:outputLabel for="diasPVencer" value="Dias para vencer:" />
+				<p:inputMask id="diasPVencer"
+					value="#{ManterCategoriaMB.categoria.numeroDeDiasParaVencimento}"
+					mask="9?9999" size="45" />
+
+			</p:panelGrid>
+
+			<p:panelGrid columns="1" align="left">
+				<p:row style="grid">
+					<div style="font-size: 90% !important" align="left">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<p:commandButton value="Nova" ajax="false"
+							action="#{ManterCategoriaMB.criarCategoria}" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<p:commandButton value="Excluir" ajax="false"
+							action="#{ManterCategoriaMB.removerCategoria}" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<p:commandButton value="Atualizar" ajax="false"
+							action="#{ManterCategoriaMB.atualizarCategoria}" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<p:commandButton value="Limpar" ajax="false"
+							action="#{ManterCategoriaMB.limparTelaManterCategoria}" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</div>
+				</p:row>
+			</p:panelGrid>
+
+			<br />
+			<p:messages id="messages" autoUpdate="true" closable="true" showDetail="true"/>
+			<br />
+
 			<p:separator />
-			<p:dataTable value="#{ManterCategoriaMB.listaCategoria}"
+
+			<p:dataTable id="tabela" value="#{ManterCategoriaMB.listaCategoria}"
 				var="categoria" style="width:80%" styleClass="table table-hover"
 				emptyMessage="Nenhum resultado">
 				<p:column>
-					<f:facet name="header">Nome</f:facet>
-					<h:outputText value="#{categoria.nomeCategoria}"></h:outputText>
+					<f:facet name="header">Categoria</f:facet>
+					<h:outputText value="#{categoria.nomeCategoria}" />
 				</p:column>
+
 				<p:column>
-					<f:facet name="header">Número de dias para vencer</f:facet>
-					<h:outputText value="#{categoria.numeroDeDiasParaVencimento}"></h:outputText>
+					<f:facet name="header">Dias para vencer</f:facet>
+					<h:outputText value="#{categoria.numeroDeDiasParaVencimento}" />
 				</p:column>
+
 				<p:column style="width=100; text-align: center">
 					<h:commandButton value="Selecionar"
-						action="#{ManterCategoriaMB.selecionarCategoria(categoria)}">
-					</h:commandButton>
+						action="#{ManterCategoriaMB.selecionarCategoria(categoria)}" />
 				</p:column>
+
 			</p:dataTable>
 			<br /> <br />
 		</div>

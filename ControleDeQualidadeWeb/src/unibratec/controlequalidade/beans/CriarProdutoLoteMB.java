@@ -98,7 +98,7 @@ public class CriarProdutoLoteMB {
 		}
 		return "";
 	}
-
+	//Metodo que popula o comboBox de categoria no gui, para escolha do usuario.
 	public List<Categoria> getListaCategoria() {
 		try {
 			listaCategoria = fachada.listaTodasCategorias();
@@ -125,7 +125,7 @@ public class CriarProdutoLoteMB {
 	public String voltarTelaInicial(){
 		return "/menu-acoes.xhtml";
 	}
-
+	// limpando a gui.
 	public String limparModelProdutoLote(){
 		produto = new Produto();
 		lote = new Lote();
@@ -159,7 +159,7 @@ public class CriarProdutoLoteMB {
 			return true;
 		}
 	}	
-
+	//Metodo para tratar como o campo de texto de desconto é capturado. Por conta do Jquery de mascara o mesmo necessita desse tratamento.
 	private double tratarValorDesconto(){
 		String valorPrecoString = getValorPreco();
 		valorPrecoString = valorPrecoString.replace(",", "");
