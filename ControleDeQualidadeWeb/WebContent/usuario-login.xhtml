@@ -27,7 +27,7 @@
 
 <h:body styleClass="tadiwa">
 	<div id="tudo" align="center" style="background-color: transparent;">
-		<h:form id="form" style="background-color: transparent;">
+		<h:form id="loginForm" style="background-color: transparent;">
 			<p:panel style="background-color: transparent;">
 				<p:messages id="messages" />
 				<p:panelGrid columns="2" style="background-color: transparent;">
@@ -39,9 +39,22 @@
 					<p:password id="senhaUsuario" value="#{loginMB.usuario.senhaUsuario}" size="45" />
 				</p:panelGrid>
 
-				<p:commandButton ajax="false" value="Limpar" action="#{loginMB.limparTela}" />
 				<p:commandButton ajax="false" value="Entrar" action="#{loginMB.fazLogin}" />
+				<p:commandButton ajax="false" value="Limpar" action="#{loginMB.limparTelaLogin}" />
 			</p:panel>
+		</h:form>
+		
+		<h:form id="logoutOutraSessaoForm" style="background-color: transparent;">
+			<p:confirmDialog header="Logout" message="Deseja fazer logout da outra sessão?" icon="ui-icon-alert"
+			 widgetVar="logoutOutraSessaoVar" visible="true" rendered="#{loginMB.showLogoutOutraSessaoDialog}">
+				<div align="center">
+				  	<p:commandButton value="Sim" action="#{loginMB.fazLogoutOutraSessao}"
+				  	styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					
+					<p:commandButton value="Não" action="#{loginMB.naofazLogoutOutraSessao}" 
+					 styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</div>
+			</p:confirmDialog>
 		</h:form>
 	</div>
 </h:body>

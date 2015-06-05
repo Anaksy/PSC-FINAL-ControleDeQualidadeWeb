@@ -6,22 +6,34 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Index</title>
+	<h:title>Ações</h:title>
 </h:head>
 <h:body>
-	<h3>Indice</h3>
-	<h:form>
-		<br />
-		<h:commandButton value="Manter Categoria" action="#{MenuAcoesMB.manterCategoria}" />
-		<br />
-		<br />
-		<h:commandButton value="Criar Produto/Lote" action="#{MenuAcoesMB.criarprodutoLote}" />
-		<br />
-		<br />
-		<h:commandButton value="Rotina Produto" action="#{MenuAcoesMB.rotinaProduto}" />
-		<br />
-		<br />
-		<h:commandButton value="Pesquiar Produtos" action="#{MenuAcoesMB.pesquisarProdutos}" />
-	</h:form>
+	<div align="right">
+		<h:form style="font-size:90% !important">
+			<p:commandLink id="logoutID" action="#{loginMB.fazLogout}" ajax="false">
+        		<h:outputText value="Logout" />
+    		</p:commandLink>
+		</h:form>
+	</div>
+	<div>
+		<h:form>
+			<p:separator />
+			<br />
+			<p:panelGrid columns="1" align="rigth">
+				<p:commandButton value="Manter Categoria" action="#{MenuAcoesMB.manterCategoria}" 
+				rendered="#{loginMB.controladorAcesso.permissaoAdministrador}" />
+
+				<p:commandButton value="Criar Produto/Lote" action="#{MenuAcoesMB.criarprodutoLote}"
+				rendered="#{loginMB.controladorAcesso.permissaoAdministrador}" />
+
+				<p:commandButton value="Rotina Produto" action="#{MenuAcoesMB.rotinaProduto}" 
+				rendered="#{loginMB.controladorAcesso.permissaoUsuario}" />
+
+				<p:commandButton value="Pesquiar Produtos" action="#{MenuAcoesMB.pesquisarProdutos}" 
+				rendered="#{loginMB.controladorAcesso.permissaoUsuario}" />
+			</p:panelGrid>
+		</h:form>
+	</div>
 </h:body>
 </html>

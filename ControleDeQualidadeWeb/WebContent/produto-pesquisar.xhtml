@@ -24,6 +24,13 @@
 </h:head>
 <h:body>
 	<h:form>
+		<div align="right">
+		<h:form style="font-size:90% !important">
+			<p:commandLink id="logoutID" action="#{loginMB.fazLogout}" ajax="false">
+        		<h:outputText value="Logout" />
+    		</p:commandLink>
+		</h:form>
+	</div>
 		<div>
 			<div align="left">
 				<p:separator />
@@ -126,9 +133,11 @@
 		</div>
 
 		<div align="center">
-			<p:separator />
-			<h:commandButton value="Voltar"
-				action="#{PesquisarProdutosMB.voltarTelaInicial}" />
+			<h:form>
+				<br />
+				<p:separator />
+				<h:commandButton value="Voltar" action="#{RotinaProdutoMB.voltarTelaInicial}" />
+			</h:form>
 		</div>
 	</h:form>
 </h:body>

@@ -69,17 +69,17 @@ public class TesteControleDeQualidade {
 //		System.out.println(teste);
 
 		
-		String valorDescontoString = "10.000,67";
-		System.out.println(valorDescontoString);
-		valorDescontoString = valorDescontoString.replace(",", "");
-		System.out.println(valorDescontoString);
-		valorDescontoString = valorDescontoString.replace(".", "");
-		System.out.println(valorDescontoString);
-		valorDescontoString = new StringBuilder(valorDescontoString).insert(valorDescontoString.length()-1, ".").toString();
-		System.out.println(valorDescontoString);
-		double valorDescontoDouble = Double.parseDouble(valorDescontoString);
-		System.out.println(valorDescontoDouble);
-		
+//		String valorDescontoString = "10.000,67";
+//		System.out.println(valorDescontoString);
+//		valorDescontoString = valorDescontoString.replace(",", "");
+//		System.out.println(valorDescontoString);
+//		valorDescontoString = valorDescontoString.replace(".", "");
+//		System.out.println(valorDescontoString);
+//		valorDescontoString = new StringBuilder(valorDescontoString).insert(valorDescontoString.length()-1, ".").toString();
+//		System.out.println(valorDescontoString);
+//		double valorDescontoDouble = Double.parseDouble(valorDescontoString);
+//		System.out.println(valorDescontoDouble);
+//		
 		
 
 		/*
@@ -313,9 +313,13 @@ public class TesteControleDeQualidade {
 		
 
 		IDAOUsuario daoUsuario = DAOFactory.getUsuarioDAO();
-		Usuario user = new Usuario("pedro", "tirant", PerfilUsuarioEnum.ADMIN);
+		Usuario user = new Usuario("wilkie", "123", PerfilUsuarioEnum.ADMIN);
 		
 		daoUsuario.inserir(user);
-		 */
+		
+		Usuario user2 = new Usuario("pedro", "123", PerfilUsuarioEnum.USER);
+		
+		daoUsuario.inserir(user2);
+		*/
 	}
 }

@@ -1,6 +1,5 @@
 package unibratec.controlequalidade.beans;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
@@ -22,35 +21,13 @@ public class AutorizadorAcesso implements PhaseListener {
 	
 	@Override
 	public void afterPhase(PhaseEvent event) {
-/*		
-		FacesContext facesContext = event.getFacesContext();
 
-		String currentPage = facesContext.getViewRoot().getViewId();
-
-		System.out.println(">>>>>>>>>>>>>>>>> AutorizadorAcesso.afterPhase() "
-				+ "para página de ID " + event.getFacesContext().getViewRoot().getViewId());
-		
-		boolean isLoginPage = (currentPage.lastIndexOf("usuario-login.xhtml") > -1);
-
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-
-		LoginMB loginBean = (LoginMB) session.getAttribute("usuario");
-
-		if (!isLoginPage && loginBean != null) {
-
-			FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Acesso negado", null));
-
-			NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
-
-			nh.handleNavigation(facesContext, null, "loginPage");
-		}
-*/
 		FacesContext contexto = event.getFacesContext();
 		
 		String paginaAtual = contexto.getViewRoot().getViewId();
 		
 		System.out.println(">>>>>>>>>>>>>>>>> AutorizadorAcesso.afterPhase() "
-				+ "para página de ID " + event.getFacesContext().getViewRoot().getViewId());
+				+ "para página de ID " + event.getFacesContext().getViewRoot().getViewId()); // TIRAR DEPOIS
 		
 		if (!(paginaAtual.lastIndexOf(PAGINA_LOGIN) > -1)) {
 			
@@ -86,74 +63,5 @@ public class AutorizadorAcesso implements PhaseListener {
 	public PhaseId getPhaseId() {
 		return PhaseId.RESTORE_VIEW;
 	}
-
-
-
-
-
-
-
-
-
-
-
-	/*
-	private static final long serialVersionUID = 1L;
-
-	@Override
-	public void afterPhase(PhaseEvent event) {
-
-		FacesContext facesContext = event.getFacesContext();
-
-		String currentPage = facesContext.getViewRoot().getViewId();
-
-		boolean isLoginPage = (currentPage.lastIndexOf("usuario-login.xhtml") > -1);
-
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-
-		LoginMB loginBean = (LoginMB) session.getAttribute("loginBean");
-
-		if (!isLoginPage && loginBean != null && !loginBean.isUsuarioAutenticado()) {
-
-			FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Acesso negado", null));
-
-			NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
-
-			nh.handleNavigation(facesContext, null, "loginPage");
-		}
-	 */
-	/*				
-		FacesContext facesContext = event.getFacesContext();
-		String paginaAtual = facesContext.getViewRoot().getViewId();
-
-		boolean isPaginaLogin = (paginaAtual.lastIndexOf("usuario-login.xhtml") > -1);
-		HttpSession sessao = (HttpSession) facesContext.getExternalContext().getSession(true);
-		LoginMB usuarioAtual = (LoginMB) sessao.getAttribute("usuario");
-
-		System.out.println("************************* WILKIE ***********************");
-		System.out.println(paginaAtual);
-		System.out.println(isPaginaLogin);
-		System.out.println(usuarioAtual);
-		System.out.println("************************* WILKIE ***********************");
-
-
-		if (!isPaginaLogin && usuarioAtual == null) {
-			//FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Acesso negado", null));
-			NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
-			navigationHandler.handleNavigation(facesContext, null, "paginaLogin");
-		}
-
-		//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioAtual", usuarioAtual);
-	}
-
-	@Override
-	public void beforePhase(PhaseEvent event) {
-	}
-
-	@Override
-	public PhaseId getPhaseId() {
-
-		return PhaseId.RESTORE_VIEW;
-	}
-	 */
+	
 }
