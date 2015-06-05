@@ -8,7 +8,9 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<script type="text/javascript" src="resources/js/jquery.js"></script>
-	<script type="text/javascript">var $j = jQuery.noConflict(true);</script>
+	<script type="text/javascript">
+		var $j = jQuery.noConflict(true);
+	</script>
 	<script type="text/javascript" src="resources/js/jquery.maskMoney.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -23,23 +25,24 @@
 	<h:title>Pesquisar Produto</h:title>
 </h:head>
 <h:body>
-	<h:form>
-		<div align="right">
+	<div align="right">
 		<h:form style="font-size:90% !important">
-			<p:commandLink id="logoutID" action="#{loginMB.fazLogout}" ajax="false">
-        		<h:outputText value="Logout" />
-    		</p:commandLink>
+			<p:commandLink id="logoutID" action="#{loginMB.fazLogout}"
+				ajax="false">
+				<h:outputText value="Logout" />
+			</p:commandLink>
 		</h:form>
 	</div>
+	<h:form>
 		<div>
 			<div align="left">
 				<p:separator />
 				<br />
 				<p:selectOneMenu id="estadoProdutoEnum"
 					value="#{PesquisarProdutosMB.estadoProdutoEnum}">
-					<f:selectItem itemLabel="Selecione"/>
+					<f:selectItem itemLabel="Selecione" />
 					<f:selectItems value="#{PesquisarProdutosMB.estadoProdutoEnumList}"
-						var="n" itemLabel="#{n}" itemValue="#{n}"/>
+						var="n" itemLabel="#{n}" itemValue="#{n}" />
 				</p:selectOneMenu>
 
 				&nbsp;
@@ -74,11 +77,12 @@
 					action="#{PesquisarProdutosMB.pesquisar}" ajax="false" />
 
 				<br /> <br /> Desconto:
-				<p:inputText value="#{PesquisarProdutosMB.valorDesconto}" styleClass="dinheiro"/>
+				<p:inputText value="#{PesquisarProdutosMB.valorDesconto}"
+					styleClass="dinheiro" />
 
 				&nbsp;
 				<p:commandButton value="Desconto"
-					action="#{PesquisarProdutosMB.desconto}" ajax="false"/>
+					action="#{PesquisarProdutosMB.desconto}" ajax="false" />
 
 			</div>
 
@@ -136,7 +140,8 @@
 			<h:form>
 				<br />
 				<p:separator />
-				<h:commandButton value="Voltar" action="#{RotinaProdutoMB.voltarTelaInicial}" />
+				<h:commandButton value="Voltar"
+					action="#{RotinaProdutoMB.voltarTelaInicial}" />
 			</h:form>
 		</div>
 	</h:form>
