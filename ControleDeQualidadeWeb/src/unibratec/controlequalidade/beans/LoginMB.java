@@ -14,7 +14,6 @@ import unibratec.controlequalidade.entidades.Usuario;
 import unibratec.controlequalidade.exceptions.UsuarioNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.UsuarioSenhaIncorretaException;
 import unibratec.controlequalidade.negocio.Fachada;
-import unibratec.controlequalidade.util.Funcoes;
 import unibratec.controlequalidade.util.MensagensGui;
 
 @ManagedBean(name ="loginMB")
@@ -105,27 +104,27 @@ public class LoginMB {
 					// Atualizando no banco a informação de usuário ativo em uma sessão
 					this.fachada.atualizaStatusUsuario(usuarioAutenticado);		
 					
-					System.out.println(">>>>>>>>>>>>> Login com Sucesso!!!");
+					Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Login com Sucesso!!!");
 					
 					return OUTCOME_LOGIN;
 					
 				} else{
 					
-					Funcoes.erroMsg(null, MensagensGui.LOGIN_USUARIO_LOGADO_OUTRA_SESSAO);
+					MensagensGui.erroMsg(null, MensagensGui.LOGIN_USUARIO_LOGADO_OUTRA_SESSAO);
 					
 					// Apresenta o dialog sobre fazer logout de outra sessão
 					setShowLogoutOutraSessaoDialog(true);
 					
-					System.out.println(">>>>>>>>>>>>> Usuário logado em outra Sessão");
+					Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Usuário logado em outra Sessão");
 					
 					return "";
 				}
 		
 			} else{
 				
-				Funcoes.avisoMsg(null, MensagensGui.LOGIN_PREENCHER_CAMPOS);
+				MensagensGui.avisoMsg(null, MensagensGui.LOGIN_PREENCHER_CAMPOS);
 				
-				System.out.println(">>>>>>>>>>>>> Campos não preenchidos corretamente ou não preenchidos.");
+				Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Campos não preenchidos corretamente ou não preenchidos.");
 				
 				return "";
 			
@@ -137,7 +136,7 @@ public class LoginMB {
 			
 			System.out.println(e.getMessage());
 			
-			Funcoes.erroMsg(null, MensagensGui.LOGIN_USUARIO_NAO_CADASTRADO);
+			MensagensGui.erroMsg(null, MensagensGui.LOGIN_USUARIO_NAO_CADASTRADO);
 			
 			return "";
 
@@ -147,7 +146,7 @@ public class LoginMB {
 			
 			System.out.println(e.getMessage());
 			
-			Funcoes.avisoMsg(null, MensagensGui.LOGIN_USUARIO_SENHA_INCORRETO);
+			MensagensGui.avisoMsg(null, MensagensGui.LOGIN_USUARIO_SENHA_INCORRETO);
 			
 			return "";
 		}
@@ -175,15 +174,15 @@ public class LoginMB {
 			
 			contexto.getExternalContext().invalidateSession();
 
-			System.out.println(">>>>>>>>>>>>> Logout com Sucesso!!!");
+			Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Logout com Sucesso!!!");
 			
 			return OUTCOME_LOGOUT;
 		
 		} else{
 			
-			System.out.println(">>>>>>>>>>>>> Logout falhou!!!");
+			Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Logout falhou!!!");
 			
-			System.out.println(">>>>>>>>>>>>> Não há usuário na sessão.");
+			Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Não há usuário na sessão.");
 			
 			return "";
 		}
@@ -212,7 +211,7 @@ public class LoginMB {
 
 			setShowLogoutOutraSessaoDialog(false);
 
-			System.out.println(">>>>>>>>>>>>> Logout com Sucesso!!!");
+			Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Logout com Sucesso!!!");
 
 			return OUTCOME_LOGOUT;
 		
@@ -222,11 +221,11 @@ public class LoginMB {
 			
 			System.out.println(e.getMessage());
 			
-			Funcoes.erroMsg(null, MensagensGui.LOGIN_USUARIO_NAO_CADASTRADO);
+			MensagensGui.erroMsg(null, MensagensGui.LOGIN_USUARIO_NAO_CADASTRADO);
 			
-			System.out.println(">>>>>>>>>>>>> Logout falhou!!!");
+			Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Logout falhou!!!");
 			
-			System.out.println(">>>>>>>>>>>>> Não há usuário na sessão.");
+			Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Não há usuário na sessão.");
 			
 			return "";
 		}		
@@ -238,7 +237,7 @@ public class LoginMB {
 	 */
 	public void limparTelaLogin() {
 		
-		System.out.println(">>>>>>>>>>>>> Limpando os dados da tela de login!!!");
+		Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Limpando os dados da tela de login!!!");
 		
 		this.usuario = new Usuario();
 	}
@@ -257,9 +256,9 @@ public class LoginMB {
 		
 		limparTelaLogin();
 		
-		System.out.println(">>>>>>>>>>>>> Logout de outra sessão não realizado!!!");
+		Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Logout de outra sessão não realizado!!!");
 		
-		System.out.println(">>>>>>>>>>>>> Encaminhando para outcome de sessão inválida.");
+		Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Encaminhando para outcome de sessão inválida.");
 				
 		return SESSAO_INVALIDA;
 	}
@@ -274,7 +273,7 @@ public class LoginMB {
 	 */
 	private boolean camposPreenchidos() {
 		
-		System.out.println(">>>>>>>>>>>>> Verificando se as credenciais para o login foram preenchidas.");
+		Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Verificando se as credenciais para o login foram preenchidas.");
 		
 		return (this.usuario != null && this.usuario.getNomeUsuario() != null
 				&& !this.usuario.getNomeUsuario().isEmpty()
@@ -295,7 +294,7 @@ public class LoginMB {
 	 */
 	private boolean isUsuarioLogado() throws UsuarioNaoCadastradoException {
 		
-		System.out.println(">>>>>>>>>>>>> Verificando se há sessão ativa para o usuário.");
+		Logger.getLogger(LoginMB.class).log(Level.INFO,">>>>>>>>>>>>> Verificando se há sessão ativa para o usuário.");
 		
 		this.fachada.getUsarioByNome(this.usuario.getNomeUsuario());
 					

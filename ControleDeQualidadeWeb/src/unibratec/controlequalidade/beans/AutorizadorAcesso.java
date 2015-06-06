@@ -37,7 +37,7 @@ public class AutorizadorAcesso implements PhaseListener {
 			
 			if (usuarioSessao == null) {
 				
-				Funcoes.erroMsg(MensagensGui.SUMARIO_ERRO, MensagensGui.LOGIN_ACESSO_NEGADO);
+				MensagensGui.erroMsg(MensagensGui.SUMARIO_ERRO, MensagensGui.LOGIN_ACESSO_NEGADO);
 				
 				NavigationHandler navHandler = contexto.getApplication().getNavigationHandler();
 				

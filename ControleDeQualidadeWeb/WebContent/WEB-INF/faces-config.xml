@@ -16,6 +16,16 @@
 </navigation-rule>
 
 <navigation-rule>
+	<description>Regra de navegação para home</description>
+	<from-view-id>/*</from-view-id>
+	<navigation-case>
+		<from-outcome>home</from-outcome>
+		<to-view-id>/menu-acoes.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
 	<description>Regra de navegação para logout</description>
 	<from-view-id>/*</from-view-id>
 	<navigation-case>

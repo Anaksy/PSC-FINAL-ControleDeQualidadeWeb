@@ -1,5 +1,8 @@
 package unibratec.controlequalidade.util;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 public abstract class MensagensGui {
 
 	public static final String CATEGORIA_CADASTRADA_SUCESSO = "Categoria cadastrada com sucesso!";
@@ -37,4 +40,17 @@ public abstract class MensagensGui {
 	public static final String SUMARIO_INFO= "Informação:";
 	public static final String SUMARIO_AVISO = "Aviso!";
 	public static final String SUMARIO_ERRO = "Erro!";
+	
+	
+	public static void infoMsg(String sumario, String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, sumario, msg));
+	}
+
+	public static void avisoMsg(String sumario, String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, sumario, msg));
+	}
+
+	public static void erroMsg(String sumario, String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, sumario, msg));
+	}
 }

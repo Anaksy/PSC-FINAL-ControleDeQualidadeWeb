@@ -26,9 +26,10 @@ public class NegocioCategoria {
 	}
 
 	/**
-	 * Método para inserir uma Categoria
+	 * Método utilizado para inserir uma Categoria.
 	 * 
-	 * @param categoria
+	 * @param categoria utilizado como parâmetro da query.
+	 * 
 	 * @throws CategoriaCadastradaException
 	 */
 	public void inserirCategoria(Categoria categoria) throws CategoriaCadastradaException { 
@@ -36,16 +37,19 @@ public class NegocioCategoria {
 		if (this.daoCategoria.existeCategoria(categoria)) {
 
 			throw new CategoriaCadastradaException(MensagensExceptions.CATEGORIA_CADASTRADA_EXCEPTION);
-
 		}
+		
 		categoria.setIdCategoria(0);
+		
 		this.daoCategoria.inserir(categoria);
 	}
 
 	/**
-	 * Método para listar todas as Categoria cadastradas na base
+	 * Método utilizado para listar todas as Categoria cadastradas
+	 * no banco de dados.
 	 * 
 	 * @return List<Categoria>
+	 * 
 	 * @throws NenhumaCategoriaCadastradaException 
 	 */
 	public List<Categoria> listaTodasCategorias() throws NenhumaCategoriaCadastradaException{
@@ -61,10 +65,13 @@ public class NegocioCategoria {
 	}
 
 	/**
-	 * Método para buscar uma Categoria a partir de um nome. 
+	 * Método utilizado para buscar uma Categoria pelo nome
+	 * no banco de dados. 
 	 * 
-	 * @param nomeCategoria
-	 * @return
+	 * @param nomeCategoria utilizado como parâmentro na query.
+	 *
+	 * @return Categoria
+	 *
 	 * @throws CategoriaNaoCadastradaException
 	 */
 	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException{
@@ -82,10 +89,12 @@ public class NegocioCategoria {
 	}
 
 	/**
-	 *  Método para buscar uma Categoria por id. 
+	 * Método utilizado para buscar uma Categoria por id no banco de dados. 
 	 * 
-	 * @param categoria
-	 * @return
+	 * @param categoria utilizado como parâmentro na query.
+	 * 
+	 * @return Categoria
+	 * 
 	 * @throws CategoriaNaoCadastradaException
 	 */
 	public Categoria buscaCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException{
@@ -103,9 +112,11 @@ public class NegocioCategoria {
 	}
 
 	/**
-	 * Método para alterar nome e número de dias para vencer de uma Categoria.
+	 * Método utilizado para alterar nome e número de dias para vencer de uma Categoria.
 	 * 
-	 * @param categoria
+	 * @param categoria utilizado como parâmetro na query.
+	 * 
+	 * @throws CategoriaNaoCadastradaException
 	 * @throws CategoriaCadastradaException
 	 */
 	public void alteraCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, CategoriaCadastradaException{
@@ -138,6 +149,7 @@ public class NegocioCategoria {
 	 * Método para remover uma Categoria.
 	 * 
 	 * @param categoria
+	 * 
 	 * @throws CategoriaNaoCadastradaException 
 	 * @throws ProdutoComCategoriaException 
 	 */

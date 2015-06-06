@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14314030242310" configfile="/ControleDeQualidadeWeb/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="usuario-login.xhtml" comment="Regra de navegação para login" id="pf14333155108360" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf14333155108361" inlinks="pf14333155108362 pf14333155108363" path="/usuario-login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="menu-acoes.xhtml" id="pf14333155108364" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14333155108361" path="/menu-acoes.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="*" comment="Regra de navegação para logout" id="pf14333155108365" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14333155108362 pf14333155108363" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="usuario-login.xhtml" comment="Regra de navegação para login" id="pf14333155108360" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14333155108361" inlinks="pf14333155108362 pf14333155108363" path="/usuario-login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="menu-acoes.xhtml" id="pf14333155108364" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14333155108361 pf14335789147010" path="/menu-acoes.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" comment="Regra de navegação para logout" id="pf14333155108365" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14333155108362 pf14333155108363 pf14335789147010" path="/*"/>
   <links id="pf14333155108361" target="pf14333155108364" source="pf14333155108360" outcome="login" redirect="true"/>
   <links id="pf14333155108362" target="pf14333155108360" source="pf14333155108365" outcome="logout" redirect="true"/>
   <links id="pf14333155108363" target="pf14333155108360" source="pf14333155108365" outcome="sessao_invalida" redirect="true"/>
+  <links id="pf14335789147010" target="pf14333155108364" source="pf14333155108365" outcome="home" redirect="true"/>
 </pageflow:Pageflow>

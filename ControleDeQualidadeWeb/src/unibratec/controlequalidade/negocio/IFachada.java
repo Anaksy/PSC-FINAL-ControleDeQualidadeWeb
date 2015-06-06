@@ -25,19 +25,69 @@ import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCatego
 
 public interface IFachada {
 
+	/**
+	 * Método utilizado para inserir uma Categoria.
+	 * 
+	 * @param categoria utilizado como parâmetro da query.
+	 * 
+	 * @throws CategoriaCadastradaException
+	 */
 	public void inserirCategoria(Categoria categoria) throws CategoriaCadastradaException;
 
+	/**
+	 * Método utilizado para listar todas as Categoria cadastradas
+	 * no banco de dados.
+	 * 
+	 * @return List<Categoria>
+	 * 
+	 * @throws NenhumaCategoriaCadastradaException 
+	 */
 	public List<Categoria> listaTodasCategorias() throws NenhumaCategoriaCadastradaException;
 
+	/**
+	 * Método utilizado para alterar nome e número de dias para vencer de uma Categoria.
+	 * 
+	 * @param categoria utilizado como parâmetro na query.
+	 * 
+	 * @throws CategoriaNaoCadastradaException
+	 * @throws CategoriaCadastradaException
+	 */
 	public void alteraCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, CategoriaCadastradaException;
 
+	/**
+	 * Método para remover uma Categoria.
+	 * 
+	 * @param categoria
+	 * 
+	 * @throws CategoriaNaoCadastradaException 
+	 * @throws ProdutoComCategoriaException 
+	 */
 	public void removeCategoria(Categoria categoria) throws CategoriaNaoCadastradaException, ProdutoComCategoriaException;
 
+	/**
+	 * Método utilizado para buscar uma Categoria pelo nome
+	 * no banco de dados. 
+	 * 
+	 * @param nomeCategoria utilizado como parâmentro na query.
+	 *
+	 * @return Categoria
+	 *
+	 * @throws CategoriaNaoCadastradaException
+	 */
 	public Categoria buscaCategoriaPorNomeCategoria(String nomeCategoria) throws CategoriaNaoCadastradaException;
 
-	public void criarProdutoLote(Produto produto, Lote lote) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException;
-
+	/**
+	 * Método utilizado para buscar uma Categoria por id no banco de dados. 
+	 * 
+	 * @param categoria utilizado como parâmentro na query.
+	 * 
+	 * @return Categoria
+	 * 
+	 * @throws CategoriaNaoCadastradaException
+	 */
 	public Categoria buscarCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException;
+	
+	public void criarProdutoLote(Produto produto, Lote lote) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException;
 
 	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption;
 	

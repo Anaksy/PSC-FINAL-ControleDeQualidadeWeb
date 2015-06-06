@@ -25,17 +25,17 @@
 		<div align="left">
 
 			<h:inputHidden type="hidden"
-				value="#{ManterCategoriaMB.categoria.idCategoria}" />
+				value="#{manterCategoriaMB.categoria.idCategoria}" />
 
 			<p:panelGrid columns="2">
 
 				<h:outputLabel for="nomeCategoria" value="Nome da Categoria:" />
 				<p:inputText id="nomeCategoria"
-					value="#{ManterCategoriaMB.categoria.nomeCategoria}" size="45" />
+					value="#{manterCategoriaMB.categoria.nomeCategoria}" size="45" />
 
 				<h:outputLabel for="diasPVencer" value="Dias para vencer:" />
 				<p:inputMask id="diasPVencer"
-					value="#{ManterCategoriaMB.categoria.numeroDeDiasParaVencimento}"
+					value="#{manterCategoriaMB.categoria.numeroDeDiasParaVencimento}"
 					mask="9?9999" size="45" />
 
 			</p:panelGrid>
@@ -45,16 +45,16 @@
 					<div style="font-size: 90% !important" align="left">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<p:commandButton value="Nova" ajax="false"
-							action="#{ManterCategoriaMB.criarCategoria}" />
+							action="#{manterCategoriaMB.criarCategoria}" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<p:commandButton value="Excluir" ajax="false"
-							action="#{ManterCategoriaMB.removerCategoria}" />
+							action="#{manterCategoriaMB.removerCategoria}" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<p:commandButton value="Atualizar" ajax="false"
-							action="#{ManterCategoriaMB.atualizarCategoria}" />
+							action="#{manterCategoriaMB.atualizarCategoria}" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<p:commandButton value="Limpar" ajax="false"
-							action="#{ManterCategoriaMB.limparTelaManterCategoria}" />
+							action="#{manterCategoriaMB.limparTelaManterCategoria}" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</div>
 				</p:row>
@@ -66,9 +66,10 @@
 
 			<p:separator />
 
-			<p:dataTable id="tabela" value="#{ManterCategoriaMB.listaCategoria}"
+			<p:dataTable id="tabela" value="#{manterCategoriaMB.listaCategoria}"
 				var="categoria" style="width:80%" styleClass="table table-hover"
 				emptyMessage="Nenhum resultado">
+				
 				<p:column>
 					<f:facet name="header">Categoria</f:facet>
 					<h:outputText value="#{categoria.nomeCategoria}" />
@@ -80,17 +81,16 @@
 				</p:column>
 
 				<p:column style="width=100; text-align: center">
-					<h:commandButton value="Selecionar"
-						action="#{ManterCategoriaMB.selecionarCategoria(categoria)}" />
+						<h:commandButton value="Selecionar" action="#{manterCategoriaMB.selecionarCategoria(categoria)}" />
 				</p:column>
 
 			</p:dataTable>
 			<br /> <br />
 		</div>
-		<div align="center">
+		<div align="left">
 			<p:separator />
-			<h:commandButton value="Voltar"
-				action="#{ManterCategoriaMB.voltarTelaInicial}" />
+			<p:commandButton value="Voltar"
+				action="#{manterCategoriaMB.voltarTelaInicial}" />
 		</div>
 	</h:form>
 </h:body>

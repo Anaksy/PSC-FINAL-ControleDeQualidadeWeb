@@ -43,7 +43,6 @@ public class Fachada implements IFachada {
 	@Override
 	public void inserirCategoria(Categoria categoria) throws CategoriaCadastradaException {
 		this.negocioCategoria.inserirCategoria(categoria);
-
 	}
 
 	@Override

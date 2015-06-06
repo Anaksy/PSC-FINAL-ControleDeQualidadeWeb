@@ -48,17 +48,5 @@ public abstract class Funcoes {
 		String[] meses = {"JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEC"};
 		return meses[mes];
 	}
-	
-	public static void infoMsg(String sumario, String msg) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, sumario, msg));
-	}
-
-	public static void avisoMsg(String sumario, String msg) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, sumario, msg));
-	}
-
-	public static void erroMsg(String sumario, String msg) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, sumario, msg));
-	}
-	
+		
 }

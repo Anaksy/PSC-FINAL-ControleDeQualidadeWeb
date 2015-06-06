@@ -12,14 +12,7 @@ IDAOCategoria {
 		super(em);
 	}
 
-	/**
-	 * Método para verificar a existência de uma categoria com mesmo nome
-	 * da categoria recebida por parâmetro.
-	 * 
-	 * @param Categoria
-	 * 
-	 * @return true/false
-	 */
+
 	@Override
 	public boolean existeCategoria(Categoria categoria) {
 
@@ -46,14 +39,7 @@ IDAOCategoria {
 
 	}
 	
-	/**
-	 * Método para verificar a existência de uma categoria com mesmo nome, 
-	 * e id diferente da categoria recebida por parâmetro.
-	 * 
-	 * @param Categoria
-	 * 
-	 * @return true/false
-	 */
+	
 	@Override
 	public boolean existeCategoriaDiferenteId(Categoria categoria) {
 
@@ -82,13 +68,7 @@ IDAOCategoria {
 
 	}
 	
-	/**
-	 * Método para buscar uma categoria pelo nome.
-	 * 
-	 * @param String nomeCategoria
-	 * 
-	 * @return Categoria
-	 */
+
 	@Override
 	public Categoria buscaCategoria(String nomeCategoria) {
 
