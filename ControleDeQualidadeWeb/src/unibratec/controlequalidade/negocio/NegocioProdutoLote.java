@@ -21,7 +21,11 @@ public class NegocioProdutoLote {
 		this.negocioLote = new NegocioLote();
 	}
 
-	//Metodo que concluir o fluco de criação de um produto/lote
+	/**
+	 * Metodo que concluir o fluxo de criação de um produto/lote
+	 * 
+	 * @param lote, produto
+	 */
 	public void criarProdutoLote(Lote lote, Produto produto) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException{
 		
 		Calendar dataAtual = Calendar.getInstance();

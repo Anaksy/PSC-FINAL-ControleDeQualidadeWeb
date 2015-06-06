@@ -2,12 +2,14 @@ package unibratec.controlequalidade.negocio;
 
 import java.util.Calendar;
 import java.util.List;
+
 import unibratec.controlequalidade.dao.DAOFactory;
 import unibratec.controlequalidade.dao.IDAOProduto;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.DescontoProdutoPrestesAVencerException;
 import unibratec.controlequalidade.exceptions.DescontoValorException;
+import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.util.Funcoes;
@@ -24,7 +26,16 @@ public class NegocioVenda {
 		this.negocioProduto = new NegocioProduto();
 	}
 		
-	// Método que inseri um desconto no produto
+	/**
+	 * 
+	 * Metodo que atribui desconto a um produto.
+	 * 
+	 * @param produto, desconto
+	 * 
+	 * @throws ProdutoNaoCadastradoException
+	 * @throws DescontoValorException
+	 * @throws DescontoProdutoPrestesAVencerException
+	 */
 	public void DescontoProduto(Produto produto, double desconto) throws ProdutoNaoCadastradoException, DescontoValorException, DescontoProdutoPrestesAVencerException {
 		
 		Produto produtoEncontrado = this.negocioProduto.buscaProdutoPorId(produto.getIdProduto());
@@ -51,7 +62,11 @@ public class NegocioVenda {
 		}
 	}
 
-	
+	/**
+	 * Método que executa a rotina no sistema que muda a situação dos produtos de acordo com suas datas.
+	 * 
+	 * @throws ProdutoNaoEncontradoExcecption
+	 */
 	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption {
 
 		List<Produto> produtosList = this.daoProduto.pesquisarProdutoPorEstadoList(EstadoProdutoEnum.EM_ESTOQUE);

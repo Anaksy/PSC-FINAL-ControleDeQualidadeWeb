@@ -13,14 +13,6 @@ public class DAOLote extends DAOGenerico<Lote> implements IDAOLote {
 		super(em);
 	}
 
-	/**
-	 * Verifica a existencia de um lote.
-	 * 
-	 * @param Lote
-	 * 
-	 * @return true/false
-	 * @throws LoteCadastradoException 
-	 */
 	@Override
 	public boolean existeLote(Lote lote) throws LoteCadastradoException {
 
@@ -46,13 +38,6 @@ public class DAOLote extends DAOGenerico<Lote> implements IDAOLote {
 		}
 	}
 
-	/**
-	 * Método para buscar um Lote pelo nome.
-	 * 
-	 * @param String nomeLote
-	 * 
-	 * @return Lote
-	 */
 	@Override
 	public Lote buscaLote(String nomeLote) {
 
@@ -79,15 +64,8 @@ public class DAOLote extends DAOGenerico<Lote> implements IDAOLote {
 		}
 	}
 
-	/**
-	 * Método para buscar o número de dias para vencer da categoria dos produtos do lote.
-	 * 
-	 * @param Lote
-	 * 
-	 * @return Long
-	 */
 	@Override
-	public Long pesquisaNDiasPVenderCategoriaDeLote(Lote lote){
+	public Long pesquisaNDiasPVencerCategoriaDeLote(Lote lote){
 
 		TypedQuery<Produto> query = this.entityManager.createNamedQuery(Produto.FIND_BY_LOTE_ID, Produto.class);
 

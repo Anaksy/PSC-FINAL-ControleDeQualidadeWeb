@@ -44,13 +44,6 @@ public class DAOProduto extends DAOGenerico<Produto> implements IDAOProduto {
 		return query.getResultList();
 	}
 	
-	/**
-	 * Método para buscar produtos pelo nome.
-	 * 
-	 * @param nomeProduto
-	 * 
-	 * @return List<Produto>
-	 */
 	@Override
 	public List<Produto> pesquisaProdutoPorNomeList(String nomeProduto) {
 
@@ -61,13 +54,6 @@ public class DAOProduto extends DAOGenerico<Produto> implements IDAOProduto {
 		return query.getResultList();
 	}
 	
-	/**
-	 * Método para buscar produtos pelo nome e situacao.
-	 * 
-	 * @param nomeProduto, situacaoProduto
-	 * 
-	 * @return List<Produto>
-	 */
 	@Override
 	public List<Produto> pesquisaProdutoPorNomeSituacaoList(String nomeProduto, EstadoProdutoEnum estadoProduto) {
 

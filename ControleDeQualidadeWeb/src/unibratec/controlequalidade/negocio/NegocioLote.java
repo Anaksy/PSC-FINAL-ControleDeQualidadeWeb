@@ -60,7 +60,7 @@ public class NegocioLote {
 
 		}
 
-		Long nDiasCatgLote = this.daoLote.pesquisaNDiasPVenderCategoriaDeLote(lotePesquisado);
+		Long nDiasCatgLote = this.daoLote.pesquisaNDiasPVencerCategoriaDeLote(lotePesquisado);
 
 		if (nDiasCatgLote == null) {
 

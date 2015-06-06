@@ -87,26 +87,117 @@ public interface IFachada {
 	 */
 	public Categoria buscarCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException;
 	
+	/**
+	 * Metodo utilizado que cria um produto, lote e faz a associação dos mesmos.
+	 * 
+	 * @param produto
+	 * @param lote
+	 * @throws dataDeValidadeMenorPermitidaCategoriaException
+	 * @throws LoteCadastradoException
+	 */
 	public void criarProdutoLote(Produto produto, Lote lote) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException;
 
+	/**
+	 * Metodo que executa a rotina de verificação das datas dos produtos, e dessa forma mudando seus estados.
+	 * 
+	 * @throws ProdutoNaoEncontradoExcecption
+	 */
 	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption;
 	
+	/**
+	 * Metodo que busca um produto por ID.
+	 * 
+	 * @param idProduto
+	 * @return
+	 * @throws ProdutoNaoCadastradoException
+	 */
 	public Produto buscaProdutoPorId(long idProduto) throws ProdutoNaoCadastradoException;
 
+	/**
+	 * Metodo de filtro de pesquisa de produtos por estado.
+	 * 
+	 * @param estadoProdutoEnum
+	 * @return
+	 * @throws ProdutoNaoEncontradoExcecption
+	 */
 	public List <Produto> filtrarPesquisaSituacao(EstadoProdutoEnum estadoProdutoEnum) throws ProdutoNaoEncontradoExcecption;
 
+	/**
+	 * Metodo de filtro de pesquisa de produtos por nome.
+	 * 
+	 * @param nomeProduto
+	 * @return
+	 * @throws ProdutoNaoCadastradoException
+	 */
 	public List <Produto> filtrarPesquisaNome(String nomeProduto) throws ProdutoNaoCadastradoException;
 
+	/**
+	 * Metodo de filtro de pesquisa de produtos por faixa de data de validade.
+	 * 
+	 * @param dataInicial
+	 * @param dataFinal
+	 * @return
+	 * @throws ProdutoNaoCadastradoException
+	 * @throws FiltroPesquisaProdutoNaoEncontradoException
+	 */
 	public List<Produto> filtrarPesquisaFaixaDataValidade(Date dataInicial, Date dataFinal) throws ProdutoNaoCadastradoException, FiltroPesquisaProdutoNaoEncontradoException;
 
+	/**
+	 * Metodo de filtro de pesquisa de produtos por faixa de data de validade e nome.
+	 * 
+	 * @param dataInicial
+	 * @param dataFinal
+	 * @param nomeProduto
+	 * @return
+	 * @throws FiltroPesquisaProdutoNaoEncontradoException
+	 * @throws ProdutoNaoCadastradoException
+	 */
 	public List<Produto> filtrarPesquisaFaixaDataNome(Date dataInicial, Date dataFinal, String nomeProduto) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException;
 
+	/**
+	 * Metodo de filtro de pesquisa de produtos por nome e estado.
+	 * 
+	 * @param nomeProduto
+	 * @param estadoProdutoEnum
+	 * @return
+	 * @throws FiltroPesquisaProdutoNaoEncontradoException
+	 */
 	public List<Produto> filtrarPesquisaNomeSituacao(String nomeProduto, EstadoProdutoEnum estadoProdutoEnum) throws FiltroPesquisaProdutoNaoEncontradoException;
 
+	/**
+	 * Metodo de filtro de pesquisa de produtos por faixa de data de validade e estado do produto.
+	 * 
+	 * @param dataInicial
+	 * @param dataFinal
+	 * @param estadoProdutoEnum
+	 * @return
+	 * @throws FiltroPesquisaProdutoNaoEncontradoException
+	 * @throws ProdutoNaoCadastradoException
+	 */
 	public List<Produto> filtrarPesquisaFaixaDataSituacao(Date dataInicial, Date dataFinal, EstadoProdutoEnum estadoProdutoEnum) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException;
 	
+	/**
+	 * Metodo de filtro de pesquisa de produtos por faixa de data de validade, estado do produto e nome.
+	 * 
+	 * @param dataInicial
+	 * @param dataFinal
+	 * @param estadoProdutoEnum
+	 * @param nomeProduto
+	 * @return
+	 * @throws FiltroPesquisaProdutoNaoEncontradoException
+	 * @throws ProdutoNaoCadastradoException
+	 */
 	public List<Produto> filtrarPesquisaFaixaDataSituacaoNome(Date dataInicial, Date dataFinal, EstadoProdutoEnum estadoProdutoEnum, String nomeProduto) throws FiltroPesquisaProdutoNaoEncontradoException, ProdutoNaoCadastradoException;
 
+	/**
+	 * Metodo que atribui desconto a um produto.
+	 * 
+	 * @param produto
+	 * @param desconto
+	 * @throws ProdutoNaoCadastradoException
+	 * @throws DescontoValorException
+	 * @throws DescontoProdutoPrestesAVencerException
+	 */
 	public void DescontoProduto(Produto produto, double desconto) throws ProdutoNaoCadastradoException, DescontoValorException, DescontoProdutoPrestesAVencerException;
 
 	/**
