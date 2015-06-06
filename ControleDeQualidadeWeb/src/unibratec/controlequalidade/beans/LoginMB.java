@@ -29,10 +29,17 @@ public class LoginMB {
 	private Fachada fachada;
 	private Usuario usuario;
 	private ControladorAcesso controladorAcesso;
-	private boolean showLogoutOutraSessaoDialog;
+	private boolean showLogoutOutraSessaoDialog; // Flag do "rendered" do logoutOutraSessaoForm
 
 	public LoginMB() {}
 
+	/*
+	 * É importante colocar suas inicializações no post construct e não no
+	 * construtor da classe, isso porque se você estiver realizando injeção de 
+	 * dependência (no Spring, por exemplo) todas as dependências podem não
+	 * estar carregadas na construção da sua classe, então no post construct
+	 * você garante que tudo já foi carregado e agora você podem ser usados. 
+	 */
 	@PostConstruct
 	public void inicializar() {
 		this.fachada = new Fachada();
@@ -64,7 +71,7 @@ public class LoginMB {
 	
 	
 	/**
-	 * Utilizado para tentativas de login no sistema, confrontando dados
+	 * Método utilizado para tentativas de login no sistema, confrontando dados
 	 * fornecidos pelo usuário com registros de usuários cadastrados.
 	 *
 	 * @return Outcome associado a fracasso ou sucesso na tentativa de login.
@@ -83,37 +90,42 @@ public class LoginMB {
 					// Recuperando o contexto do JSF
 					FacesContext contexto = FacesContext.getCurrentInstance();
 					
-					// Recuperando a sessão para o usuário
+					// Recuperando a sessão do contexto
 					HttpSession sessao = (HttpSession) contexto.getExternalContext().getSession(true);
 
 					// Adicionando o usuário na sessão
 					sessao.setAttribute(USUARIO_SESSAO, usuarioAutenticado);
 
-					// Configura o acesso de acordo com perfil do usuário
+					// Configura o acesso das páginas e informações de acordo com perfil do usuário
 					this.controladorAcesso.configuraAcesso();
 
 					// Setando o status do usuário para ativo na sessão
 					usuarioAutenticado.setStatusUsuario(StatusUsuarioEnum.ATIVO.getValue());
 
-					// Atualizando a informação de usuário ativo na sessão
+					// Atualizando no banco a informação de usuário ativo em uma sessão
 					this.fachada.atualizaStatusUsuario(usuarioAutenticado);		
-
+					
+					System.out.println(">>>>>>>>>>>>> Login com Sucesso!!!");
+					
 					return OUTCOME_LOGIN;
 					
 				} else{
 					
-					Funcoes.erroMsg(MensagensGui.LOGIN_USUARIO_LOGADO_OUTRA_SESSAO);
+					Funcoes.erroMsg(null, MensagensGui.LOGIN_USUARIO_LOGADO_OUTRA_SESSAO);
 					
+					// Apresenta o dialog sobre fazer logout de outra sessão
 					setShowLogoutOutraSessaoDialog(true);
 					
-					System.out.println("ShowLogoutOutraSessaoDialog: "+ this.showLogoutOutraSessaoDialog); // TIRAR DEPOIS
+					System.out.println(">>>>>>>>>>>>> Usuário logado em outra Sessão");
 					
 					return "";
 				}
 		
 			} else{
 				
-				Funcoes.avisoMsg(MensagensGui.LOGIN_PREENCHER_CAMPOS);
+				Funcoes.avisoMsg(null, MensagensGui.LOGIN_PREENCHER_CAMPOS);
+				
+				System.out.println(">>>>>>>>>>>>> Campos não preenchidos corretamente ou não preenchidos.");
 				
 				return "";
 			
@@ -122,35 +134,37 @@ public class LoginMB {
 		} catch (UsuarioNaoCadastradoException e) {
 
 			e.printStackTrace();
+			
 			System.out.println(e.getMessage());
-			Funcoes.erroMsg(MensagensGui.LOGIN_USUARIO_NAO_CADASTRADO);
+			
+			Funcoes.erroMsg(null, MensagensGui.LOGIN_USUARIO_NAO_CADASTRADO);
+			
 			return "";
 
 		} catch (UsuarioSenhaIncorretaException e) {
 
 			e.printStackTrace();
+			
 			System.out.println(e.getMessage());
-			Funcoes.avisoMsg(MensagensGui.LOGIN_USUARIO_SENHA_INCORRETO);
+			
+			Funcoes.avisoMsg(null, MensagensGui.LOGIN_USUARIO_SENHA_INCORRETO);
+			
 			return "";
 		}
 	}
 
 	
-
 	/**
-	 * Utilizado para finalizar uma sessão de um usuário no sistema.
+	 * Método utilizado para finalizar a sessão atual de um usuário no sistema.
 	 *
-	 * @return Outcome associado a fracasso ou sucesso na tentativa de logout.
+	 * @return Outcome associado ao sucesso na tentativa de logout.
 	 */
 	public String fazLogout() {
 
-		// Recuperando o contexto do JSF
 		FacesContext contexto = FacesContext.getCurrentInstance();
 		
-		// Recuperando a sessão para o usuário
 		HttpSession sessao = (HttpSession) contexto.getExternalContext().getSession(false);
 
-		// Capturando o usuário da sessão
 		Usuario usuarioSessao = (Usuario) sessao.getAttribute(USUARIO_SESSAO);
 
 		if (usuarioSessao != null) {
@@ -158,61 +172,110 @@ public class LoginMB {
 			usuarioSessao.setStatusUsuario(StatusUsuarioEnum.INATIVO.getValue());
 
 			this.fachada.atualizaStatusUsuario(usuarioSessao);
+			
+			contexto.getExternalContext().invalidateSession();
+
+			System.out.println(">>>>>>>>>>>>> Logout com Sucesso!!!");
+			
+			return OUTCOME_LOGOUT;
+		
+		} else{
+			
+			System.out.println(">>>>>>>>>>>>> Logout falhou!!!");
+			
+			System.out.println(">>>>>>>>>>>>> Não há usuário na sessão.");
+			
+			return "";
 		}
-
-		contexto.getExternalContext().invalidateSession();
-
-		return OUTCOME_LOGOUT;
 	}
 
 	
-	public String fazLogoutOutraSessao() throws UsuarioNaoCadastradoException{
+	/**
+	 * Método utilizado para fazer logout de um usuário no sistema em uma sessão aberta
+	 * em outro navegador ou outra aba. A outra sessão é representada por uma flag no 
+	 * banco de dados.
+	 * <code>"0"</code> caso não haja uma sessão aberta
+	 * <code>"1"</code> caso haja uma sessão aberta.
+	 * 
+	 * @return Outcome associado ao sucesso na tentativa de logout.
+	 * 
+	 */
+	public String fazLogoutOutraSessao() {
 		
-		Usuario usuarioOutraSessao = this.fachada.getUsarioByNome(this.usuario.getNomeUsuario());
-		
-		usuarioOutraSessao.setStatusUsuario(StatusUsuarioEnum.INATIVO.getValue());
+		try {
+			
+			Usuario usuarioOutraSessao = this.fachada.getUsarioByNome(this.usuario.getNomeUsuario());
+			
+			usuarioOutraSessao.setStatusUsuario(StatusUsuarioEnum.INATIVO.getValue());
 
-		this.fachada.atualizaStatusUsuario(usuarioOutraSessao);
+			this.fachada.atualizaStatusUsuario(usuarioOutraSessao);
+
+			setShowLogoutOutraSessaoDialog(false);
+
+			System.out.println(">>>>>>>>>>>>> Logout com Sucesso!!!");
+
+			return OUTCOME_LOGOUT;
 		
-		setShowLogoutOutraSessaoDialog(false);
-		
-		System.out.println("ShowLogoutOutraSessaoDialog: "+ this.showLogoutOutraSessaoDialog); // TIRAR DEPOIS
-		
-		return OUTCOME_LOGOUT;
+		} catch (UsuarioNaoCadastradoException e) {
+			
+			e.printStackTrace();
+			
+			System.out.println(e.getMessage());
+			
+			Funcoes.erroMsg(null, MensagensGui.LOGIN_USUARIO_NAO_CADASTRADO);
+			
+			System.out.println(">>>>>>>>>>>>> Logout falhou!!!");
+			
+			System.out.println(">>>>>>>>>>>>> Não há usuário na sessão.");
+			
+			return "";
+		}		
 	}
 	
 	
 	/**
-	 * Limpa todos os dados da tela de login.
+	 * Método utilizado para limpar todos os dados da tela de login.
 	 */
 	public void limparTelaLogin() {
 		
-		System.out.println("public String limparTela()"); // APAGAR DEPOIS
+		System.out.println(">>>>>>>>>>>>> Limpando os dados da tela de login!!!");
 		
 		this.usuario = new Usuario();
 	}
 	
 	
+	/**
+	 * Método utilizado para não fazer logout de um usuário no sistema em uma sessão aberta
+	 * em outro navegador ou outra aba. O pop up de questionamento sobre fazer o logout de
+	 * outra sessão é fechado e os dados da tela são resetados.
+	 * 
+	 * @return Outcome associado a sessão inválida. 
+	 */
 	public String naofazLogoutOutraSessao(){
 		
 		setShowLogoutOutraSessaoDialog(false);
 		
-		System.out.println("ShowLogoutOutraSessaoDialog: "+ this.showLogoutOutraSessaoDialog); // TIRAR DEPOIS
-		
 		limparTelaLogin();
 		
+		System.out.println(">>>>>>>>>>>>> Logout de outra sessão não realizado!!!");
+		
+		System.out.println(">>>>>>>>>>>>> Encaminhando para outcome de sessão inválida.");
+				
 		return SESSAO_INVALIDA;
 	}
 	
 	
 	/**
-	 * Utilizado para verificar se as credenciais necessárias para realização do
+	 * Método utilizado para verificar se as credenciais necessárias para realização do
 	 * login foram preenchidas.
 	 *
-	 * @return <code>true</code> em caso de dados preenchidos.
+	 * @return <code>true</code> caso de dados preenchidos.
 	 *         <code>false</code> caso contrário.
 	 */
 	private boolean camposPreenchidos() {
+		
+		System.out.println(">>>>>>>>>>>>> Verificando se as credenciais para o login foram preenchidas.");
+		
 		return (this.usuario != null && this.usuario.getNomeUsuario() != null
 				&& !this.usuario.getNomeUsuario().isEmpty()
 				&& this.usuario.getSenhaUsuario() != null 
@@ -225,14 +288,19 @@ public class LoginMB {
 	 * já não possui alguma sessão aberta em outro navegador ou outra aba. A
 	 * aplicação está barrando múltiplos acessos simultâneos de um usuário.
 	 *
-	 * @return <code>true</code> se já existir uma sessão ativa para o usuário.
-	 *         <code>false</code> caso contrário.
+	 * @return <code>true</code> caso haja uma sessão ativa para o usuário.
+	 *         <code>false</code> caso não haja uma sessão ativa para o usuário.
+	 *         
 	 * @throws UsuarioNaoCadastradoException 
 	 */
 	private boolean isUsuarioLogado() throws UsuarioNaoCadastradoException {
-
+		
+		System.out.println(">>>>>>>>>>>>> Verificando se há sessão ativa para o usuário.");
+		
 		this.fachada.getUsarioByNome(this.usuario.getNomeUsuario());
 					
 		return this.fachada.isUsuarioLogado(this.usuario);
 	}
+	
+
 }

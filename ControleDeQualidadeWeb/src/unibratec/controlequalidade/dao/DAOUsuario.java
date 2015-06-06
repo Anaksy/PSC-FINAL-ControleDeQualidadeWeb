@@ -33,7 +33,6 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IDAOUsuario {
 			
 			return null;
 		}
-
 	}
 
 }

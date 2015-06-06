@@ -14,6 +14,7 @@ public class ControladorAcesso {
 	private boolean permissaoAdministrador;
 	private boolean permissaoUsuario;
 
+	
 	public boolean isPermissaoAdministrador() {
 		
 		FacesContext contexto = FacesContext.getCurrentInstance();
@@ -79,7 +80,7 @@ public class ControladorAcesso {
 
 		if (usuarioSessao != null) {
 			
-			Logger.getLogger("ControladorAcesso").log(Level.INFO,">>>>>>>>>>>>>> Usuário da sessão tem tipo {0} " + usuarioSessao.getPerfilUsuario());
+			Logger.getLogger("ControladorAcesso").log(Level.INFO,">>>>>>>>>>>>>> Usuário da sessão tem tipo " + usuarioSessao.getPerfilUsuario());
 			
 			this.permissaoAdministrador = (usuarioSessao.getPerfilUsuario() == PerfilUsuarioEnum.ADMIN);
 			

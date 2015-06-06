@@ -59,12 +59,47 @@ public interface IFachada {
 
 	public void DescontoProduto(Produto produto, double desconto) throws ProdutoNaoCadastradoException, DescontoValorException, DescontoProdutoPrestesAVencerException;
 
+	/**
+	 * Método utilizado para autenticar um usuário 
+	 * fazendo uma busca no banco de dados. 
+	 * 
+	 * @param nomeUsuario utilizado como parâmentro da query.
+	 * @param senhaUsuario utilizado para comparação com a senha
+	 * 		  do usuário retornado da consulta no banco de dados.
+	 * 
+	 * @return Usuario
+	 * 
+	 * @throws UsuarioNaoCadastradoException
+	 * @throws UsuarioSenhaIncorretaException
+	 */
 	public Usuario autenticaUsuario(String usuario, String senha) throws UsuarioNaoCadastradoException, UsuarioSenhaIncorretaException;
 	
+	/**
+	 * Método utilizado para atualizar o status de um usuário no banco de dados.
+	 * 
+	 * @param usuarioUpdate utilizado como parâmetro da query.
+	 */
 	public void atualizaStatusUsuario(Usuario usuario);
 	
+	/**
+	 * Método utilizado para buscar um usuário no banco de dados. 
+	 * 
+	 * @param nomeUsuario utilizado como parâmentro da query.
+	 * 
+	 * @return Usuario
+	 * 
+	 * @throws UsuarioNaoCadastradoException
+	 */
 	public Usuario getUsarioByNome(String usuario) throws UsuarioNaoCadastradoException;
 	
+	/**
+	 * Método utilizado para verificar se o usuário está logado no sistema.
+	 * 
+	 * @param usuario utilizado como parâmetro da query.
+	 * 
+	 * @return <code>false</code> caso não esteja logado no sistema.
+	 * 		   <code>true</code> caso contrário.
+	 */
 	public boolean isUsuarioLogado(Usuario usuario);
 
 

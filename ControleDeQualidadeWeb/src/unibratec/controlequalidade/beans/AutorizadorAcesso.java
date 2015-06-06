@@ -27,7 +27,7 @@ public class AutorizadorAcesso implements PhaseListener {
 		String paginaAtual = contexto.getViewRoot().getViewId();
 		
 		System.out.println(">>>>>>>>>>>>>>>>> AutorizadorAcesso.afterPhase() "
-				+ "para página de ID " + event.getFacesContext().getViewRoot().getViewId()); // TIRAR DEPOIS
+				+ "para página de ID " + event.getFacesContext().getViewRoot().getViewId());
 		
 		if (!(paginaAtual.lastIndexOf(PAGINA_LOGIN) > -1)) {
 			
@@ -36,8 +36,11 @@ public class AutorizadorAcesso implements PhaseListener {
 			Object usuarioSessao = sessao.getAttribute(LoginMB.USUARIO_SESSAO);
 			
 			if (usuarioSessao == null) {
-				Funcoes.erroMsg(MensagensGui.LOGIN_ACESSO_NEGADO);
+				
+				Funcoes.erroMsg(MensagensGui.SUMARIO_ERRO, MensagensGui.LOGIN_ACESSO_NEGADO);
+				
 				NavigationHandler navHandler = contexto.getApplication().getNavigationHandler();
+				
 				//navHandler.handleNavigation(contexto, null, LoginMB.SESSAO_INVALIDA);
 				navHandler.handleNavigation(contexto, null,	"/usuario-login.xhtml");
 			}

@@ -34,5 +34,7 @@ public abstract class MensagensGui {
 	public static final String DESCONTO_INSERIDO_SUCESSO = "Desconto inserido com sucesso!";
 	public static final String PRODUTO_BD_FALHA = "Nenhum produto encontrado.";
 	public static final String PRODUTO_PESQUISA_FALHA = "Não existem produtos cadastrados com essa condição de pesquisa.";
-		
+	public static final String SUMARIO_INFO= "Informação:";
+	public static final String SUMARIO_AVISO = "Aviso!";
+	public static final String SUMARIO_ERRO = "Erro!";
 }
