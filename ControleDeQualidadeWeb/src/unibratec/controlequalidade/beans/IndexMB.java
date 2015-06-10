@@ -13,4 +13,8 @@ public class IndexMB {
 	public String criarprodutoLote(){
 		return "/CriarProdutoLote.xhtml";
 	}
+	
+	public String rotinaProduto(){
+		return "/RotinaProduto.xhtml";
+	}
 }

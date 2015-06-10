@@ -65,7 +65,7 @@ public class CriarProdutoLoteMB {
 		this.listaCategoria = listaCategoria;
 	}
 
-	public String criarProdutoLote(){
+	public void criarProdutoLote(){
 		try {
 			Categoria categoriaSelecionada = fachada.buscarCategoriaPorId(categoria);
 			produto.setCategoriaProduto(categoriaSelecionada);
@@ -88,7 +88,6 @@ public class CriarProdutoLoteMB {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		return null;
 	}
 
 	public List<Categoria> getListaCategoria() {
@@ -103,7 +102,7 @@ public class CriarProdutoLoteMB {
 	}
 	
 	private void infoMsg(String msg) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", msg));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação:", msg));
 	}
 
 	private void avisoMsg(String msg) {

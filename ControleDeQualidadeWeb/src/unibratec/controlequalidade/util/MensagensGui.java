@@ -16,7 +16,11 @@ public class MensagensGui {
 	
 	public static final String LOTE_DATA_VALIDADE_MENOR_CATEGORIA_EXCEPTION = "Data de validade inserida menor que a permitida para essa categoria.";
 	public static final String LOTE_NOME_JA_EXISTE_FALHA = "Nome de lote ja existe.";
+	
 	public static final String PRODUTO_LOTE_CRIADO_SUCESSO = "Produto e lote criados com sucesso.";
+	
+	public static final String ROTINA_PRODUTO_SUCESSO = "Rotina de validação de produtos executada com sucesso!";
+	public static final String ROTINA_PRODUTO_FALHA = "Não existem produtos com o status EM_ESTOQUE no sistema.";
 	
 
 	

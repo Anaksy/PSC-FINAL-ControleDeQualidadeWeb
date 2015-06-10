@@ -53,7 +53,7 @@ public class ManterCategoriaMB {
 		this.mensagem = mensagem;
 	}
 
-	public String selecionarCategoria(Categoria c){
+	public void selecionarCategoria(Categoria c){
 		try {
 			Categoria CategoriaEncontrada = fachada.buscaCategoriaPorNomeCategoria(c.getNomeCategoria());
 			categoria.setIdCategoria(CategoriaEncontrada.getIdCategoria());
@@ -64,10 +64,9 @@ public class ManterCategoriaMB {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		return null;
 	} 
 
-	public String atualizarCategoria(){
+	public void atualizarCategoria(){
 		if (validarCamposCategoria(categoria) == true) {
 			try {
 				fachada.alteraCategoria(categoria);
@@ -81,16 +80,14 @@ public class ManterCategoriaMB {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
 			}
-			return null;
 		}
 		else {
 			erroMsg(MensagensGui.CATEGORIA_DADOS_INCOMPLETOS);
-			return null;
 		}
 
 	}
 
-	public String criarCategoria(){
+	public void criarCategoria(){
 		categoria.setIdCategoria(0);// Talvez deveria botar isso no metodo do DAO ?
 		if (validarCamposCategoria(categoria) == true) {
 			try {
@@ -101,15 +98,13 @@ public class ManterCategoriaMB {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
 			}
-			return null;
 		}
 		else {
 			erroMsg(MensagensGui.CATEGORIA_DADOS_INCOMPLETOS);
-			return null;
 		}
 	}
 
-	public String removerCategoria(){
+	public void removerCategoria(){
 		try {
 			fachada.removeCategoria(categoria);
 			infoMsg(MensagensGui.CATEGORIA_REMOVIDA_SUCESSO);
@@ -122,11 +117,10 @@ public class ManterCategoriaMB {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		return null;
 	}
 
 	private void infoMsg(String msg) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", msg));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação:", msg));
 	}
 
 	private void avisoMsg(String msg) {

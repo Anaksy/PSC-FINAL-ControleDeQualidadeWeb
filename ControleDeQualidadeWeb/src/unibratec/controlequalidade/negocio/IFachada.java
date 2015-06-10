@@ -11,6 +11,7 @@ import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 import unibratec.controlequalidade.exceptions.NenhumaCategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.ProdutoComCategoriaException;
+import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 
 
@@ -29,6 +30,8 @@ public interface IFachada {
 	public void criarProdutoLote(Produto produto, Lote lote) throws dataDeValidadeMenorPermitidaCategoriaException, LoteCadastradoException;
 	
 	public Categoria buscarCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException;
+	
+	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption;
 	
 
 //	public void inserirProdutoLote(Produto produto, Lote lote, Calendar dataValidade, int qtdProdutos) throws dataDeValidadeMenorPermitidaCategoriaException;

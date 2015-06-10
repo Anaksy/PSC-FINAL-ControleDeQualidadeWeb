@@ -3,6 +3,7 @@ package unibratec.controlequalidade.negocio;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 import unibratec.controlequalidade.dao.DAOFactory;
 import unibratec.controlequalidade.dao.IDAOProduto;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
@@ -10,6 +11,7 @@ import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.exceptions.ProdutoNaoPrestesAVencerException;
 import unibratec.controlequalidade.util.Funcoes;
+import unibratec.controlequalidade.util.MensagensExceptions;
 
 public class NegocioVenda {
 	
@@ -21,7 +23,7 @@ public class NegocioVenda {
 
 	}
 		
-	// Método que retorna uma lista com o produtos prestes a vencer
+/*	// Método que retorna uma lista com o produtos prestes a vencer
 	public List<Produto> retornaListaProdutosPrestesAVencer() throws ProdutoNaoEncontradoExcecption {
 
 		List<Produto> produtosList = this.daoProduto.pesquisarProdutoPorEstadoList(EstadoProdutoEnum.EM_ESTOQUE);
@@ -66,13 +68,17 @@ public class NegocioVenda {
 		
 		daoProduto.alterar(produto);
 	}
-	
+	*/
 	
 	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption {
 
 		List<Produto> produtosList = this.daoProduto.pesquisarProdutoPorEstadoList(EstadoProdutoEnum.EM_ESTOQUE);
 			
 		Calendar dataAtual = Calendar.getInstance();
+				
+		if (produtosList.isEmpty()) {
+			throw new ProdutoNaoEncontradoExcecption(MensagensExceptions.ROTINA_PRODUTO_FALHA);
+		}		
 				
 		for (Produto p : produtosList) {
 			
@@ -88,7 +94,7 @@ public class NegocioVenda {
 				daoProduto.alterar(p);
 			}
 			
-			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) < -30)) {
+			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) < -5)) {
 				
 				p.setEstadoProduto(EstadoProdutoEnum.INATIVO);
 				daoProduto.alterar(p);

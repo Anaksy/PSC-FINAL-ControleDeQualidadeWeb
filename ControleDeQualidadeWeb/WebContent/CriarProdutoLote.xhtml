@@ -46,7 +46,7 @@
 			<br />
 			<br />
 			<h:commandButton value="Criar"
-				action="#{CriarProdutoLoteMB.criarProdutoLote}"/>
+				action="#{CriarProdutoLoteMB.criarProdutoLote}" />
 			<br />
 			<br />
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
@@ -54,10 +54,12 @@
 			<br />
 		</h:form>
 	</div>
-	<div align="center">
-		<p:separator />
-		<h:commandButton value="Voltar"
-			action="#{CriarProdutoLoteMB.voltarTelaInicial}" />
-	</div>
+	<h:form>
+		<div align="center">
+			<p:separator />
+			<h:commandButton value="Voltar"
+				action="#{CriarProdutoLoteMB.voltarTelaInicial}" />
+		</div>
+	</h:form>
 </h:body>
 </html>

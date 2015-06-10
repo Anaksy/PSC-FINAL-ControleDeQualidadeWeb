@@ -22,14 +22,14 @@ public class Fachada implements IFachada {
 	private NegocioLote negocioLote;
 	private NegocioProduto negocioProduto;
 	private NegocioCategoria negocioCategoria;
-	//private NegocioVenda negocioVenda;
+	private NegocioVenda negocioVenda;
 	private NegocioProdutoLote negocioProdutoLote;
 
 	public Fachada() {
 		this.negocioLote = new NegocioLote();
 		this.negocioProduto = new NegocioProduto();
 		this.negocioCategoria = new NegocioCategoria();
-		//this.negocioVenda = new NegocioVenda(em);
+		this.negocioVenda = new NegocioVenda();
 		this.negocioProdutoLote = new NegocioProdutoLote();
 		
 	}
@@ -68,6 +68,11 @@ public class Fachada implements IFachada {
 	@Override
 	public Categoria buscarCategoriaPorId(Categoria categoria) throws CategoriaNaoCadastradaException {
 		return this.negocioCategoria.buscaCategoriaPorId(categoria); 
+	}
+
+	@Override
+	public void executarRotinaProdutos() throws ProdutoNaoEncontradoExcecption {
+		this.negocioVenda.executarRotinaProdutos();
 	}
 
 	//	@Override

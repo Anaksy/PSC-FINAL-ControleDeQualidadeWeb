@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<h:title>Rotina Produto</h:title>
+</h:head>
+<h:body>
+	<div align="left">
+		<h:form>
+			<p:separator />
+			<h:commandButton value="Executar Rotina"
+				action="#{RotinaProdutoMB.executarRotinaProduto}" />
+			<br />
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<br />
+		</h:form>
+	</div>
+	<div align="center">
+		<h:form>
+			<br />
+			<p:separator />
+			<h:commandButton value="Voltar"
+				action="#{RotinaProdutoMB.voltarTelaInicial}" />
+		</h:form>
+	</div>
+</h:body>
+</html>

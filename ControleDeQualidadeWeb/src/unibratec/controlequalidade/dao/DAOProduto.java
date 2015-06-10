@@ -22,7 +22,7 @@ public class DAOProduto extends DAOGenerico<Produto> implements IDAOProduto {
 	}
 	
 	@Override
-	public List<Produto> pesquisarProdutoPorEstadoList(EstadoProdutoEnum estadoProduto) throws ProdutoNaoEncontradoExcecption {
+	public List<Produto> pesquisarProdutoPorEstadoList(EstadoProdutoEnum estadoProduto) {
 
 		TypedQuery<Produto> query = this.entityManager.createNamedQuery(
 				NAMED_QUERY_FIND_BY_ESTADO, this.classePersistente);
