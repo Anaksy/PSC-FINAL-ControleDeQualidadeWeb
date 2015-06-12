@@ -31,56 +31,61 @@
     		</p:commandLink>
 		</h:form>
 	</div>
-	<div align="left">
-		<h:form>
-			<p:separator />
-			Nome do Produto: <p:inputText
-				value="#{CriarProdutoLoteMB.produto.nomeProduto}" />
-			<br />
-			<br /> 
-			Fabricante: <p:inputText
-				value="#{CriarProdutoLoteMB.produto.fabricanteProduto}" />
-			<br />
-			<br />
-			Categoria: 
-			<p:selectOneMenu value="#{CriarProdutoLoteMB.categoria.idCategoria}">
-				<f:selectItems value="#{CriarProdutoLoteMB.listaCategoria}"
-					var="categoria" itemValue="#{categoria.idCategoria}"
-					itemLabel="#{categoria.nomeCategoria}" />
-			</p:selectOneMenu>
-			<br />
-			<br />
-			Preço:
-			<p:inputText value="#{CriarProdutoLoteMB.valorPreco}" styleClass="dinheiro"/>
-			<br />
-			<br /> 
-			Quantidade de Produtos:
-			<p:inputMask value="#{CriarProdutoLoteMB.lote.qtdProdutos}"
-				mask="9?999999" />
-			<br />
-			<br />
-			 Data de validade: <p:outputLabel for="button" />
-			<p:calendar id="button" value="#{CriarProdutoLoteMB.dataValidade}"
-				showOn="button" readonlyInput="true" />
-			<br />
-			<br />
-			<h:commandButton value="Criar"
-				action="#{CriarProdutoLoteMB.criarProdutoLote}" /> 
-			&nbsp;
-			<h:commandButton value="Limpar"
-				action="#{CriarProdutoLoteMB.limparModelProdutoLote}" />
-			<br />
-			<br />
-			<br />
-			<p:messages id="messages" showDetail="true" autoUpdate="true"
-				closable="true" />
-			<br />
-		</h:form>
-	</div>
+	
+	<p:separator />
+	
 	<h:form>
-		<div align="center">
+		<div align="left">
+		
+			<p:panelGrid columns="2">
+			
+				<h:outputLabel for="nomeProdutoId" value="Nome do Produto:" />
+				<p:inputText id="nomeProdutoId" value="#{CriarProdutoLoteMB.produto.nomeProduto}" size="25" />
+			
+				<h:outputLabel for="fabricanteId" value="Fabricante:" />
+				<p:inputText id="fabricanteId" value="#{CriarProdutoLoteMB.produto.fabricanteProduto}" size="25" />
+		
+				<h:outputLabel for="categoria" value="Categoria:" />
+				<p:selectOneMenu id="categoria" value="#{CriarProdutoLoteMB.categoria.idCategoria}">
+					<f:selectItems value="#{CriarProdutoLoteMB.listaCategoria}"	var="categoria" itemValue="#{categoria.idCategoria}" itemLabel="#{categoria.nomeCategoria}" />
+				</p:selectOneMenu>
+	
+				<h:outputLabel for="precoId" value="Preço:" />
+				<p:inputText id="precoId" value="#{CriarProdutoLoteMB.valorPreco}" styleClass="dinheiro" size="25" />
+		
+				<h:outputLabel for="qtdId" value="Quantidade de Produtos:" />
+				<p:inputMask id="qtdId" value="#{CriarProdutoLoteMB.lote.qtdProdutos}"	mask="9?999999" size="25"/>
+			
+				<h:outputLabel for="dataValidadeId" value=" Data de validade:" />
+				<p:calendar id="dataValidadeId" value="#{CriarProdutoLoteMB.dataValidade}" showOn="button" readonlyInput="true" />
+	
+			</p:panelGrid>
+			
+			<p:panelGrid columns="1" align="center">
+				<p:row>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<h:commandButton value="Criar" action="#{CriarProdutoLoteMB.criarProdutoLote}" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<h:commandButton value="Limpar" action="#{CriarProdutoLoteMB.limparModelProdutoLote}" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</p:row>	
+			</p:panelGrid>
+			
+			
+			<br />
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<br />
+			
+		</div>
+	</h:form>
+
+
+	<h:form>
+		<div align="left">
 			<p:separator />
-			<h:commandButton value="Voltar"
+			<p:commandButton value="Voltar"
 				action="#{CriarProdutoLoteMB.voltarTelaInicial}" />
 		</div>
 	</h:form>

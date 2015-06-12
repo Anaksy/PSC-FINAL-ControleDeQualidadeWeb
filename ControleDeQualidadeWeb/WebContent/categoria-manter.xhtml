@@ -24,19 +24,15 @@
 	<h:form id="formCategoria">
 		<div align="left">
 
-			<h:inputHidden type="hidden"
-				value="#{manterCategoriaMB.categoria.idCategoria}" />
+			<h:inputHidden type="hidden" value="#{manterCategoriaMB.categoria.idCategoria}" />
 
 			<p:panelGrid columns="2">
 
 				<h:outputLabel for="nomeCategoria" value="Nome da Categoria:" />
-				<p:inputText id="nomeCategoria"
-					value="#{manterCategoriaMB.categoria.nomeCategoria}" size="45" />
+				<p:inputText id="nomeCategoria" value="#{manterCategoriaMB.categoria.nomeCategoria}" size="45" />
 
 				<h:outputLabel for="diasPVencer" value="Dias para vencer:" />
-				<p:inputMask id="diasPVencer"
-					value="#{manterCategoriaMB.categoria.numeroDeDiasParaVencimento}"
-					mask="9?9999" size="45" />
+				<p:inputMask id="diasPVencer" value="#{manterCategoriaMB.categoria.numeroDeDiasParaVencimento}"	mask="9?9999" size="45" />
 
 			</p:panelGrid>
 
@@ -44,17 +40,13 @@
 				<p:row style="grid">
 					<div style="font-size: 90% !important" align="left">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<p:commandButton value="Nova" ajax="false"
-							action="#{manterCategoriaMB.criarCategoria}" />
+						<p:commandButton value="Nova" ajax="false" action="#{manterCategoriaMB.criarCategoria}" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<p:commandButton value="Excluir" ajax="false"
-							action="#{manterCategoriaMB.removerCategoria}" />
+						<p:commandButton value="Excluir" ajax="false" action="#{manterCategoriaMB.removerCategoria}" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<p:commandButton value="Atualizar" ajax="false"
-							action="#{manterCategoriaMB.atualizarCategoria}" />
+						<p:commandButton value="Atualizar" ajax="false" action="#{manterCategoriaMB.atualizarCategoria}" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<p:commandButton value="Limpar" ajax="false"
-							action="#{manterCategoriaMB.limparTelaManterCategoria}" />
+						<p:commandButton value="Limpar" ajax="false" action="#{manterCategoriaMB.limparTelaManterCategoria}" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</div>
 				</p:row>
@@ -66,9 +58,7 @@
 
 			<p:separator />
 
-			<p:dataTable id="tabela" value="#{manterCategoriaMB.listaCategoria}"
-				var="categoria" style="width:80%" styleClass="table table-hover"
-				emptyMessage="Nenhum resultado">
+			<p:dataTable id="tabela" value="#{manterCategoriaMB.listaCategoria}" var="categoria" style="width:80%" styleClass="table table-hover" emptyMessage="Nenhum resultado">
 				
 				<p:column>
 					<f:facet name="header">Categoria</f:facet>

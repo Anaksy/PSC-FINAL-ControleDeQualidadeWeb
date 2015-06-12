@@ -33,79 +33,68 @@
 			</p:commandLink>
 		</h:form>
 	</div>
+	
+	<p:separator />
+	
 	<h:form>
 		<div>
 			<div align="left">
-				<p:separator />
+				
+				<p:panelGrid columns="3">
+				
+					<h:outputLabel for="estadoProdutoEnum" value="Situação Produto:" />
+					<p:selectOneMenu id="estadoProdutoEnum"	value="#{PesquisarProdutosMB.estadoProdutoEnum}">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{PesquisarProdutosMB.estadoProdutoEnumList}"	var="n" itemLabel="#{n}" itemValue="#{n}" />
+					</p:selectOneMenu>
+					<h:selectBooleanCheckbox value="#{PesquisarProdutosMB.checkboxSituacao}" id="checkBoxSituacao" />
+
+
+					<h:outputLabel for="nomeProduto" value="Nome do Produto:" />
+					<p:inputText id="nomeProduto" value="#{PesquisarProdutosMB.nomeProduto}" />
+					<h:selectBooleanCheckbox value="#{PesquisarProdutosMB.checkboxNome}" id="checkBoxNome" />
+					
+					
+					<h:outputLabel for="nomeProduto" value="Data inicial:" />				
+					<p:calendar id="button" value="#{PesquisarProdutosMB.dataInicial}" showOn="button" readonlyInput="true" />
+					<h:selectBooleanCheckbox value="#{PesquisarProdutosMB.checkboxFaixaDataValidade}" id="checkBoxDataValidade"/>
+					
+					
+					<h:outputLabel for="nomeProduto" value="Data final:" />
+					<p:calendar id="buttonB" value="#{PesquisarProdutosMB.dataFinal}" showOn="button" readonlyInput="true" />
+					&nbsp;
+				</p:panelGrid>
+				
 				<br />
-				<p:selectOneMenu id="estadoProdutoEnum"
-					value="#{PesquisarProdutosMB.estadoProdutoEnum}">
-					<f:selectItem itemLabel="Selecione" />
-					<f:selectItems value="#{PesquisarProdutosMB.estadoProdutoEnumList}"
-						var="n" itemLabel="#{n}" itemValue="#{n}" />
-				</p:selectOneMenu>
-
-				&nbsp;
-				<h:selectBooleanCheckbox
-					value="#{PesquisarProdutosMB.checkboxSituacao}"
-					id="checkBoxSituacao" />
-
-				<br /> <br /> Nome do Produto:
-				<p:inputText value="#{PesquisarProdutosMB.nomeProduto}" />
-
-				&nbsp;
-				<h:selectBooleanCheckbox value="#{PesquisarProdutosMB.checkboxNome}"
-					id="checkBoxNome" />
-
-				<br /> <br /> Data inicial
-				<p:outputLabel for="button" />
-				<p:calendar id="button" value="#{PesquisarProdutosMB.dataInicial}"
-					showOn="button" readonlyInput="true" />
-
-				&nbsp; <br /> <br /> Data final
-				<p:outputLabel for="button" />
-				<p:calendar id="buttonB" value="#{PesquisarProdutosMB.dataFinal}"
-					showOn="button" readonlyInput="true" />
-
-				&nbsp;
-				<h:selectBooleanCheckbox
-					value="#{PesquisarProdutosMB.checkboxFaixaDataValidade}"
-					id="checkBoxDataValidade" />
-
-				<br /> <br />
-				<p:commandButton value="Pesquisar"
-					action="#{PesquisarProdutosMB.pesquisar}" ajax="false" />
-
-				<br /> <br /> Desconto:
-				<p:inputText value="#{PesquisarProdutosMB.valorDesconto}"
-					styleClass="dinheiro" />
-
-				&nbsp;
-				<p:commandButton value="Desconto"
-					action="#{PesquisarProdutosMB.desconto}" ajax="false" />
-
+				<p:commandButton value="Pesquisar" action="#{PesquisarProdutosMB.pesquisar}" ajax="false" />
+				<br />
+				<br />
+				
+				<p:panelGrid columns="3">	
+					<h:outputLabel for="desconto" value="Desconto:" />
+					<p:inputText value="#{PesquisarProdutosMB.valorDesconto}" styleClass="dinheiro" />
+					<p:commandButton value="Desconto" action="#{PesquisarProdutosMB.desconto}" ajax="false" />
+				</p:panelGrid>
+				
 			</div>
 
 			<br />
-			<p:messages id="messages" showDetail="true" autoUpdate="true"
-				closable="true" />
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<br /> <br />
 
 			<p:separator />
-			<p:dataTable value="#{PesquisarProdutosMB.listaProduto}"
-				var="produto" style="width:100%" styleClass="table table-hover"
-				emptyMessage="Nenhum resultado">
+			<p:dataTable value="#{PesquisarProdutosMB.listaProduto}" var="produto" style="width:100%" styleClass="table table-hover" emptyMessage="Nenhum resultado">
 				<p:column>
 					<f:facet name="header">Situação</f:facet>
-					<h:outputText value="#{produto.estadoProduto}"></h:outputText>
+					<h:outputText value="#{produto.estadoProduto}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">Fabricate</f:facet>
-					<h:outputText value="#{produto.fabricanteProduto}"></h:outputText>
+					<h:outputText value="#{produto.fabricanteProduto}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">Nome</f:facet>
-					<h:outputText value="#{produto.nomeProduto}"></h:outputText>
+					<h:outputText value="#{produto.nomeProduto}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">Preço</f:facet>
@@ -115,35 +104,30 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">Categoria</f:facet>
-					<h:outputText value="#{produto.categoriaProduto.nomeCategoria}"></h:outputText>
+					<h:outputText value="#{produto.categoriaProduto.nomeCategoria}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">Lote</f:facet>
-					<h:outputText value="#{produto.loteProduto.nomeLote}"></h:outputText>
+					<h:outputText value="#{produto.loteProduto.nomeLote}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">Data de Validade</f:facet>
 					<h:outputText value="#{produto.loteProduto.dataDeValidade.time}">
-						<f:convertDateTime type="date" dateStyle="short"
-							pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+						<f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
 					</h:outputText>
 				</p:column>
 				<p:column style="width=100; text-align: center">
-					<h:commandButton value="Selecionar"
-						action="#{PesquisarProdutosMB.selecionarProduto(produto)}">
-					</h:commandButton>
+					<h:commandButton value="Selecionar" action="#{PesquisarProdutosMB.selecionarProduto(produto)}" />
 				</p:column>
 			</p:dataTable>
 		</div>
-
-		<div align="center">
+	</h:form>
+		<div align="left">
 			<h:form>
 				<br />
 				<p:separator />
-				<h:commandButton value="Voltar"
-					action="#{RotinaProdutoMB.voltarTelaInicial}" />
+				<p:commandButton value="Voltar" action="#{RotinaProdutoMB.voltarTelaInicial}" />
 			</h:form>
 		</div>
-	</h:form>
 </h:body>
 </html>
